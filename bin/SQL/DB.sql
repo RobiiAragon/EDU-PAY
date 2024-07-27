@@ -69,7 +69,6 @@ BEGIN
     SET NEW.matricula = CONCAT('MTC', formatted_id);
 END;
 //
-
 DELIMITER ;
 
 -- Tabla TUTOR
