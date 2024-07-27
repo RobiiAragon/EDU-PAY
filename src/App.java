@@ -46,7 +46,7 @@ public class App {
                 System.out.println("5. Eventos Especiales");
                 System.out.println("6. Salir");
                 System.out.println("=============================================");
-                System.out.println("Seleccione una opcion: ");\
+                System.out.println("Seleccione una opcion: ");
                 Addons.ProgramaCobros();
                 break;
             case 4:
