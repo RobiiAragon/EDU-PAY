@@ -5,7 +5,7 @@ public class Addons {
     public static void banner() {
         System.out.println("UNIVERSIDAD TECNOLOGICA DE TIJUANA");
         System.out.println("Programacion Orientada a Objetos");
-        System.out.println("SISTEMA DE COBROS DE UNA ESCUELA PARTICULAR");
+        System.out.println("EDUPAY - SISTEMA DE COBROS DE UNA ESCUELA PARTICULAR");
         System.out.println("2do G TI EVND");
         System.out.println("=============================================");
         System.out.println("Integrantes:\nJesus Roberto Aragon Lopez\nDiana Carolina Lopez Martinez\nIris Abigail Roque Vargas\nBrian Cruz Melendrez\nMaximiliano Vasquez Becerra");
@@ -13,26 +13,10 @@ public class Addons {
         System.out.println("Fecha Actual: " + java.time.LocalDate.now());
         System.out.println("===========================");
     }
-    //-------------------------------------------------------- Consultas Proyecto 7 del documento SelectsProyectoDB.sql
+    //-------------------------------------------------------- Consultas Proyecto 7
     public static void ConsultasProyecto7() {
         Scanner scanner = new Scanner(System.in);
         int CP7;
-        System.out.println("===================");
-        System.out.println("Consultas Proyecto");
-        System.out.println("=============================================");
-        System.out.println("1. Datos de un alumno en un periodo escolar");
-        System.out.println("2. Grupos en los que ha estado un alumno");
-        System.out.println("3. Números de teléfono de un tutor");
-        System.out.println("4. Inscripciones pagadas de un alumno");
-        System.out.println("5. Mensualidades pagadas de un alumno en un periodo escolar");
-        System.out.println("6. Pagos realizados por un evento especial");
-        System.out.println("7. Costos del mantenimiento por periodo escolar");
-        System.out.println("8. Lista de precios de los paquetes de útiles escolares (papelería) para un periodo y nivel escolar.");
-        System.out.println("9. Lista de precios de los uniformes para un para un periodo y nivel escolar.");
-        System.out.println("10. Total de pagos realizados para un nivel educativo en un periodo escolar");
-        System.out.println("11. Salir");
-        System.out.println("=============================================");
-        System.out.println("Seleccione una opcion: ");
         CP7 = scanner.nextInt();
         switch (CP7) {
             case 1:
@@ -214,22 +198,10 @@ public class Addons {
    public static void ProgramaCobros() {
         Scanner scanner = new Scanner(System.in);
         int PC;
-        System.out.println("Programa de Cobros");
-        System.out.println("=============================================");
-        System.out.println("1. Inscripciones");
-        System.out.println("2. Mantenimiento");
-        System.out.println("3. Opcionales");
-        System.out.println("4. Mensualidades");
-        System.out.println("5. Eventos Especiales");
-        System.out.println("6. Salir");
-        System.out.println("=============================================");
-        System.out.println("Seleccione una opcion: ");
         PC = scanner.nextInt();
                 switch (PC) {
                     case 1:
-                    
                         break;
-                
                     default:
                         System.out.println("Opcion no valida");
                         break;
