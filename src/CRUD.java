@@ -1,7 +1,7 @@
 import java.util.Scanner;
 import java.sql.*;
 
-public class CRUD extends Conexion {
+public class CRUD {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int menuAlumno = 0;
@@ -57,8 +57,8 @@ public class CRUD extends Conexion {
 
         String sql = "INSERT INTO ALUMNO (nombre, primerApell, segundoApell, direccion, nivel_educativo, periodo_escolar, grado_y_grupo) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
-        try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, nombre);
             pstmt.setString(2, primerApell);
             pstmt.setString(3, segundoApell);
@@ -76,8 +76,8 @@ public class CRUD extends Conexion {
     private static void readAlumnos() {
         String sql = "SELECT * FROM ALUMNO";
 
-        try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-             Statement stmt = conn.createStatement();
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
+            Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
                 System.out.print("Matrícula: " + rs.getString("matricula"));
@@ -114,8 +114,8 @@ public class CRUD extends Conexion {
 
         String sql = "UPDATE ALUMNO SET nombre = ?, primerApell = ?, segundoApell = ?, direccion = ?, nivel_educativo = ?, periodo_escolar = ?, grado_y_grupo = ? WHERE matricula = ?";
 
-        try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, nombre);
             pstmt.setString(2, primerApell);
             pstmt.setString(3, segundoApell);
@@ -137,8 +137,8 @@ public class CRUD extends Conexion {
 
         String sql = "DELETE FROM ALUMNO WHERE matricula = ?";
 
-        try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, matricula);
             pstmt.executeUpdate();
             System.out.println("Alumno eliminado exitosamente.");
