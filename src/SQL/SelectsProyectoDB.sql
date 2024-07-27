@@ -100,12 +100,12 @@ h. Fecha de pago
 SELECT 
     a.matricula AS 'Matrícula del alumno',                                                                                                  /*'*/
     CONCAT(a.nombre, ' ', a.primerApell, ' ', IFNULL(a.segundoApell, '')) AS 'Nombre del alumno',                                           /*'*/
-    DATE_FORMAT(pe.fecha_inicio, '%d/%m/%Y') AS 'Fecha de inicio del periodo escolar',                                                      /*'*/
-    DATE_FORMAT(pe.fecha_final, '%d/%m/%Y') AS 'Fecha final del periodo escolar',                                                           /*'*/
+    DATE_FORMAT(pe.fecha_inicio, '%d/%m/%Y') AS 'Fecha inicio PE',                                                      /*'*/
+    DATE_FORMAT(pe.fecha_final, '%d/%m/%Y') AS 'Fecha final PE',                                                           /*'*/
+    DATE_FORMAT(p.fecha, '%d/%m/%Y') AS 'Fecha de pago',                                                                                     /*'*/
     gg.grado AS 'Grado',    
     ne.nombre AS 'Nivel',
-    m.mes_pagado AS 'Mes pagado',                                                                                                           /*'*/
-    DATE_FORMAT(p.fecha, '%d/%m/%Y') AS 'Fecha de pago'                                                                                     /*'*/
+    m.mes_pagado AS 'Mes pagado'                                                                                                           /*'*/
 FROM PAGO p
 INNER JOIN ALUMNO a ON p.alumno = a.matricula
 INNER JOIN PERIODO_ESCOLAR pe ON a.periodo_escolar = pe.codigo
@@ -143,7 +143,7 @@ INNER JOIN GRADO_Y_GRUPO gg ON a.grado_y_grupo = gg.codigo
 INNER JOIN NIVEL_EDUCATIVO ne ON a.nivel_educativo = ne.codigo
 INNER JOIN MOTIVO_DE_PAGO mp ON p.motivo_de_pago = mp.codigo
 INNER JOIN EVENTOS_ESPECIALES ee ON mp.codigo = ee.motivo_de_pago
-WHERE ee.motivo_de_pago = :motivo_de_pago;
+WHERE ee.motivo_de_pago = 'MP013';
 
 /*7. Costos del mantenimiento por periodo escolar
 a. Fecha de inicio del periodo escolar

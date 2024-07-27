@@ -18,10 +18,10 @@ INSERT INTO GRADO_Y_GRUPO (codigo, grado, grupo, periodo_escolar) VALUES
 ('GG005', '2', 'B', 'PE2023');
 
 -- Inserts para ALUMNO
-INSERT INTO ALUMNO (nombre, primerApell, segundoApell, direccion, nivel_educativo, periodo_escolar, grado_y_grupo) VALUES
-('Juan', 'Pérez', 'García', 'Calle 123, Ciudad', 'NE001', 'PE2023', 'GG001'),
-('María', 'López', 'Sánchez', 'Avenida 456, Ciudad', 'NE002', 'PE2023', 'GG004'),
-('Carlos', 'Rodríguez', 'Martínez', 'Plaza 789, Ciudad', 'NE003', 'PE2023', 'GG005');
+INSERT INTO ALUMNO (matricula, nombre, primerApell, segundoApell, direccion, nivel_educativo, periodo_escolar, grado_y_grupo) VALUES
+('MTC0000001', 'Juan', 'Pérez', 'García', 'Calle 123, Ciudad', 'NE001', 'PE2023', 'GG001'),
+('MTC0000002', 'María', 'López', 'Sánchez', 'Avenida 456, Ciudad', 'NE002', 'PE2023', 'GG004'),
+('MTC0000003', 'Carlos', 'Rodríguez', 'Martínez', 'Plaza 789, Ciudad', 'NE003', 'PE2023', 'GG005');
 
 -- Inserts para TUTOR
 INSERT INTO TUTOR (folio, nombre, primerApell, segundoApell, alumno) VALUES
