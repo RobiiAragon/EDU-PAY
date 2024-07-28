@@ -23,9 +23,10 @@ FROM ALUMNO a
 INNER JOIN PERIODO_ESCOLAR pe ON a.periodo_escolar = pe.codigo
 INNER JOIN GRADO_Y_GRUPO gg ON a.grado_y_grupo = gg.codigo
 INNER JOIN NIVEL_EDUCATIVO ne ON a.nivel_educativo = ne.codigo
-LEFT JOIN TUTOR t ON a.matricula = t.alumno
+LEFT JOIN TUTOR t ON a.tutor = t.folio
 WHERE pe.codigo = :periodo_escolar AND a.matricula = :matricula
 GROUP BY a.matricula;
+
 
 /*2.Grupos en los que ha estado un alumno
 a. Matricula del alumno
@@ -58,7 +59,7 @@ SELECT
     CONCAT(a.nombre, ' ', a.primerApell, ' ', IFNULL(a.segundoApell, '')) AS 'Nombre del alumno',                                           /*'*/
     nt.numTel AS 'Número de teléfono'                                                                                                       /*'*/
 FROM TUTOR t
-INNER JOIN ALUMNO a ON t.alumno = a.matricula
+INNER JOIN ALUMNO a ON t.folio = a.tutor
 INNER JOIN NUM_TEL nt ON t.folio = nt.tutor
 WHERE t.folio = :folio_tutor;
 

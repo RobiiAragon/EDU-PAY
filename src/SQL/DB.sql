@@ -33,6 +33,14 @@ CREATE TABLE GRADO_Y_GRUPO (
     FOREIGN KEY (periodo_escolar) REFERENCES PERIODO_ESCOLAR(codigo)
 );
 
+-- Tabla TUTOR
+CREATE TABLE TUTOR (
+    folio VARCHAR(10) PRIMARY KEY,
+    nombre VARCHAR(60) NOT NULL,
+    primerApell VARCHAR(30) NOT NULL,
+    segundoApell VARCHAR(30)
+);
+
 -- Tabla ALUMNO
 CREATE TABLE ALUMNO (
     matricula VARCHAR(10) PRIMARY KEY,
@@ -43,6 +51,8 @@ CREATE TABLE ALUMNO (
     nivel_educativo VARCHAR(5),
     periodo_escolar VARCHAR(10),
     grado_y_grupo VARCHAR(5),
+    tutor VARCHAR(10),
+    FOREIGN KEY (TUTOR) REFERENCES TUTOR(folio),
     FOREIGN KEY (nivel_educativo) REFERENCES NIVEL_EDUCATIVO(codigo),
     FOREIGN KEY (periodo_escolar) REFERENCES PERIODO_ESCOLAR(codigo),
     FOREIGN KEY (grado_y_grupo) REFERENCES GRADO_Y_GRUPO(codigo)
@@ -71,15 +81,7 @@ END;
 //
 DELIMITER ;
 
--- Tabla TUTOR
-CREATE TABLE TUTOR (
-    folio VARCHAR(10) PRIMARY KEY,
-    nombre VARCHAR(60) NOT NULL,
-    primerApell VARCHAR(30) NOT NULL,
-    segundoApell VARCHAR(30),
-    alumno VARCHAR(10),
-    FOREIGN KEY (alumno) REFERENCES ALUMNO(matricula)
-);
+
 
 -- Tabla MOTIVO_DE_PAGO
 CREATE TABLE MOTIVO_DE_PAGO (

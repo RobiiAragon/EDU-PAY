@@ -15,6 +15,13 @@ public class App {
         opcion = scanner.nextInt();
         switch(opcion){
             case 1:
+                System.out.println("CRUD SISTEMA DE COBROS ESCOLARES");
+                System.out.println("=============================================");
+                System.out.println("1. Alumnos");
+                System.out.println("2. Administración");
+                System.out.println("3. Volver al menú principal");
+                System.out.println("=============================================");
+                System.out.println("Seleccione una opción: ");
                 CRUD.main(args);
                 break;
             case 2:
