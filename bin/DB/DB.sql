@@ -1,16 +1,6 @@
 -- Active: 1721413128424@@127.0.0.1@3306
 CREATE DATABASE IF NOT EXISTS Sistema_de_cobros_escolares;
-use Sistema_de_cobros_escolares;
-
-/*
--- Crear la tabla para manejar la secuencia
-CREATE TABLE matricula_seq (
-    id INT NOT NULL AUTO_INCREMENT,
-    PRIMARY KEY (id)
-);
-*/
--- Insertar un valor inicial en la secuencia
-INSERT INTO matricula_seq (id) VALUES (0);
+USE Sistema_de_cobros_escolares;
 
 -- Tabla NIVEL_EDUCATIVO
 CREATE TABLE NIVEL_EDUCATIVO (
@@ -54,36 +44,11 @@ CREATE TABLE ALUMNO (
     periodo_escolar VARCHAR(10),
     grado_y_grupo VARCHAR(5),
     tutor VARCHAR(10),
-    FOREIGN KEY (TUTOR) REFERENCES TUTOR(folio),
+    FOREIGN KEY (tutor) REFERENCES TUTOR(folio),
     FOREIGN KEY (nivel_educativo) REFERENCES NIVEL_EDUCATIVO(codigo),
     FOREIGN KEY (periodo_escolar) REFERENCES PERIODO_ESCOLAR(codigo),
     FOREIGN KEY (grado_y_grupo) REFERENCES GRADO_Y_GRUPO(codigo)
 );
-/*
--- Crear el trigger para autoincrementar la matricula
-DELIMITER //
-
-CREATE TRIGGER autoinc_matricula
-BEFORE INSERT ON ALUMNO
-FOR EACH ROW
-BEGIN
-    DECLARE next_id INT;
-    DECLARE formatted_id VARCHAR(7);
-
-    -- Obtener el siguiente valor de la secuencia
-    INSERT INTO matricula_seq () VALUES ();
-    SET next_id = LAST_INSERT_ID();
-
-    -- Formatear el ID con ceros a la izquierda
-    SET formatted_id = LPAD(next_id, 7, '0');
-
-    -- Asignar el ID formateado con el prefijo 'MTC' a la nueva fila
-    SET NEW.matricula = CONCAT(formatted_id);
-END;
-//
-DELIMITER ;
-*/
-
 
 -- Tabla MOTIVO_DE_PAGO
 CREATE TABLE MOTIVO_DE_PAGO (
@@ -174,3 +139,125 @@ CREATE TABLE NUM_TEL (
     PRIMARY KEY (tutor, numero),
     FOREIGN KEY (tutor) REFERENCES TUTOR(folio)
 );
+
+-- Crear la tabla para manejar la secuencia
+CREATE TABLE matricula_seq (
+    id INT NOT NULL AUTO_INCREMENT,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE folio_seq (
+    id INT NOT NULL AUTO_INCREMENT,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE ggcofigo_seq (
+    id INT NOT NULL AUTO_INCREMENT,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE mpcodigo_seq (
+    id INT NOT NULL AUTO_INCREMENT,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE necodigo_seq (
+    id INT NOT NULL AUTO_INCREMENT,
+    PRIMARY KEY (id)
+);
+
+
+-- Crear el trigger para autoincrementar la matricula
+DELIMITER //
+CREATE TRIGGER autoinc_matricula
+BEFORE INSERT ON ALUMNO
+FOR EACH ROW
+BEGIN
+    DECLARE next_id INT;
+    DECLARE formatted_id VARCHAR(7);
+    -- Obtener el siguiente valor de la secuencia
+    INSERT INTO matricula_seq () VALUES ();
+    SET next_id = LAST_INSERT_ID();
+    -- Formatear el ID con ceros a la izquierda
+    SET formatted_id = LPAD(next_id, 7, '0');
+    -- Asignar el ID formateado con el prefijo 'MTC' a la nueva fila
+    SET NEW.matricula = CONCAT('MTC', formatted_id);
+END;
+//
+DELIMITER ;
+
+-- Crear el trigger para autoincrementar el folio del tutor
+DELIMITER //
+CREATE TRIGGER autoinc_folio
+BEFORE INSERT ON TUTOR
+FOR EACH ROW
+BEGIN
+    DECLARE next_id INT;
+    DECLARE formatted_id VARCHAR(7);
+    -- Obtener el siguiente valor de la secuencia
+    INSERT INTO folio_seq () VALUES ();
+    SET next_id = LAST_INSERT_ID();
+    -- Formatear el ID con ceros a la izquierda
+    SET formatted_id = LPAD(next_id, 3, '0');
+    -- Asignar el ID formateado con el prefijo 'TU' a la nueva fila
+    SET NEW.folio = CONCAT('TU', formatted_id);
+END;
+//
+DELIMITER ;
+
+-- Crear el trigger para autoincrementar el codigo del `grado_y_grupo`
+DELIMITER //
+CREATE TRIGGER autoinc_codigoGG
+BEFORE INSERT ON GRADO_Y_GRUPO
+FOR EACH ROW
+BEGIN
+    DECLARE next_id INT;
+    DECLARE formatted_id VARCHAR(7);
+    -- Obtener el siguiente valor de la secuencia
+    INSERT INTO ggcofigo_seq () VALUES ();
+    SET next_id = LAST_INSERT_ID();
+    -- Formatear el ID con ceros a la izquierda
+    SET formatted_id = LPAD(next_id, 3, '0');
+    -- Asignar el ID formateado con el prefijo 'GG' a la nueva fila
+    SET NEW.codigo = CONCAT('GG', formatted_id);
+END;
+//
+DELIMITER ;
+
+-- Crear el trigger para autoincrementar el codigo del `motivo_de_pago`
+DELIMITER //
+CREATE TRIGGER autoinc_codigoMP
+BEFORE INSERT ON MOTIVO_DE_PAGO
+FOR EACH ROW
+BEGIN
+    DECLARE next_id INT;
+    DECLARE formatted_id VARCHAR(7);
+    -- Obtener el siguiente valor de la secuencia
+    INSERT INTO mpcodigo_seq () VALUES ();
+    SET next_id = LAST_INSERT_ID();
+    -- Formatear el ID con ceros a la izquierda
+    SET formatted_id = LPAD(next_id, 3, '0');
+    -- Asignar el ID formateado con el prefijo 'MP' a la nueva fila
+    SET NEW.codigo = CONCAT('MP', formatted_id);
+END;
+//
+DELIMITER ;
+
+-- Crear el trigger para autoincrementar el codigo del `nivel_educativo`
+DELIMITER //
+CREATE TRIGGER autoinc_codigoNE
+BEFORE INSERT ON NIVEL_EDUCATIVO
+FOR EACH ROW
+BEGIN
+    DECLARE next_id INT;
+    DECLARE formatted_id VARCHAR(7);
+    -- Obtener el siguiente valor de la secuencia
+    INSERT INTO necodigo_seq () VALUES ();
+    SET next_id = LAST_INSERT_ID();
+    -- Formatear el ID con ceros a la izquierda
+    SET formatted_id = LPAD(next_id, 3, '0');
+    -- Asignar el ID formateado con el prefijo 'NE' a la nueva fila
+    SET NEW.codigo = CONCAT('NE', formatted_id);
+END;
+//
+DELIMITER ;

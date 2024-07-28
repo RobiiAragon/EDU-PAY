@@ -9,7 +9,7 @@ public class App {
         System.out.println("=============================================");
         System.out.println("1. CRUD");
         System.out.println("2. Programa de Cobros");
-        System.out.println("3. Salir");
+        System.out.println("3. Salir del sistema");
         System.out.println("==================");
         System.out.println("Seleccione una opcion: ");
         opcion = scanner.nextInt();

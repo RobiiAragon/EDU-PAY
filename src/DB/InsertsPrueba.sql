@@ -24,10 +24,10 @@ INSERT INTO TUTOR (folio, nombre, primerApell, segundoApell) VALUES
 ('TU003', 'Luis', 'Rodríguez', 'Gómez');
 
 -- Inserts para ALUMNO
-INSERT INTO ALUMNO (nombre, primerApell, segundoApell, direccion, tutor, nivel_educativo, periodo_escolar, grado_y_grupo) VALUES
-('Juan', 'Pérez', 'García', 'Calle 123, Ciudad', 'TU001', 'NE001', 'PE2023', 'GG001'),
-('María', 'López', 'Sánchez', 'Avenida 456, Ciudad', 'TU002', 'NE002', 'PE2023', 'GG004'),
-('Carlos', 'Rodríguez', 'Martínez', 'Plaza 789, Ciudad', 'TU003', 'NE003', 'PE2023', 'GG005');
+INSERT INTO ALUMNO (matricula, nombre, primerApell, segundoApell, direccion, tutor, nivel_educativo, periodo_escolar, grado_y_grupo) VALUES
+('MTC0000001', 'Juan', 'Pérez', 'García', 'Calle 123, Ciudad', 'TU001', 'NE001', 'PE2023', 'GG001'),
+('MTC0000002', 'María', 'López', 'Sánchez', 'Avenida 456, Ciudad', 'TU002', 'NE002', 'PE2023', 'GG004'),
+('MTC0000003', 'Carlos', 'Rodríguez', 'Martínez', 'Plaza 789, Ciudad', 'TU003', 'NE003', 'PE2023', 'GG005');
 
 -- Inserts para MOTIVO_DE_PAGO
 INSERT INTO MOTIVO_DE_PAGO (codigo, nombre, precio) VALUES
@@ -52,8 +52,8 @@ INSERT INTO PAGO (numero, fecha, subtotal, iva, monto_total, estado, alumno, mot
 (2, '2023-09-01', 400.00, 64.00, 464.00, 'Pagado', 'MTC0000002', 'MP004'),
 (3, '2023-08-01', 1000.00, 160.00, 1160.00, 'Pagado', 'MTC0000003', 'MP002'),
 (4, '2023-09-01', 500.00, 80.00, 580.00, 'Pagado', 'MTC0000003', 'MP005'),
-(5, '2023-08-01', 1200.00, 192.00, 1392.00, 'Pagado', 'MTC0000004', 'MP003'),
-(6, '2023-09-01', 600.00, 96.00, 696.00, 'Pagado', 'MTC0000004', 'MP006');
+(5, '2023-08-01', 1200.00, 192.00, 1392.00, 'Pagado', 'MTC0000001', 'MP003'),
+(6, '2023-09-01', 600.00, 96.00, 696.00, 'Pagado', 'MTC0000001', 'MP006');
 
 -- Inserts para EVENTOS_ESPECIALES
 INSERT INTO EVENTOS_ESPECIALES (motivo_de_pago, fecha, lugar, horario, descripcion) VALUES

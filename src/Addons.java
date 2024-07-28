@@ -36,6 +36,29 @@ public class Addons {
             e.printStackTrace();
         }
     }
+    //-------------------------------------------------------- Agregar Grado y Grupo
+    public static void AgregarGradoYGrupo() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("=============================================");
+        System.out.println("Añadir Grado y Grupo");
+        System.out.println("Ingrese el grado: ");
+        String grado = scanner.next();
+        System.out.println("Ingrese el grupo: ");
+        String grupo = scanner.next();
+        System.out.println("Ingrese el periodo escolar: ");
+        String periodoEscolar = scanner.next();
+        String query = "INSERT INTO GRADO_Y_GRUPO (grado, grupo, periodo_escolar) VALUES (?, ?, ?, ?)";
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setString(2, grado);
+            pstmt.setString(3, grupo);
+            pstmt.setString(4, periodoEscolar);
+            pstmt.executeUpdate();
+            System.out.println("Grado y grupo agregado correctamente");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     //-------------------------------------------------------- Programa de Cobros
    public static void ProgramaCobros() {
     Scanner scanner = new Scanner(System.in);
