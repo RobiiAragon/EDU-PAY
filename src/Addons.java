@@ -13,6 +13,29 @@ public class Addons {
         System.out.println("Fecha Actual: " + java.time.LocalDate.now());
         System.out.println("===========================");
     }
+    //-------------------------------------------------------- Agregar Periodo Escolar
+    public static void AgregarPeriodoEscolar() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("=============================================");
+        System.out.println("Añadir Periodo Escolar");
+        System.out.println("Ingrese el código del periodo escolar: ");
+        String codigo = "PE"+scanner.next();
+        System.out.println("Ingrese la fecha de inicio del periodo escolar (yyyy-mm-dd): ");
+        String fechaInicio = scanner.next();
+        System.out.println("Ingrese la fecha final del periodo escolar (yyyy-mm-dd): ");
+        String fechaFinal = scanner.next();
+        String query = "INSERT INTO PERIODO_ESCOLAR (codigo, fecha_inicio, fecha_final) VALUES (?, ?, ?)";
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setString(1, codigo);
+            pstmt.setString(2, fechaInicio);
+            pstmt.setString(3, fechaFinal);
+            pstmt.executeUpdate();
+            System.out.println("Periodo escolar agregado correctamente");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     //-------------------------------------------------------- Programa de Cobros
    public static void ProgramaCobros() {
     Scanner scanner = new Scanner(System.in);

@@ -1,12 +1,14 @@
 -- Active: 1721413128424@@127.0.0.1@3306
 CREATE DATABASE IF NOT EXISTS Sistema_de_cobros_escolares;
 use Sistema_de_cobros_escolares;
+
+/*
 -- Crear la tabla para manejar la secuencia
 CREATE TABLE matricula_seq (
     id INT NOT NULL AUTO_INCREMENT,
     PRIMARY KEY (id)
 );
-
+*/
 -- Insertar un valor inicial en la secuencia
 INSERT INTO matricula_seq (id) VALUES (0);
 
@@ -57,7 +59,7 @@ CREATE TABLE ALUMNO (
     FOREIGN KEY (periodo_escolar) REFERENCES PERIODO_ESCOLAR(codigo),
     FOREIGN KEY (grado_y_grupo) REFERENCES GRADO_Y_GRUPO(codigo)
 );
-
+/*
 -- Crear el trigger para autoincrementar la matricula
 DELIMITER //
 
@@ -76,11 +78,11 @@ BEGIN
     SET formatted_id = LPAD(next_id, 7, '0');
 
     -- Asignar el ID formateado con el prefijo 'MTC' a la nueva fila
-    SET NEW.matricula = CONCAT('MTC', formatted_id);
+    SET NEW.matricula = CONCAT(formatted_id);
 END;
 //
 DELIMITER ;
-
+*/
 
 
 -- Tabla MOTIVO_DE_PAGO
