@@ -4,7 +4,7 @@ import java.sql.*;
 public class CRUD {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int menuAlumno, CRUDAlumno, CRUDAdmin;
+        int i, menuAlumno, CRUDAlumno, CRUDAdmin;
         menuAlumno = scanner.nextInt();
         scanner.nextLine(); // Consumir el salto de línea
         
@@ -17,10 +17,9 @@ public class CRUD {
                 System.out.println("2. Añadir Grados y grupos");
                 System.out.println("3. Añadir motivos de Pago");
                 System.out.println("4. Añadir Uniformes");
-                System.out.println("5. Añadir Tipos de Uniformes");
-                System.out.println("6. Añadir Eventos Especiales");
+                System.out.println("5. Añadir Eventos Especiales");
                 System.out.println("-------------------------------");
-                System.out.println("7. Voler al menú principal");
+                System.out.println("6. Voler al menú principal");
                 System.out.println("================================");
                 System.out.println("Seleccione una opción: ");
                 CRUDAlumno= scanner.nextInt();
@@ -28,7 +27,29 @@ public class CRUD {
                     case 1:
                         Addons.AgregarPeriodoEscolar();
                         break;
-                
+                    case 2:
+                        Addons.AgregarGradosyGrupos();
+                        break;
+                    case 3:
+                        Addons.AgregarMotivosdePago();
+                        break;
+                    case 4:
+                        Addons.AgregarUniformes();
+                        break;
+                    case 5:
+                        Addons.AgregarEventosEspeciales();
+                        break;
+                    case 6:
+                    System.out.print("Volviendo al menu principal");
+                        for (i = 0; i < 3; i++) {// bucle para repetir 3 veces el . que colocamos para que se mire
+                            try {
+                                Thread.sleep(500); // 500 milisegundos = medio segundo
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                                System.out.print(".");
+                            }
+                        break;
                     default:
                         break;
                 }
@@ -89,7 +110,6 @@ public class CRUD {
                 CRUDAdmin= scanner.nextInt();
                 break;
             case 5:
-                int i;
                 System.out.print("Volviendo al menú principal");
                     for (i = 0; i < 3; i++) {// bucle para repetir 3 veces el . que colocamos para que se mire
                         try {

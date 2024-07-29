@@ -18,7 +18,7 @@ public class Addons {
         Scanner scanner = new Scanner(System.in);
         System.out.println("=============================================");
         System.out.println("Añadir Periodo Escolar");
-        System.out.println("Ingrese el código del periodo escolar: ");
+        System.out.println("Ingrese el año del periodo escolar: ");
         String codigo = "PE"+scanner.next();
         System.out.println("Ingrese la fecha de inicio del periodo escolar (yyyy-mm-dd): ");
         String fechaInicio = scanner.next();
@@ -37,7 +37,7 @@ public class Addons {
         }
     }
     //-------------------------------------------------------- Agregar Grado y Grupo
-    public static void AgregarGradoYGrupo() {
+    public static void AgregarGradosyGrupos() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("=============================================");
         System.out.println("Añadir Grado y Grupo");
@@ -46,19 +46,138 @@ public class Addons {
         System.out.println("Ingrese el grupo: ");
         String grupo = scanner.next();
         System.out.println("Ingrese el periodo escolar: ");
-        String periodoEscolar = scanner.next();
-        String query = "INSERT INTO GRADO_Y_GRUPO (grado, grupo, periodo_escolar) VALUES (?, ?, ?, ?)";
+        String periodoEscolar = "PE" + scanner.next();
+        String sql = "INSERT INTO GRADO_Y_GRUPO (grado, grupo, periodo_escolar) VALUES (?, ?, ?)";
         try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
-             PreparedStatement pstmt = conn.prepareStatement(query)) {
-            pstmt.setString(2, grado);
-            pstmt.setString(3, grupo);
-            pstmt.setString(4, periodoEscolar);
-            pstmt.executeUpdate();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setString(1, grado);
+                pstmt.setString(2, grupo);
+                pstmt.setString(3, periodoEscolar);
+                pstmt.executeUpdate();
             System.out.println("Grado y grupo agregado correctamente");
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+    //-------------------------------------------------------- Agregar motivos de Pago
+    public static void AgregarMotivosdePago() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("=============================================");
+        System.out.println("Añadir Motivos de Pago");
+        System.out.println("Ingrese el nombre del motivo de pago: ");
+        String nombre = scanner.nextLine();
+        double precio = 0;
+        boolean validInput = false;
+        while (!validInput) {
+            System.out.println("Ingrese el precio del motivo de pago: ");
+            if (scanner.hasNextDouble()) {
+                precio = scanner.nextDouble();
+                validInput = true;
+            } else {
+                System.out.println("Entrada no válida. Por favor, ingrese un número.");
+                scanner.nextLine(); // Limpiar la entrada no válida
+            }
+        }
+        String query = "INSERT INTO MOTIVO_DE_PAGO (nombre, precio) VALUES (?, ?)";
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setString(1, nombre);
+            pstmt.setDouble(2, precio);
+            pstmt.executeUpdate();
+            System.out.println("Motivo de pago agregado correctamente");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    //-------------------------------------------------------- Agregar Uniformes
+    public static void AgregarUniformes() {
+        String motivoPago = "";
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("=============================================");
+        System.out.println("Añadir Uniformes");
+        System.out.println("------------------");
+        String queryMotivoPago = "SELECT MAX(codigo) AS ultimo_motivo FROM MOTIVO_DE_PAGO";
+        
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
+            PreparedStatement pstmt = conn.prepareStatement(queryMotivoPago)) {
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                String ultimoMotivo = rs.getString("ultimo_motivo");
+                if (ultimoMotivo != null && !ultimoMotivo.isEmpty()) {
+                    int numero = Integer.parseInt(ultimoMotivo.substring(2));
+                    motivoPago = "MP" + String.format("%03d", numero);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        // Si no se encontró ningún motivo de pago previo
+        if (motivoPago.isEmpty()) {
+            motivoPago = "MP001"; // Iniciar en MP001 si no hay registros previos
+        }
+        
+        System.out.println("Ingrese la talla del uniforme: ");
+        String talla = scanner.nextLine();
+        System.out.println("Ingrese el tipo de uniforme: ");
+        
+        String queryTipoUniforme = "SELECT * FROM TIPO_DE_UNIFORME";
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
+            PreparedStatement pstmt = conn.prepareStatement(queryTipoUniforme)) {
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                System.out.println(rs.getString("codigo") + ". " + rs.getString("nombre"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        String tipo = scanner.nextLine();
+        System.out.println("Ingrese la descripción del uniforme: ");
+        String descripcion = scanner.nextLine();
+        
+        String queryInsertUniforme = "INSERT INTO UNIFORMES (motivo_de_pago, talla, tipo_de_uniforme, descripcion) VALUES (?, ?, ?, ?)";
+        try (Connection conn1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
+            PreparedStatement pstmt1 = conn1.prepareStatement(queryInsertUniforme)) {
+            pstmt1.setString(1, motivoPago);
+            pstmt1.setString(2, talla);
+            pstmt1.setString(3, tipo);
+            pstmt1.setString(4, descripcion);
+            pstmt1.executeUpdate();
+            System.out.println("Uniforme agregado correctamente");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        scanner.close();
+    }
+    //-------------------------------------------------------- Agregar Eventos Especiales
+    public static void AgregarEventosEspeciales() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("=============================================");
+        System.out.println("Añadir Eventos Especiales");
+        System.out.println("Ingrese la fecha del evento (yyyy-mm-dd): ");
+        String fecha = scanner.nextLine();
+        System.out.println("Ingrese el lugar del evento especial (yyyy-mm-dd): ");
+        String lugar = scanner.nextLine();
+        System.out.println("Ingrese el horario del evento especial: ");
+        String horario = scanner.nextLine();
+        System.out.println("Ingrese la descripcion del evento especial: ");
+        String descripcion = scanner.nextLine();
+        String query = "INSERT INTO EVENTOS_ESPECIALES (motivo_de_pago, fecha, lugar, horario, descripcion) VALUES ('MP013', ?, ?, ?, ?)";
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setString(1, fecha);
+            pstmt.setString(2, lugar);
+            pstmt.setString(3, horario);
+            pstmt.setString(4, descripcion);
+            pstmt.executeUpdate();
+            System.out.println("Evento especial agregado correctamente");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+        
     //-------------------------------------------------------- Programa de Cobros
    public static void ProgramaCobros() {
     Scanner scanner = new Scanner(System.in);
