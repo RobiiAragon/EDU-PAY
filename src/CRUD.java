@@ -80,8 +80,8 @@ public class CRUD {
                 System.out.println("1. Modificar Alumnos");
                 System.out.println("2. Modificar tutores");
                 System.out.println("3. Modificar Grados y grupos");
-                System.out.println("4. Modificar costo base de un nivel educativo");
-                System.out.println("5. Modificar el costo de motivos de Pago");
+                System.out.println("4. Modificar un Nivel Educativo");
+                System.out.println("5. Modificar un motivos de Pago");
                 System.out.println("6. Modificar packs de Papeleria");
                 System.out.println("7. Modificar Uniformes");
                 System.out.println("8. Modificar Tipos de Uniformes");
@@ -102,10 +102,10 @@ public class CRUD {
                         Addons.ModificarGradosyGrupos();
                         break;
                     case 4:
-                        Addons.ModificarCostoBaseNivelEducativo();
+                        Addons.ModificarNivelEducativo();
                         break;
                     case 5:
-                        Addons.ModificarCostoMotivosdePago();
+                        Addons.ModificarMotivosdePago();
                         break;
                     case 6:
                         Addons.ModificarPacksPapeleria();
