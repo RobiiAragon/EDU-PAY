@@ -154,27 +154,165 @@ public class Addons {
     //-------------------------------------------------------- Agregar Eventos Especiales
     public static void AgregarEventosEspeciales() {
         Scanner scanner = new Scanner(System.in);
+        String motivoPago = "";
         System.out.println("=============================================");
         System.out.println("Añadir Eventos Especiales");
+        String queryMotivoPago = "SELECT MAX(codigo) AS ultimo_motivo FROM MOTIVO_DE_PAGO";
+        
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
+            PreparedStatement pstmt = conn.prepareStatement(queryMotivoPago)) {
+        ResultSet rs = pstmt.executeQuery();
+        if (rs.next()) {
+            String ultimoMotivo = rs.getString("ultimo_motivo");
+            if (ultimoMotivo != null && !ultimoMotivo.isEmpty()) {
+                motivoPago = ultimoMotivo; // Utiliza el último motivo de pago registrado
+            }
+        }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        // Si no se encontró ningún motivo de pago previo
+        if (motivoPago.isEmpty()) {
+            motivoPago = "MP001"; // Iniciar en MP001 si no hay registros previos
+        }
         System.out.println("Ingrese la fecha del evento (yyyy-mm-dd): ");
         String fecha = scanner.nextLine();
-        System.out.println("Ingrese el lugar del evento especial (yyyy-mm-dd): ");
+        System.out.println("Ingrese el lugar del evento: ");
         String lugar = scanner.nextLine();
         System.out.println("Ingrese el horario del evento especial: ");
         String horario = scanner.nextLine();
         System.out.println("Ingrese la descripcion del evento especial: ");
         String descripcion = scanner.nextLine();
-        String query = "INSERT INTO EVENTOS_ESPECIALES (motivo_de_pago, fecha, lugar, horario, descripcion) VALUES ('MP013', ?, ?, ?, ?)";
+        String query = "INSERT INTO EVENTOS_ESPECIALES (motivo_de_pago, fecha, lugar, horario, descripcion) VALUES (?, ?, ?, ?, ?)";
         try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
              PreparedStatement pstmt = conn.prepareStatement(query)) {
-            pstmt.setString(1, fecha);
-            pstmt.setString(2, lugar);
-            pstmt.setString(3, horario);
-            pstmt.setString(4, descripcion);
+            pstmt.setString(1, motivoPago);
+            pstmt.setString(2, fecha);
+            pstmt.setString(3, lugar);
+            pstmt.setString(4, horario);
+            pstmt.setString(5, descripcion);
             pstmt.executeUpdate();
             System.out.println("Evento especial agregado correctamente");
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+    }
+    //-------------------------------------------------------- ModificarAlumnos
+    public static void ModificarAlumnos() {
+        Scanner scanner = new Scanner(System.in);
+        int MA;
+        MA = scanner.nextInt();
+        switch (MA) {
+            case 1:
+                break;
+            default:
+                System.out.println("Opcion no valida");
+                break;
+        }
+    }
+    //-------------------------------------------------------- ModificarTutores
+    public static void ModificarTutores() {
+        Scanner scanner = new Scanner(System.in);
+        int MT;
+        MT = scanner.nextInt();
+        switch (MT) {
+            case 1:
+                break;
+            default:
+                System.out.println("Opcion no valida");
+                break;
+        }
+    }
+    //-------------------------------------------------------- ModificarGradosyGrupos
+    public static void ModificarGradosyGrupos() {
+        Scanner scanner = new Scanner(System.in);
+        int MGG;
+        MGG = scanner.nextInt();
+        switch (MGG) {
+            case 1:
+                break;
+            default:
+                System.out.println("Opcion no valida");
+                break;
+        }
+    }
+    //-------------------------------------------------------- ModificarCostoBaseNivelEducativo
+    public static void ModificarCostoBaseNivelEducativo() {
+        Scanner scanner = new Scanner(System.in);
+        int MCNE;
+        MCNE = scanner.nextInt();
+        switch (MCNE) {
+            case 1:
+                break;
+            default:
+                System.out.println("Opcion no valida");
+                break;
+        }
+    }
+    //-------------------------------------------------------- ModificarCostoMotivosdePago
+    public static void ModificarCostoMotivosdePago() {
+        Scanner scanner = new Scanner(System.in);
+        int MCMP;
+        MCMP = scanner.nextInt();
+        switch (MCMP) {
+            case 1:
+                break;
+            default:
+                System.out.println("Opcion no valida");
+                break;
+        }
+    }
+    //-------------------------------------------------------- ModificarPacksPapeleria
+    public static void ModificarPacksPapeleria() {
+        Scanner scanner = new Scanner(System.in);
+        int MPP;
+        MPP = scanner.nextInt();
+        switch (MPP) {
+            case 1:
+                break;
+            default:
+                System.out.println("Opcion no valida");
+                break;
+        }
+    }
+    //-------------------------------------------------------- ModificarUniformes
+    public static void ModificarUniformes() {
+        Scanner scanner = new Scanner(System.in);
+        int MU;
+        MU = scanner.nextInt();
+        switch (MU) {
+            case 1:
+                break;
+            default:
+                System.out.println("Opcion no valida");
+                break;
+        }
+    }
+    //-------------------------------------------------------- ModificarTiposUniformes
+    public static void ModificarTiposUniformes() {
+        Scanner scanner = new Scanner(System.in);
+        int MTU;
+        MTU = scanner.nextInt();
+        switch (MTU) {
+            case 1:
+                break;
+            default:
+                System.out.println("Opcion no valida");
+                break;
+        }
+    }
+    //-------------------------------------------------------- ModificarEventosEspeciales
+    public static void ModificarEventosEspeciales() {
+        Scanner scanner = new Scanner(System.in);
+        int MEE;
+        MEE = scanner.nextInt();
+        switch (MEE) {
+            case 1:
+                break;
+            default:
+                System.out.println("Opcion no valida");
+                break;
         }
     }
         

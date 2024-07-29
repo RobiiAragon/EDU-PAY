@@ -4,7 +4,7 @@ import java.sql.*;
 public class CRUD {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int i, menuAlumno, CRUDAlumno, CRUDAdmin;
+        int i, menuAlumno, CRUDAlumno, CRUDAdmin, CRUDalumno;
         menuAlumno = scanner.nextInt();
         scanner.nextLine(); // Consumir el salto de línea
         
@@ -90,7 +90,49 @@ public class CRUD {
                 System.out.println("10. volver al menú principal");
                 System.out.println("=============================================");
                 System.out.println("Seleccione una opción: ");
-                CRUDAlumno= scanner.nextInt();
+                CRUDAlumno = scanner.nextInt();
+                switch(CRUDAlumno){
+                    case 1:
+                        Addons.ModificarAlumnos();
+                        break;
+                    case 2:
+                        Addons.ModificarTutores();
+                        break;
+                    case 3:
+                        Addons.ModificarGradosyGrupos();
+                        break;
+                    case 4:
+                        Addons.ModificarCostoBaseNivelEducativo();
+                        break;
+                    case 5:
+                        Addons.ModificarCostoMotivosdePago();
+                        break;
+                    case 6:
+                        Addons.ModificarPacksPapeleria();
+                        break;
+                    case 7:
+                        Addons.ModificarUniformes();
+                        break;
+                    case 8:
+                        Addons.ModificarTiposUniformes();
+                        break;
+                    case 9:
+                        Addons.ModificarEventosEspeciales();
+                        break;
+                    case 10:
+                        System.out.print("Volviendo al menú principal");
+                        for (i = 0; i < 3; i++) {// bucle para repetir 3 veces el . que colocamos para que se mire
+                            try {
+                               Thread.sleep(500); // 500 milisegundos = medio segundo
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                                System.out.print(".");
+                            }
+                        break;
+                    default:
+                        break;
+                }
                 break;
             case 4:
                 System.out.println("DELETE - CRUD");
