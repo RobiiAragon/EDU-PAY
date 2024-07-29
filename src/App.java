@@ -5,6 +5,7 @@ public class App {
 
         int opcion;
         Addons.banner();
+        Thread.sleep(200);
         System.out.println("SISTEMA DE COBROS DE UNA ESCUELA PARTICULAR");
         System.out.println("=============================================");
         System.out.println("1. CRUD");
@@ -13,6 +14,7 @@ public class App {
         System.out.println("==================");
         System.out.println("Seleccione una opcion: ");
         opcion = scanner.nextInt();
+        Thread.sleep(500); 
         switch(opcion){
             case 1:
                 System.out.println("CRUD SISTEMA DE COBROS ESCOLARES");
@@ -42,9 +44,9 @@ public class App {
             case 3:
             int i;
             System.out.print("Saliendo");
-                for (i = 0; i < 3; i++) {// bucle para repetir 3 veces el . que colocamos para que se mire
+                for (i = 0; i < 3; i++) {
                     try {
-                       Thread.sleep(500); // 500 milisegundos = medio segundo
+                       Thread.sleep(500);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
