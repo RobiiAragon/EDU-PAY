@@ -29,6 +29,7 @@ INSERT INTO ALUMNO (matricula, nombre, primerApell, segundoApell, direccion, tut
 ('MTC0000002', 'María', 'López', 'Sánchez', 'Avenida 456, Ciudad', 'TU002', 'NE002', 'PE2023', 'GG004'),
 ('MTC0000003', 'Carlos', 'Rodríguez', 'Martínez', 'Plaza 789, Ciudad', 'TU003', 'NE003', 'PE2023', 'GG005');
 
+
 -- Inserts para MOTIVO_DE_PAGO
 INSERT INTO MOTIVO_DE_PAGO (codigo, nombre, precio) VALUES
 ('MP001', 'Inscripción Preescolar', 800.00),

@@ -126,7 +126,7 @@ CREATE TABLE UNIFORMES (
     motivo_de_pago VARCHAR(5) PRIMARY KEY,
     talla VARCHAR(10) NOT NULL,
     tipo_de_uniforme VARCHAR(5),
-    descripcion VARCHAR(80),
+    descripcion VARCHAR(255),
     FOREIGN KEY (motivo_de_pago) REFERENCES MOTIVO_DE_PAGO(codigo),
     FOREIGN KEY (tipo_de_uniforme) REFERENCES TIPO_DE_UNIFORME(codigo)
 );
@@ -140,7 +140,7 @@ CREATE TABLE NUM_TEL (
     FOREIGN KEY (tutor) REFERENCES TUTOR(folio)
 );
 
--- Crear la tabla para manejar la secuencia
+----------------------------------------------------------------- Crear la tabla para manejar la secuencia
 CREATE TABLE matricula_seq (
     id INT NOT NULL AUTO_INCREMENT,
     PRIMARY KEY (id)
@@ -165,7 +165,10 @@ CREATE TABLE necodigo_seq (
     id INT NOT NULL AUTO_INCREMENT,
     PRIMARY KEY (id)
 );
-
+CREATE TABLE tucodigo_seq (
+    id INT NOT NULL AUTO_INCREMENT,
+    PRIMARY KEY (id)
+);
 
 -- Crear el trigger para autoincrementar la matricula
 DELIMITER //
@@ -258,6 +261,25 @@ BEGIN
     SET formatted_id = LPAD(next_id, 3, '0');
     -- Asignar el ID formateado con el prefijo 'NE' a la nueva fila
     SET NEW.codigo = CONCAT('NE', formatted_id);
+END;
+//
+DELIMITER ;
+
+-- Crear el trigger para autoincrementar el codigo del `tipo_de_uniforme`
+DELIMITER //
+CREATE TRIGGER autoinc_codigoTU
+BEFORE INSERT ON TIPO_DE_UNIFORME
+FOR EACH ROW
+BEGIN
+    DECLARE next_id INT;
+    DECLARE formatted_id VARCHAR(7);
+    -- Obtener el siguiente valor de la secuencia
+    INSERT INTO tucodigo_seq () VALUES ();
+    SET next_id = LAST_INSERT_ID();
+    -- Formatear el ID con ceros a la izquierda
+    SET formatted_id = LPAD(next_id, 3, '0');
+    -- Asignar el ID formateado con el prefijo 'TU' a la nueva fila
+    SET NEW.codigo = CONCAT('TU', formatted_id);
 END;
 //
 DELIMITER ;
