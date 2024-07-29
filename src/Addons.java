@@ -253,7 +253,7 @@ public class Addons {
         }
         System.out.println("Ingrese el nuevo grado y grupo del alumno: ");
         String gradoGrupo = scanner.nextLine();
-        System.out.println("aqui estan los grados y grupos disponibles");
+        System.out.println("Ingrese El Tutor del alumno");
         String query3 = "SELECT * FROM TUTOR";
         try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
              PreparedStatement pstmt = conn.prepareStatement(query3)) {
@@ -296,7 +296,7 @@ public class Addons {
         String apellido = scanner.nextLine();
         System.out.println("Ingrese el nuevo apellido materno del tutor: ");
         String apellido2 = scanner.nextLine();
-        String query = "UPDATE TUTOR SET nombre = ?, primerApell = ?, segundoApell = ?, direccion = ? WHERE folio = ?";
+        String query = "UPDATE TUTOR SET nombre = ?, primerApell = ?, segundoApell = ? WHERE folio = ?";
         try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
              PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setString(1, nombre);
@@ -346,10 +346,10 @@ public class Addons {
             e.printStackTrace();
         }
     }
-    //-------------------------------------------------------- ModificarCostoBaseNivelEducativo
-    public static void ModificarCostoBaseNivelEducativo() {
+    //-------------------------------------------------------- Modificar un Nivel Educativo
+    public static void ModificarNivelEducativo() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Modificar Costo Base Nivel Educativo");
+        System.out.println("Modificar un Nivel Educativo");
         System.out.println("=============================================");
         System.out.println("Ingrese el código del nivel educativo a modificar: ");
         String codigo = scanner.nextLine();
@@ -379,10 +379,10 @@ public class Addons {
             e.printStackTrace();
         }
     }
-    //-------------------------------------------------------- ModificarCostoMotivosdePago
-    public static void ModificarCostoMotivosdePago() {
+    //-------------------------------------------------------- Modificar Motivos de Pago
+    public static void ModificarMotivosdePago() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Modificar Costo Motivos de Pago");
+        System.out.println("Modificar Motivos de Pago");
         System.out.println("=============================================");
         System.out.println("Ingrese el código del motivo de pago a modificar: ");
         String codigo = scanner.nextLine();
@@ -418,51 +418,109 @@ public class Addons {
         System.out.println("Modificar Packs de Papeleria");
         System.out.println("=============================================");
         System.out.println("Ingrese el código del motivo de pago del pack de papelería a modificar: ");
-        String codigo = scanner.nextLine();
+        String motivo_de_pago = scanner.nextLine();
         System.out.println("Ingrese el nuevo nombre del pack de papelería: ");
-        String nombre = scanner.nextLine();
+        String nombre_pack = scanner.nextLine();
         String descripcion;
         System.out.println("Ingrese la nueva descripción del pack de papelería: ");
         descripcion = scanner.nextLine();
+        String query = "update PAPELERIA set nombre_pack = ?, descripcion = ? where motivo_de_pago = ?";
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setString(1, nombre_pack);
+            pstmt.setString(2, descripcion);
+            pstmt.setString(3, motivo_de_pago);
+            pstmt.executeUpdate();
+            System.out.println("Pack de papelería modificado correctamente");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         
     }
     //-------------------------------------------------------- ModificarUniformes
     public static void ModificarUniformes() {
         Scanner scanner = new Scanner(System.in);
-        int MU;
-        MU = scanner.nextInt();
-        switch (MU) {
-            case 1:
-                break;
-            default:
-                System.out.println("Opcion no valida");
-                break;
+        System.out.println("Modificar Uniformes");
+        System.out.println("=============================================");
+        System.out.println("Ingrese el motivo de pago del uniforme a modificar: ");
+        String motivo_de_pago = scanner.nextLine();
+        System.out.println("Ingrese la nueva talla del uniforme: ");
+        String talla = scanner.nextLine();
+        System.out.println("Aqui se muestran los tipos de uniformes disponibles");
+        String query0 = "SELECT * FROM TIPO_DE_UNIFORME";
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
+             PreparedStatement pstmt = conn.prepareStatement(query0)) {
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                System.out.println(rs.getString("codigo") + ". " + rs.getString("nombre"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        System.out.println("Ingrese el nuevo tipo de uniforme: ");
+        String tipo_de_uniforme = scanner.nextLine();
+        System.out.println("Ingrese la nueva descripción del uniforme: ");
+        String descripcion = scanner.nextLine();
+        String query = "update UNIFORMES set talla = ?, tipo_de_uniforme = ?, descripcion = ? where motivo_de_pago = ?";
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setString(1, talla);
+            pstmt.setString(2, tipo_de_uniforme);
+            pstmt.setString(3, descripcion);
+            pstmt.setString(4, motivo_de_pago);
+            pstmt.executeUpdate();
+            System.out.println("Uniforme modificado correctamente");
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
     //-------------------------------------------------------- ModificarTiposUniformes
     public static void ModificarTiposUniformes() {
         Scanner scanner = new Scanner(System.in);
-        int MTU;
-        MTU = scanner.nextInt();
-        switch (MTU) {
-            case 1:
-                break;
-            default:
-                System.out.println("Opcion no valida");
-                break;
+        System.out.println("Modificar Tipos de Uniformes");
+        System.out.println("=============================================");
+        System.out.println("Ingrese el código del tipo de uniforme a modificar: ");
+        String codigo = scanner.nextLine();
+        System.out.println("Ingrese el nuevo nombre del tipo de uniforme: ");
+        String nombre = scanner.nextLine();
+        String query = "UPDATE TIPO_DE_UNIFORME SET nombre = ? WHERE codigo = ?";
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setString(1, nombre);
+            pstmt.setString(2, codigo);
+            pstmt.executeUpdate();
+            System.out.println("Tipo de uniforme modificado correctamente");
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
     //-------------------------------------------------------- ModificarEventosEspeciales
     public static void ModificarEventosEspeciales() {
         Scanner scanner = new Scanner(System.in);
-        int MEE;
-        MEE = scanner.nextInt();
-        switch (MEE) {
-            case 1:
-                break;
-            default:
-                System.out.println("Opcion no valida");
-                break;
+        System.out.println("Modificar Eventos Especiales");
+        System.out.println("=============================================");
+        System.out.println("Ingrese el motivo de pago del evento especial a modificar: ");
+        String motivo_de_pago = scanner.nextLine();
+        System.out.println("Ingrese la nueva fecha del evento (yyyy-mm-dd): ");
+        String fecha = scanner.nextLine();
+        System.out.println("Ingrese el nuevo lugar del evento: ");
+        String lugar = scanner.nextLine();
+        System.out.println("Ingrese el nuevo horario del evento especial (00:00-00:00): ");
+        String horario = scanner.nextLine();
+        System.out.println("Ingrese la nueva descripción del evento especial: ");
+        String descripcion = scanner.nextLine();
+        String query = "UPDATE EVENTOS_ESPECIALES SET fecha = ?, lugar = ?, horario = ?, descripcion = ? WHERE motivo_de_pago = ?";
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setString(1, fecha);
+            pstmt.setString(2, lugar);
+            pstmt.setString(3, horario);
+            pstmt.setString(4, descripcion);
+            pstmt.setString(5, motivo_de_pago);
+            pstmt.executeUpdate();
+            System.out.println("Evento especial modificado correctamente");
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
         
