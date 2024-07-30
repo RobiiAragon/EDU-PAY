@@ -29,9 +29,6 @@ public class Addons {
                     Inscripciones();
                     break;
                 case 2:
-                    PortaldePagos();
-                    break;
-                case 3:
                     ConsultarPagos();
                     break;
                     default:
