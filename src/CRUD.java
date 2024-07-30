@@ -3,15 +3,9 @@ import java.util.Scanner;
 public class CRUD {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int menuAlumno, CRUDAlumno, CRUDAdmin;
+        int menuAlumno, CRUDAlumno, CRUDAdmin, CP7;
         
         while (true) {
-            System.out.println("Seleccione una opción del menú principal:");
-            System.out.println("1. CREATE");
-            System.out.println("2. READ");
-            System.out.println("3. UPDATE");
-            System.out.println("4. DELETE");
-            System.out.println("5. Salir del programa");
             menuAlumno = scanner.nextInt();
             scanner.nextLine(); // Consumir el salto de línea
 
@@ -60,7 +54,6 @@ public class CRUD {
                     }
                     break;
                 case 2:
-                    while (true) {
                         System.out.println("READ - CRUD");
                         System.out.println("=============================================");
                         System.out.println("1. Datos de un alumno en un periodo escolar");
@@ -73,14 +66,10 @@ public class CRUD {
                         System.out.println("8. Lista de precios de los paquetes de útiles escolares (papelería) para un periodo y nivel escolar.");
                         System.out.println("9. Lista de precios de los uniformes para un periodo y nivel escolar.");
                         System.out.println("10. Total de pagos realizados para un nivel educativo en un periodo escolar");
-                        System.out.println("-------------------------------");
-                        System.out.println("11. Volver al menú CRUD");
                         System.out.println("=============================================");
                         System.out.println("Seleccione una opción: ");
-                        CRUDAdmin = scanner.nextInt();
-                        if (CRUDAdmin == 11) break;
                         Addons.ConsultasProyecto7();
-                    }
+                    
                     break;
                 case 3:
                     while (true) {
