@@ -1,5 +1,11 @@
 import java.util.Scanner;
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.format.DateTimeFormatter;
+import java.time.format.TextStyle;
+import java.util.Locale;
+
 public class Addons {
     //-------------------------------------------------------- Banner
     public static void banner() {
@@ -13,6 +19,291 @@ public class Addons {
         System.out.println("Fecha Actual: " + java.time.LocalDate.now());
         System.out.println("===========================");
     }
+    //-------------------------------------------------------- Seleccion de Opciones Programa de Cobros
+   public static void MenuProgramaCobros() {
+    Scanner scanner = new Scanner(System.in);
+    int PCinscripcion;
+    PCinscripcion = scanner.nextInt();
+            switch (PCinscripcion) {
+                case 1:
+                    Inscripciones();
+                    break;
+                case 2:
+                    PortaldePagos();
+                    break;
+                case 3:
+                    ConsultarPagos();
+                    default:
+                        System.out.println("Opcion no valida");
+                        break;
+            }
+    }
+    //-------------------------------------------------------- Portal de Pagos
+    public static void PortaldePagos() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("=============================================");
+        System.out.println("Portal de Pagos");
+        System.out.println("Ingrese la matricula del alumno: ");
+        String matricula = scanner.nextLine();
+        // Verificar que el alumno existe en la tabla alumno
+        String queryCheckAlumno = "SELECT COUNT(*) FROM alumno WHERE matricula = ?";
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
+             PreparedStatement pstmt = conn.prepareStatement(queryCheckAlumno)) {
+            pstmt.setString(1, matricula);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next() && rs.getInt(1) == 0) {
+                System.out.println("El alumno con matrícula " + matricula + " no existe.");
+                return;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        // si el alumno existe deja continuar de lo contrario regresa al menu principal
+        if(matricula != null && !matricula.isEmpty()) {
+            System.out.println("Estos son los motivos de pago disponibles");
+        }else{
+            return;
+        }
+    }
+    //-------------------------------------------------------- Consultar Pagos
+    public static void ConsultarPagos() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("=============================================");
+        System.out.println("Consultar Pagos");
+        System.out.println("Ingrese la matricula del alumno: ");
+    }
+    //-------------------------------------------------------- Inscripciones
+    public static void Inscripciones() {
+        
+    Scanner scanner = new Scanner(System.in);
+        System.out.println("=============================================");
+                    System.out.println("Ingrese el nombre del tutor: ");
+                    String nombre = scanner.next();
+                    scanner.nextLine();
+                    System.out.println("Ingrese el primer apellido del tutor: ");
+                    String primerApell = scanner.next();
+                    scanner.nextLine();
+                    System.out.println("Ingrese el segundo apellido del tutor: ");
+                    String segundoApell = scanner.next();
+                    scanner.nextLine();
+                    // Insertar tutor
+                    String query = "INSERT INTO TUTOR (nombre, primerApell, segundoApell) VALUES (?, ?, ?)";
+                    try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
+                         PreparedStatement pstmt = conn.prepareStatement(query)) {
+                        pstmt.setString(1, nombre);
+                        pstmt.setString(2, primerApell);
+                        pstmt.setString(3, segundoApell);
+                        pstmt.executeUpdate();
+                        System.out.println("Tutor agregado correctamente");
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                    System.out.println("ingrese el numero de telefono del tutor: ");
+                    String num_tel = scanner.next();
+                    scanner.nextLine();
+                    // buscar el folio del tutor
+                    String query1 = "SELECT folio FROM TUTOR WHERE nombre = ? AND primerApell = ? AND segundoApell = ?";
+                    String folio = "";
+                    try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
+                         PreparedStatement pstmt = conn.prepareStatement(query1)) {
+                        pstmt.setString(1, nombre);
+                        pstmt.setString(2, primerApell);
+                        pstmt.setString(3, segundoApell);
+                        ResultSet rs = pstmt.executeQuery();
+                        while (rs.next()) {
+                            folio = rs.getString("folio");
+                        }
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                    // Insertar numero de telefono
+                    String query2 = "INSERT INTO NUM_TEL (tutor, numTel) VALUES (?, ?)";
+                    try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
+                         PreparedStatement pstmt = conn.prepareStatement(query2)) {
+                        pstmt.setString(1, folio);
+                        pstmt.setString(2, num_tel);
+                        pstmt.executeUpdate();
+                        System.out.println("Numero de telefono agregado correctamente");
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                    // Insertar alumno
+                    System.out.println("Ingrese el nombre del alumno: ");
+                    String nombreAlumno = scanner.next();
+                    scanner.nextLine();
+                    System.out.println("Ingrese el primer apellido del alumno: ");
+                    String primerApellAlumno = scanner.next();
+                    scanner.nextLine();
+                    System.out.println("Ingrese el segundo apellido del alumno: ");
+                    String segundoApellAlumno = scanner.next();
+                    scanner.nextLine();
+                    System.out.println("Ingrese la dirección del alumno: ");
+                    String direccion = scanner.next();
+                    scanner.nextLine();
+                    System.out.println("Estos son los niveles educativos disponibles");
+                    String query3 = "SELECT * FROM NIVEL_EDUCATIVO";
+                    try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
+                         PreparedStatement pstmt = conn.prepareStatement(query3)) {
+                        ResultSet rs = pstmt.executeQuery();
+                        while (rs.next()) {
+                            System.out.println(rs.getString("codigo") + ". " + rs.getString("nombre"));
+                        }
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                    System.out.println("Ingrese el nivel educativo del alumno: ");
+                    String nivelEducativo = scanner.next();
+                    System.out.println("Estos son los periodos escolares disponibles");
+                    String query4 = "SELECT * FROM PERIODO_ESCOLAR";
+                    try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
+                         PreparedStatement pstmt = conn.prepareStatement(query4)) {
+                        ResultSet rs = pstmt.executeQuery();
+                        while (rs.next()) {
+                            System.out.println(rs.getString("codigo") + ". " + rs.getString("fecha_inicio") + " - " + rs.getString("fecha_final"));
+                        }
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                    System.out.println("Ingrese el periodo escolar del alumno: ");
+                    String periodoEscolar = scanner.next();
+                    scanner.nextLine();
+                    System.out.println("Estos son los grados y grupos disponibles");
+                    String query5 = "SELECT * FROM GRADO_Y_GRUPO";
+                    try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
+                         PreparedStatement pstmt = conn.prepareStatement(query5)) {
+                        ResultSet rs = pstmt.executeQuery();
+                        while (rs.next()) {
+                            System.out.println(rs.getString("codigo") + ". " + rs.getString("grado") + rs.getString("grupo"));
+                        }
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                    System.out.println("Ingrese el grado y grupo del alumno: ");
+                    String gradoGrupo = scanner.next();
+                    scanner.nextLine();
+
+                    // Insertar alumno
+                    String query6 = "INSERT INTO ALUMNO (nombre, primerApell, segundoApell, direccion, nivel_educativo, periodo_escolar, grado_y_grupo, tutor) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                    try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
+                         PreparedStatement pstmt = conn.prepareStatement(query6)) {
+                        pstmt.setString(1, nombreAlumno);
+                        pstmt.setString(2, primerApellAlumno);
+                        pstmt.setString(3, segundoApellAlumno);
+                        pstmt.setString(4, direccion);
+                        pstmt.setString(5, nivelEducativo);
+                        pstmt.setString(6, periodoEscolar);
+                        pstmt.setString(7, gradoGrupo);
+                        pstmt.setString(8, folio);
+                        pstmt.executeUpdate();
+                        System.out.println("Alumno agregado correctamente");
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                    //sacar la matricula del alumno
+                    String query7 = "SELECT matricula FROM ALUMNO WHERE nombre = ? AND primerApell = ? AND segundoApell = ?";
+                    String matricula = "";
+                    try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
+                         PreparedStatement pstmt = conn.prepareStatement(query7)) {
+                        pstmt.setString(1, nombreAlumno);
+                        pstmt.setString(2, primerApellAlumno);
+                        pstmt.setString(3, segundoApellAlumno);
+                        ResultSet rs = pstmt.executeQuery();
+                        while (rs.next()) {
+                            matricula = rs.getString("matricula");
+                        }
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                    //registrar pago de inscripcion
+                    //mostrar motivos de pago
+                    System.out.println("Estos son los motivos de pago disponibles");
+                    String query8 = "SELECT * FROM MOTIVO_DE_PAGO";
+                    try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
+                        PreparedStatement pstmt = conn.prepareStatement(query8)) {
+                        ResultSet rs = pstmt.executeQuery();
+                        while (rs.next()) {
+                            System.out.println(rs.getString("codigo") + ". " + rs.getString("nombre") + " - $" + rs.getString("precio"));
+                        }
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                    System.out.println("Ingrese el motivo de pago de la inscripcion: ");
+                    String motivo_de_pago = scanner.next();
+                    scanner.nextLine();
+                    //obtener el costo del motivo de pago
+                    String query9 = "SELECT precio FROM MOTIVO_DE_PAGO WHERE codigo = ?";
+                    double precio = 0;
+                    try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
+                        PreparedStatement pstmt = conn.prepareStatement(query9)) {
+                        pstmt.setString(1, motivo_de_pago);
+                        ResultSet rs = pstmt.executeQuery();
+                        while (rs.next()) {
+                            precio = rs.getDouble("precio");
+                        }
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                    // Obtener la fecha actual
+                    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                    LocalDate fechaActual = LocalDate.now();
+                    String fecha = dtf.format(fechaActual);
+                    //sacar el subtotal = costo del motivo de pago
+                    double subtotal = precio;
+                    //sacar el iva = subtotal * 0.16
+                    double iva = subtotal * 0.16;
+                    //sacar el total = subtotal + iva
+                    double total = subtotal + iva;
+                    // Verificar que el alumno existe en la tabla alumno
+                    String queryCheckAlumno = "SELECT COUNT(*) FROM alumno WHERE matricula = ?";
+                    try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
+                        PreparedStatement pstmt = conn.prepareStatement(queryCheckAlumno)) {
+                        pstmt.setString(1, matricula);
+                        ResultSet rs = pstmt.executeQuery();
+                        if (rs.next() && rs.getInt(1) == 0) {
+                            System.out.println("El alumno con matrícula " + matricula + " no existe.");
+                            return;
+                        }
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                    //insertar el pago
+                    String query10 = "INSERT INTO PAGO (fecha, subtotal, iva, monto_total, estado, alumno, motivo_de_pago) VALUES (?, ?, ?, ?, 'Pendiente', ?, ?)";
+                    try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
+                        PreparedStatement pstmt = conn.prepareStatement(query10)) {
+                        pstmt.setString(1, fecha);
+                        pstmt.setDouble(2, subtotal);
+                        pstmt.setDouble(3, iva);
+                        pstmt.setDouble(4, total);
+                        pstmt.setString(5, matricula);
+                        pstmt.setString(6, motivo_de_pago);
+                        pstmt.executeUpdate();
+                        System.out.println("Pago de inscripcion registrado correctamente");
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                    System.out.println("=============================================");
+                    System.out.println("proceso de inscripcion completado");
+                    System.out.println("Su pago esta pendiente de ser aprobado por el administrador");
+                    System.out.println("El portal de pagos esta habilitado para realizar su pago se le pedira la matricula del alumno para realizar el pago");
+                    // se imprime el recibo
+                    System.out.println("Recibo de inscripcion");
+                    System.out.println("Fecha: " + fecha);
+                    System.out.println("Matrícula del alumno: " + matricula);
+                    System.out.println("Nombre del alumno: " + nombreAlumno + " " + primerApellAlumno + " " + segundoApellAlumno);
+                    System.out.println("Dirección: " + direccion);
+                    System.out.println("Nivel educativo: " + nivelEducativo);
+                    System.out.println("Periodo escolar: " + periodoEscolar);
+                    System.out.println("Grado y grupo: " + gradoGrupo);
+                    System.out.println("Tutor: " + nombre + " " + primerApell + " " + segundoApell);
+                    System.out.println("Motivo de pago: " + motivo_de_pago);
+                    System.out.println("---------------------------------------------");
+                    System.out.println("Subtotal: " + subtotal);
+                    System.out.println("IVA: " + iva);
+                    System.out.println("---------------------------------------------");
+                    System.out.println("Total: " + total);
+                    System.out.println("=============================================");
+                }
+        
     //-------------------------------------------------------- Agregar Periodo Escolar
     public static void AgregarPeriodoEscolar() {
         Scanner scanner = new Scanner(System.in);
@@ -771,19 +1062,7 @@ public class Addons {
     }
 
         
-    //-------------------------------------------------------- Programa de Cobros
-   public static void ProgramaCobros() {
-    Scanner scanner = new Scanner(System.in);
-    int PC;
-    PC = scanner.nextInt();
-            switch (PC) {
-                case 1:
-                    break;
-                default:
-                    System.out.println("Opcion no valida");
-                    break;
-            }
-    }
+
     //-------------------------------------------------------- Consultas Proyecto 7
     public static void ConsultasProyecto7() {
         Scanner scanner = new Scanner(System.in);

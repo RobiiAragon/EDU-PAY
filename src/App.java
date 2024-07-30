@@ -32,10 +32,11 @@ public class App {
                 System.out.println("1. Inscripciones");
                 System.out.println("2. Portal de pagos");
                 System.out.println("3. Consultar pagos");
-                System.out.println("4. Salir");
+                System.out.println("4. ");
+                System.out.println(". Salir");
                 System.out.println("=============================================");
                 System.out.println("Seleccione una opcion: ");
-                Addons.ProgramaCobros();
+                Addons.MenuProgramaCobros();
                 break;
             case 3:
             int i;

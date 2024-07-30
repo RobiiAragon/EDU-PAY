@@ -39,7 +39,7 @@ CREATE TABLE ALUMNO (
     nombre VARCHAR(30) NOT NULL,
     primerApell VARCHAR(30) NOT NULL,
     segundoApell VARCHAR(30),
-    direccion VARCHAR(100) NOT NULL,
+    direccion VARCHAR(255) NOT NULL,
     nivel_educativo VARCHAR(5),
     periodo_escolar VARCHAR(10),
     grado_y_grupo VARCHAR(5),
@@ -59,7 +59,7 @@ CREATE TABLE MOTIVO_DE_PAGO (
 
 -- Tabla PAGO
 CREATE TABLE PAGO (
-    numero INT PRIMARY KEY,
+    numero INT PRIMARY KEY AUTO_INCREMENT,
     fecha DATE NOT NULL,
     subtotal DECIMAL(10,2) NOT NULL,
     iva DECIMAL(10,2) NOT NULL,
@@ -134,9 +134,8 @@ CREATE TABLE UNIFORMES (
 -- Tabla NUM_TEL
 CREATE TABLE NUM_TEL (
     tutor VARCHAR(10),
-    numero VARCHAR(15),
     numTel VARCHAR(15),
-    PRIMARY KEY (tutor, numero),
+    PRIMARY KEY (tutor),
     FOREIGN KEY (tutor) REFERENCES TUTOR(folio)
 );
 

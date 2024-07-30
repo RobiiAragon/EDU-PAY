@@ -14,8 +14,9 @@ INSERT INTO GRADO_Y_GRUPO (codigo, grado, grupo, periodo_escolar) VALUES
 ('GG001', '1', 'A', 'PE2023'),
 ('GG002', '2', 'A', 'PE2023'),
 ('GG003', '3', 'A', 'PE2023'),
-('GG004', '1', 'A', 'PE2023'),
-('GG005', '2', 'B', 'PE2023');
+('GG004', '1', 'A', 'PE2024'),
+('GG005', '2', 'A', 'PE2024'),
+('GG006', '3', 'A', 'PE2024');
 
 -- Inserts para TUTOR
 INSERT INTO TUTOR (folio, nombre, primerApell, segundoApell) VALUES
@@ -25,9 +26,9 @@ INSERT INTO TUTOR (folio, nombre, primerApell, segundoApell) VALUES
 
 -- Inserts para ALUMNO
 INSERT INTO ALUMNO (matricula, nombre, primerApell, segundoApell, direccion, tutor, nivel_educativo, periodo_escolar, grado_y_grupo) VALUES
-('MTC0000001', 'Juan', 'Pérez', 'García', 'Calle 123, Ciudad', 'TU001', 'NE001', 'PE2023', 'GG001'),
-('MTC0000002', 'María', 'López', 'Sánchez', 'Avenida 456, Ciudad', 'TU002', 'NE002', 'PE2023', 'GG004'),
-('MTC0000003', 'Carlos', 'Rodríguez', 'Martínez', 'Plaza 789, Ciudad', 'TU003', 'NE003', 'PE2023', 'GG005');
+('MTC0000001', 'Juan', 'Pérez', 'García', 'Calle 123, Tijuana', 'TU001', 'NE001', 'PE2023', 'GG001'),
+('MTC0000002', 'María', 'López', 'Sánchez', 'Avenida 456, Tijuana', 'TU002', 'NE002', 'PE2023', 'GG004'),
+('MTC0000003', 'Carlos', 'Rodríguez', 'Martínez', 'Plaza 789, Tijuana', 'TU003', 'NE003', 'PE2023', 'GG005');
 
 
 -- Inserts para MOTIVO_DE_PAGO
@@ -94,7 +95,7 @@ INSERT INTO UNIFORMES (motivo_de_pago, talla, tipo_de_uniforme, descripcion) VAL
 ('MP009', 'L', 'TU001', 'Uniforme diario secundaria talla grande');
 
 -- Inserts para NUM_TEL
-INSERT INTO NUM_TEL (tutor, numero, numTel) VALUES
-('TU001', '1', '555-1234'),
-('TU002', '1', '555-5678'),
-('TU003', '1', '555-9012');
+INSERT INTO NUM_TEL (tutor, numTel) VALUES
+('TU001', '555-1234'),
+('TU002', '555-5678'),
+('TU003', '555-9012');
