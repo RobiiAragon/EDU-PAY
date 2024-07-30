@@ -523,6 +523,253 @@ public class Addons {
             e.printStackTrace();
         }
     }
+    //-------------------------------------------------------- Eliminar Alumnos
+    public static void EliminarAlumnos() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Eliminar Alumnos");
+        System.out.println("=============================================");
+        System.out.println("Ingrese la matricula del alumno a eliminar: ");
+        String matricula = scanner.nextLine();
+        // Eliminar pagos relacionados
+        String query1 = "UPDATE PAGO SET ALUMNO = NULL WHERE ALUMNO = ?";
+        try (Connection conn1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
+            PreparedStatement pstmt1 = conn1.prepareStatement(query1)) {
+            pstmt1.setString(1, matricula);
+            pstmt1.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        String query = "DELETE FROM ALUMNO WHERE matricula = ?";
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
+            PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setString(1, matricula);
+            pstmt.executeUpdate();
+            System.out.println("Alumno eliminado correctamente");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    //-------------------------------------------------------- Eliminar Tutores
+    public static void EliminarTutores() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Eliminar Tutores");
+        System.out.println("=============================================");
+        System.out.println("Ingrese el folio del tutor a eliminar: ");
+        String folio = scanner.nextLine();
+        // Eliminar numeros de telefono relacionados
+        String query2 = "DELETE FROM num_tel WHERE tutor = ?";
+        try (Connection conn2 = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
+            PreparedStatement pstmt2 = conn2.prepareStatement(query2)) {
+            pstmt2.setString(1, folio);
+            pstmt2.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        // Eliminar alumnos relacionados
+        String query1 = "UPDATE ALUMNO SET tutor = NULL WHERE tutor = ?";
+        try (Connection conn1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
+            PreparedStatement pstmt1 = conn1.prepareStatement(query1)) {
+            pstmt1.setString(1, folio);
+            pstmt1.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        String query = "DELETE FROM TUTOR WHERE folio = ?";
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
+            PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setString(1, folio);
+            pstmt.executeUpdate();
+            System.out.println("Tutor eliminado correctamente");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    //-------------------------------------------------------- Eliminar Grados y Grupos
+    public static void EliminarGradosyGrupos() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Eliminar Grados y Grupos");
+        System.out.println("=============================================");
+        System.out.println("Ingrese el código del grado y grupo a eliminar: ");
+        String codigo = scanner.nextLine();
+        // Eliminar alumnos relacionados
+        String query1 = "UPDATE ALUMNO SET grado_y_grupo = NULL WHERE grado_y_grupo = ?";
+        try (Connection conn1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
+            PreparedStatement pstmt1 = conn1.prepareStatement(query1)) {
+            pstmt1.setString(1, codigo);
+            pstmt1.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        String query = "DELETE FROM GRADO_Y_GRUPO WHERE codigo = ?";
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
+            PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setString(1, codigo);
+            pstmt.executeUpdate();
+            System.out.println("Grado y grupo eliminado correctamente");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    //-------------------------------------------------------- Eliminar Motivos de Pago
+    public static void EliminarMotivosdePago() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Eliminar Motivos de Pago");
+        System.out.println("=============================================");
+        System.out.println("Ingrese el código del motivo de pago a eliminar: ");
+        String codigo = scanner.nextLine();
+        // Eliminar pagos relacionados
+        String query1 = "UPDATE PAGO SET motivo_de_pago = NULL WHERE motivo_de_pago = ?";
+        try (Connection conn1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
+            PreparedStatement pstmt1 = conn1.prepareStatement(query1)) {
+            pstmt1.setString(1, codigo);
+            pstmt1.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        // Eliminar packs de papeleria relacionados
+        String query2 = "DELETE FROM PAPELERIA WHERE motivo_de_pago = ?";
+        try (Connection conn2 = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
+            PreparedStatement pstmt2 = conn2.prepareStatement(query2)) {
+            pstmt2.setString(1, codigo);
+            pstmt2.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        // Eliminar uniformes relacionados
+        String query3 = "DELETE FROM UNIFORMES WHERE motivo_de_pago = ?";
+        try (Connection conn3 = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
+            PreparedStatement pstmt3 = conn3.prepareStatement(query3)) {
+            pstmt3.setString(1, codigo);
+            pstmt3.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        // Eliminar eventos especiales relacionados
+        String query4 = "DELETE FROM EVENTOS_ESPECIALES WHERE motivo_de_pago = ?";
+        try (Connection conn4 = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
+            PreparedStatement pstmt4 = conn4.prepareStatement(query4)) {
+            pstmt4.setString(1, codigo);
+            pstmt4.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        // Eliminar inscripciones relacionadas
+        String query5 = "DELETE FROM INSCRIPCION WHERE motivo_de_pago = ?";
+        try (Connection conn5 = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
+            PreparedStatement pstmt5 = conn5.prepareStatement(query5)) {
+            pstmt5.setString(1, codigo);
+            pstmt5.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        // Eliminar mensualidades relacionadas
+        String query6 = "DELETE FROM MENSUALIDAD WHERE motivo_de_pago = ?";
+        try (Connection conn6 = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
+            PreparedStatement pstmt6 = conn6.prepareStatement(query6)) {
+            pstmt6.setString(1, codigo);
+            pstmt6.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        // Eliminar mantenimientos relacionados
+        String query7 = "DELETE FROM MANTENIMIENTO WHERE motivo_de_pago = ?";
+        try (Connection conn7 = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
+            PreparedStatement pstmt7 = conn7.prepareStatement(query7)) {
+            pstmt7.setString(1, codigo);
+            pstmt7.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        String query = "DELETE FROM MOTIVO_DE_PAGO WHERE codigo = ?";
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
+            PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setString(1, codigo);
+            pstmt.executeUpdate();
+            System.out.println("Motivo de pago eliminado correctamente");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    //-------------------------------------------------------- Eliminar Packs de Papeleria
+    public static void EliminarPacksPapeleria() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Eliminar Packs de Papeleria");
+        System.out.println("=============================================");
+        System.out.println("Ingrese el motivo de pago del pack de papelería a eliminar: ");
+        String motivo_de_pago = scanner.nextLine();
+        String query = "DELETE FROM PAPELERIA WHERE motivo_de_pago = ?";
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
+            PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setString(1, motivo_de_pago);
+            pstmt.executeUpdate();
+            System.out.println("Pack de papelería eliminado correctamente");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    //-------------------------------------------------------- Eliminar Uniformes
+    public static void EliminarUniformes() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Eliminar Uniformes");
+        System.out.println("=============================================");
+        System.out.println("Ingrese el motivo de pago del uniforme a eliminar: ");
+        String motivo_de_pago = scanner.nextLine();
+        String query = "DELETE FROM UNIFORMES WHERE motivo_de_pago = ?";
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
+            PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setString(1, motivo_de_pago);
+            pstmt.executeUpdate();
+            System.out.println("Uniforme eliminado correctamente");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    //-------------------------------------------------------- Eliminar Tipos de Uniformes
+    public static void EliminarTiposUniformes() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Eliminar Tipos de Uniformes");
+        System.out.println("=============================================");
+        System.out.println("Ingrese el código del tipo de uniforme a eliminar: ");
+        System.out.println("(Ojo eliminar un tipo de uniforme eliminara los uniformes relacionados con este tipo de uniforme)");
+        String codigo = scanner.nextLine();
+        // Eliminar uniformes relacionados
+        String query1 = "DELETE FROM UNIFORMES WHERE tipo_de_uniforme = ?";
+        try (Connection conn1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
+            PreparedStatement pstmt1 = conn1.prepareStatement(query1)) {
+            pstmt1.setString(1, codigo);
+            pstmt1.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        String query = "DELETE FROM TIPO_DE_UNIFORME WHERE codigo = ?";
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
+            PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setString(1, codigo);
+            pstmt.executeUpdate();
+            System.out.println("Tipo de uniforme eliminado correctamente");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    //-------------------------------------------------------- Eliminar Eventos Especiales
+    public static void EliminarEventosEspeciales() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Eliminar Eventos Especiales");
+        System.out.println("=============================================");
+        System.out.println("Ingrese el motivo de pago del evento especial a eliminar: ");
+        String motivo_de_pago = scanner.nextLine();
+        String query = "DELETE FROM EVENTOS_ESPECIALES WHERE motivo_de_pago = ?";
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
+            PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setString(1, motivo_de_pago);
+            pstmt.executeUpdate();
+            System.out.println("Evento especial eliminado correctamente");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
         
     //-------------------------------------------------------- Programa de Cobros
    public static void ProgramaCobros() {

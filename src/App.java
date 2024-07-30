@@ -5,7 +5,6 @@ public class App {
 
         int opcion;
         Addons.banner();
-        Thread.sleep(200);
         System.out.println("SISTEMA DE COBROS DE UNA ESCUELA PARTICULAR");
         System.out.println("=============================================");
         System.out.println("1. CRUD");
@@ -14,7 +13,6 @@ public class App {
         System.out.println("==================");
         System.out.println("Seleccione una opcion: ");
         opcion = scanner.nextInt();
-        Thread.sleep(500); 
         switch(opcion){
             case 1:
                 System.out.println("CRUD SISTEMA DE COBROS ESCOLARES");
@@ -32,11 +30,9 @@ public class App {
                 System.out.println("Programa de Cobros");
                 System.out.println("=============================================");
                 System.out.println("1. Inscripciones");
-                System.out.println("2. Mantenimiento");
-                System.out.println("3. Opcionales");
-                System.out.println("4. Mensualidades");
-                System.out.println("5. Eventos Especiales");
-                System.out.println("6. Salir");
+                System.out.println("2. Portal de pagos");
+                System.out.println("3. Consultar pagos");
+                System.out.println("4. Salir");
                 System.out.println("=============================================");
                 System.out.println("Seleccione una opcion: ");
                 Addons.ProgramaCobros();
