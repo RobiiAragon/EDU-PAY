@@ -150,6 +150,45 @@ public class CRUD {
                 System.out.println("=============================================");
                 System.out.println("Seleccione una opción: ");
                 CRUDAdmin= scanner.nextInt();
+                switch(CRUDAdmin){
+                    case 1:
+                        Addons.EliminarAlumnos();
+                        break;
+                    case 2:
+                        Addons.EliminarTutores();
+                        break;
+                    case 3:
+                        Addons.EliminarGradosyGrupos();
+                        break;
+                    case 4:
+                        Addons.EliminarMotivosdePago();
+                        break;
+                    case 5:
+                        Addons.EliminarPacksPapeleria();
+                        break;
+                    case 6:
+                        Addons.EliminarUniformes();
+                        break;
+                    case 7:
+                        Addons.EliminarTiposUniformes();
+                        break;
+                    case 8:
+                        Addons.EliminarEventosEspeciales();
+                        break;
+                    case 9:
+                        System.out.print("Volviendo al menú principal");
+                        for (i = 0; i < 3; i++) {// bucle para repetir 3 veces el . que colocamos para que se mire
+                            try {
+                               Thread.sleep(500); // 500 milisegundos = medio segundo
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                                System.out.print(".");
+                            }
+                        break;
+                    default:
+                        break;
+                }
                 break;
             case 5:
                 System.out.print("Volviendo al menú principal");
