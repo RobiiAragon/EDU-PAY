@@ -2,7 +2,7 @@ import java.util.Scanner;
 public class App {
     public static void main(String[] args) throws Exception {
         Scanner scanner = new Scanner(System.in);
-
+        
         int opcion;
         Addons.banner();
         System.out.println("SISTEMA DE COBROS DE UNA ESCUELA PARTICULAR");
@@ -13,6 +13,8 @@ public class App {
         System.out.println("==================");
         System.out.println("Seleccione una opcion: ");
         opcion = scanner.nextInt();
+        //añadir funcion para volver al menu principal
+
         switch(opcion){
             case 1:
                 System.out.println("CRUD SISTEMA DE COBROS ESCOLARES");
@@ -30,8 +32,7 @@ public class App {
                 System.out.println("Programa de Cobros");
                 System.out.println("=============================================");
                 System.out.println("1. Inscripciones");
-                System.out.println("2. Portal de pagos (Registrar pagos)");
-                System.out.println("3. Consultar pagos");
+                System.out.println("2. Consultar pagos");
                 System.out.println(". Salir");
                 System.out.println("=============================================");
                 System.out.println("Seleccione una opcion: ");
