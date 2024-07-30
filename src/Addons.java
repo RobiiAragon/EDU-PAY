@@ -19,8 +19,8 @@ public class Addons {
         System.out.println("Fecha Actual: " + java.time.LocalDate.now());
         System.out.println("===========================");
     }
-    //-------------------------------------------------------- Seleccion de Opciones Programa de Cobros
-   public static void MenuProgramaCobros() {
+    //-------------------------------------------------------- MenuProgramaCobros
+    public static void MenuProgramaCobros() {
     Scanner scanner = new Scanner(System.in);
     int PCinscripcion;
     PCinscripcion = scanner.nextInt();
@@ -33,6 +33,7 @@ public class Addons {
                     break;
                 case 3:
                     ConsultarPagos();
+                    break;
                     default:
                         System.out.println("Opcion no valida");
                         break;
@@ -45,25 +46,96 @@ public class Addons {
         System.out.println("Portal de Pagos");
         System.out.println("Ingrese la matricula del alumno: ");
         String matricula = scanner.nextLine();
-        // Verificar que el alumno existe en la tabla alumno
-        String queryCheckAlumno = "SELECT COUNT(*) FROM alumno WHERE matricula = ?";
+        
+        // Obtener la información del alumno
+        String queryAlumno = "SELECT nivel_educativo FROM ALUMNO WHERE matricula = ?";
+        String nivelEducativo = null;
         try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
-             PreparedStatement pstmt = conn.prepareStatement(queryCheckAlumno)) {
+            PreparedStatement pstmt = conn.prepareStatement(queryAlumno)) {
             pstmt.setString(1, matricula);
             ResultSet rs = pstmt.executeQuery();
-            if (rs.next() && rs.getInt(1) == 0) {
-                System.out.println("El alumno con matrícula " + matricula + " no existe.");
+            if (rs.next()) {
+                nivelEducativo = rs.getString("nivel_educativo");
+            } else {
+                System.out.println("Alumno no encontrado.");
                 return;
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        }
-        // si el alumno existe deja continuar de lo contrario regresa al menu principal
-        if(matricula != null && !matricula.isEmpty()) {
-            System.out.println("Estos son los motivos de pago disponibles");
-        }else{
             return;
         }
+
+        // Mostrar los motivos de pago disponibles
+        System.out.println("Estos son los motivos de pago disponibles");
+        String queryMotivosPago = "SELECT * FROM MOTIVO_DE_PAGO";
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
+            PreparedStatement pstmt = conn.prepareStatement(queryMotivosPago)) {
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                System.out.println(rs.getString("codigo") + ". " + rs.getString("nombre") + " - $" + rs.getString("precio"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return;
+            }
+        System.out.println("Ingrese el codigo del motivo de pago: ");
+        String motivoPago = scanner.nextLine();
+        // Obtener el precio del motivo de pago
+        String queryPrecio = "SELECT precio FROM MOTIVO_DE_PAGO WHERE codigo = ?";
+        double precio = 0;
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
+            PreparedStatement pstmt = conn.prepareStatement(queryPrecio)) {
+            pstmt.setString(1, motivoPago);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                precio = rs.getDouble("precio");
+            } else {
+                System.out.println("Motivo de pago no encontrado.");
+                return;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return;
+        }
+        // Obtener la fecha actual
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate fechaActual = LocalDate.now();
+        String fecha = dtf.format(fechaActual);
+        // Calcular el subtotal, iva y total
+        double subtotal = precio;
+        double iva = subtotal * 0.16;
+        double total = subtotal + iva;
+        // Insertar el pago
+        String queryInsertPago = "INSERT INTO PAGO (fecha, subtotal, iva, monto_total, estado, alumno, motivo_de_pago) VALUES (?, ?, ?, ?, 'Pendiente', ?, ?)";
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
+            PreparedStatement pstmt = conn.prepareStatement(queryInsertPago)) {
+            pstmt.setString(1, fecha);
+            pstmt.setDouble(2, subtotal);
+            pstmt.setDouble(3, iva);
+            pstmt.setDouble(4, total);
+            pstmt.setString(5, matricula);
+            pstmt.setString(6, motivoPago);
+            pstmt.executeUpdate();
+            System.out.println("Pago registrado correctamente");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return;
+        }
+        System.out.println("=============================================");
+        System.out.println("Pago registrado correctamente");
+        System.out.println("Fecha: " + fecha);
+        System.out.println("Matrícula del alumno: " + matricula);
+        System.out.println("Nivel educativo: " + nivelEducativo);
+        System.out.println("Motivo de pago: " + motivoPago);
+        System.out.println("---------------------------------------------");
+        System.out.println("Subtotal: " + subtotal);
+        System.out.println("IVA: " + iva);
+        System.out.println("---------------------------------------------");
+        System.out.println("Total: " + total);
+        System.out.println("=============================================");
+        System.out.println("El pago se realiza mediante Transferencia Bancaria a la cuenta 4815163067954720 a nombre de EDUPAY y la referncia es la matricula del alumno");
+        System.out.println("El pago está pendiente de ser aprobado por el administrador");
+        System.out.println("Para revisar el estado del pago, consulte en la opción de Consultar Pagos");
     }
     //-------------------------------------------------------- Consultar Pagos
     public static void ConsultarPagos() {
@@ -71,6 +143,50 @@ public class Addons {
         System.out.println("=============================================");
         System.out.println("Consultar Pagos");
         System.out.println("Ingrese la matricula del alumno: ");
+        String matricula = scanner.nextLine();
+
+        // Verificar que el alumno existe en la tabla alumno
+        String queryCheckAlumno = "SELECT * FROM ALUMNO WHERE matricula = ?";
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
+             PreparedStatement pstmtCheckAlumno = conn.prepareStatement(queryCheckAlumno)) {
+            pstmtCheckAlumno.setString(1, matricula);
+            ResultSet rsAlumno = pstmtCheckAlumno.executeQuery();
+            if (!rsAlumno.next()) {
+                System.out.println("El alumno con matrícula " + matricula + " no existe.");
+                return;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return;
+        }
+
+        // Verificar que tiene pagos pendientes
+        String queryCheckPagos = "SELECT * FROM PAGO WHERE alumno = ? AND estado = 'Pendiente'";
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
+             PreparedStatement pstmtCheckPagos = conn.prepareStatement(queryCheckPagos)) {
+            pstmtCheckPagos.setString(1, matricula);
+            ResultSet rsPagos = pstmtCheckPagos.executeQuery();
+            if (rsPagos.next()) {
+                System.out.println("Pagos del alumno con matrícula " + matricula);
+                System.out.println("=============================================");
+                do {
+                    System.out.println("Fecha de pago: " + rsPagos.getString("fecha"));
+                    System.out.println("Subtotal: " + rsPagos.getDouble("subtotal"));
+                    System.out.println("IVA: " + rsPagos.getDouble("iva"));
+                    System.out.println("Total: " + rsPagos.getDouble("monto_total"));
+                    System.out.println("Estado: " + rsPagos.getString("estado"));
+                    System.out.println("Alumno: " + rsPagos.getString("alumno"));
+                    System.out.println("Motivo de pago: " + rsPagos.getString("motivo_de_pago"));
+                    System.out.println("=============================================");
+                } while (rsPagos.next());
+                System.out.println("El pago se realiza mediante Transferencia Bancaria a la cuenta 4815163067954720 a nombre de EDUPAY y la referencia es la matricula del alumno");
+                System.out.println("El pago está pendiente de ser aprobado por el administrador");
+            } else {
+                System.out.println("El alumno con matrícula " + matricula + " no tiene pagos registrados.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
     //-------------------------------------------------------- Inscripciones
     public static void Inscripciones() {
@@ -284,7 +400,8 @@ public class Addons {
                     System.out.println("=============================================");
                     System.out.println("proceso de inscripcion completado");
                     System.out.println("Su pago esta pendiente de ser aprobado por el administrador");
-                    System.out.println("El portal de pagos esta habilitado para realizar su pago se le pedira la matricula del alumno para realizar el pago");
+                System.out.println("El pago se realiza mediante Transferencia Bancaria a la cuenta 4815163067954720 a nombre de EDUPAY y la referncia es la matricula del alumno");
+                    System.out.println("Para revisar el estado del pago, consulte en la opción de Consultar Pagos");
                     // se imprime el recibo
                     System.out.println("Recibo de inscripcion");
                     System.out.println("Fecha: " + fecha);

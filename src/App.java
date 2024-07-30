@@ -30,9 +30,8 @@ public class App {
                 System.out.println("Programa de Cobros");
                 System.out.println("=============================================");
                 System.out.println("1. Inscripciones");
-                System.out.println("2. Portal de pagos");
+                System.out.println("2. Portal de pagos (Registrar pagos)");
                 System.out.println("3. Consultar pagos");
-                System.out.println("4. ");
                 System.out.println(". Salir");
                 System.out.println("=============================================");
                 System.out.println("Seleccione una opcion: ");
