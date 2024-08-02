@@ -6,17 +6,40 @@ INSERT INTO NIVEL_EDUCATIVO (codigo, nombre, costo_base) VALUES
 
 -- Inserts para PERIODO_ESCOLAR
 INSERT INTO PERIODO_ESCOLAR (codigo, fecha_inicio, fecha_final) VALUES
-('PE2023', '2023-08-01', '2024-07-31'),
-('PE2024', '2024-08-01', '2025-07-31');
+('PE2023', '2023-01-01', '2023-12-31'),
+('PE2024', '2024-01-01', '2024-12-31'),
+('PE2025', '2025-01-01', '2025-12-31');
 
 -- Inserts para GRADO_Y_GRUPO
-INSERT INTO GRADO_Y_GRUPO (codigo, grado, grupo, periodo_escolar) VALUES
-('GG001', '1', 'A', 'PE2023'),
-('GG002', '2', 'A', 'PE2023'),
-('GG003', '3', 'A', 'PE2023'),
-('GG004', '1', 'A', 'PE2024'),
-('GG005', '2', 'A', 'PE2024'),
-('GG006', '3', 'A', 'PE2024');
+INSERT INTO GRADO_Y_GRUPO (codigo, grado, grupo, periodo_escolar, nivel_educativo) VALUES
+('GG001', '1', 'A', 'PE2023', 'NE001'),
+('GG002', '2', 'A', 'PE2023', 'NE001'),
+('GG003', '3', 'A', 'PE2023', 'NE001'),
+('GG004', '1', 'A', 'PE2024', 'NE001'),
+('GG005', '2', 'A', 'PE2024', 'NE001'),
+('GG006', '3', 'A', 'PE2024', 'NE001'),
+('GG007', '1', 'A', 'PE2025', 'NE001'),
+('GG008', '2', 'A', 'PE2025', 'NE001'),
+('GG009', '3', 'A', 'PE2025', 'NE001'),
+('GG010', '1', 'A', 'PE2023', 'NE002'),
+('GG011', '2', 'A', 'PE2023', 'NE002'),
+('GG012', '3', 'A', 'PE2023', 'NE002'),
+('GG013', '1', 'A', 'PE2024', 'NE002'),
+('GG014', '2', 'A', 'PE2024', 'NE002'),
+('GG015', '3', 'A', 'PE2024', 'NE002'),
+('GG016', '1', 'A', 'PE2025', 'NE002'),
+('GG017', '2', 'A', 'PE2025', 'NE002'),
+('GG018', '3', 'A', 'PE2025', 'NE002'),
+('GG019', '1', 'A', 'PE2023', 'NE003'),
+('GG020', '2', 'A', 'PE2023', 'NE003'),
+('GG021', '3', 'A', 'PE2023', 'NE003'),
+('GG022', '1', 'A', 'PE2024', 'NE003'),
+('GG023', '2', 'A', 'PE2024', 'NE003'),
+('GG024', '3', 'A', 'PE2024', 'NE003'),
+('GG025', '1', 'A', 'PE2025', 'NE003'),
+('GG026', '2', 'A', 'PE2025', 'NE003'),
+('GG027', '3', 'A', 'PE2025', 'NE003');
+
 
 -- Inserts para TUTOR
 INSERT INTO TUTOR (folio, nombre, primerApell, segundoApell) VALUES
@@ -32,21 +55,25 @@ INSERT INTO ALUMNO (matricula, nombre, primerApell, segundoApell, direccion, tut
 
 
 -- Inserts para MOTIVO_DE_PAGO
-INSERT INTO MOTIVO_DE_PAGO (codigo, nombre, precio) VALUES
-('MP001', 'Inscripción Preescolar', 800.00),
-('MP002', 'Inscripción Primaria', 1000.00),
-('MP003', 'Inscripción Secundaria', 1200.00),
-('MP004', 'Mensualidad Preescolar', 400.00),
-('MP005', 'Mensualidad Primaria', 500.00),
-('MP006', 'Mensualidad Secundaria', 600.00),
-('MP007', 'Uniforme Preescolar', 250.00),
-('MP008', 'Uniforme Primaria', 300.00),
-('MP009', 'Uniforme Secundaria', 350.00),
-('MP010', 'Papelería Preescolar', 150.00),
-('MP011', 'Papelería Primaria', 200.00),
-('MP012', 'Papelería Secundaria', 250.00),
-('MP013', 'Evento Especial', 150.00),
-('MP014', 'Mantenimiento', 100.00);
+INSERT INTO MOTIVO_DE_PAGO (codigo, nombre, precio, Nivel_educativo) VALUES
+('MP001', 'Inscripción Preescolar', 800.00, 'NE001'),
+('MP002', 'Inscripción Primaria', 1000.00, 'NE002'),
+('MP003', 'Inscripción Secundaria', 1200.00, 'NE003'),
+('MP004', 'Mensualidad Preescolar', 400.00, 'NE001'),
+('MP005', 'Mensualidad Primaria', 500.00, 'NE002'),
+('MP006', 'Mensualidad Secundaria', 600.00, 'NE003'),
+('MP007', 'Uniforme Preescolar', 250.00, 'NE001'),
+('MP008', 'Uniforme Primaria', 300.00, 'NE002'),
+('MP009', 'Uniforme Secundaria', 350.00, 'NE003'),
+('MP010', 'Papelería Preescolar', 150.00, 'NE001'),
+('MP011', 'Papelería Primaria', 200.00, 'NE002'),
+('MP012', 'Papelería Secundaria', 250.00, 'NE003'),
+('MP013', 'Evento Especial', 150.00, 'NE001'),
+('MP014', 'Evento Especial', 150.00, 'NE002'),
+('MP015', 'Evento Especial', 150.00, 'NE003'),
+('MP016', 'Mantenimiento', 100.00, 'NE001'),
+('MP017', 'Mantenimiento', 100.00, 'NE002'),
+('MP018', 'Mantenimiento', 100.00, 'NE003');
 
 -- Inserts para PAGO
 INSERT INTO PAGO (numero, fecha, subtotal, iva, monto_total, estado, alumno, motivo_de_pago) VALUES

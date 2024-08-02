@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class App {
-    private static Scanner scanner = new Scanner(System.in);
+    public static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) throws Exception {
         Addons.banner();
@@ -23,7 +23,7 @@ public class App {
         }
     }
 
-    private static int mostrarMenuPrincipal() {
+    public static int mostrarMenuPrincipal() {
         while (true) {
             System.out.println("SISTEMA DE COBROS DE UNA ESCUELA PARTICULAR");
             System.out.println("=============================================");
@@ -48,7 +48,7 @@ public class App {
         }
     }
 
-    private static void mostrarMenuCRUD() {
+    public static void mostrarMenuCRUD() {
         while (true) {
             System.out.println("CRUD SISTEMA DE COBROS ESCOLARES");
             System.out.println("=============================================");
@@ -93,7 +93,7 @@ public class App {
         }
     }
 
-    private static void mostrarMenuCreate() {
+    public static void mostrarMenuCreate() {
         while (true) {
             System.out.println("CREATE - CRUD");
             System.out.println("===============================");
@@ -149,7 +149,7 @@ public class App {
         }
     }
 
-    private static void mostrarMenuRead() {
+    public static void mostrarMenuRead() {
         while (true) {
             System.out.println("READ - CRUD");
             System.out.println("=============================================");
@@ -173,7 +173,7 @@ public class App {
                     Addons.limpiarPantalla();
                     return; // Volver al menú CRUD
                 } else if (opcionRead >= 1 && opcionRead <= 10) {
-                    Addons.ConsultasProyecto7();
+                    Addons.ConsultasProyecto7(opcionRead); // Pasar opcionRead como parámetro
                 } else {
                     System.out.println("Opción no válida. Por favor, intente de nuevo.");
                     Addons.limpiarPantalla();
@@ -185,7 +185,7 @@ public class App {
         }
     }
 
-    private static void mostrarMenuUpdate() {
+    public static void mostrarMenuUpdate() {
         while (true) {
             System.out.println("UPDATE - CRUD");
             System.out.println("=============================================");
@@ -256,7 +256,7 @@ public class App {
         }
     }
 
-    private static void mostrarMenuDelete() {
+    public static void mostrarMenuDelete() {
         while (true) {
             System.out.println("DELETE - CRUD");
             System.out.println("=============================================");
@@ -322,7 +322,7 @@ public class App {
         }
     }
 
-    private static void ProgramaCobros() {
+    public static void ProgramaCobros() {
         while (true) {
             System.out.println("Programa de Cobros");
             System.out.println("=============================================");
@@ -338,6 +338,7 @@ public class App {
                     case 1:
                     Addons.limpiarPantalla();
                         Addons.Inscripciones();
+                        break;
                     case 2:
                     Addons.limpiarPantalla();
                         Addons.ConsultarPagos();
@@ -356,7 +357,7 @@ public class App {
         }
     }
 
-    private static void salirDelSistema() {
+    public static void salirDelSistema() {
         System.out.print("Saliendo");
         for (int i = 0; i < 3; i++) {
             try {
