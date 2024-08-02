@@ -22,7 +22,9 @@ CREATE TABLE GRADO_Y_GRUPO (
     grado VARCHAR(5),
     grupo VARCHAR(5),
     periodo_escolar VARCHAR(10),
-    FOREIGN KEY (periodo_escolar) REFERENCES PERIODO_ESCOLAR(codigo)
+    nivel_educativo VARCHAR(5),
+    FOREIGN KEY (periodo_escolar) REFERENCES PERIODO_ESCOLAR(codigo),
+    FOREIGN KEY (nivel_educativo) REFERENCES NIVEL_EDUCATIVO(codigo)
 );
 
 -- Tabla TUTOR
@@ -54,7 +56,9 @@ CREATE TABLE ALUMNO (
 CREATE TABLE MOTIVO_DE_PAGO (
     codigo VARCHAR(5) PRIMARY KEY,
     nombre VARCHAR(30) NOT NULL,
-    precio DECIMAL(10,2) NOT NULL
+    precio DECIMAL(10,2) NOT NULL,
+    Nivel_educativo VARCHAR(5),
+    FOREIGN KEY (nivel_educativo) REFERENCES NIVEL_EDUCATIVO(codigo)
 );
 
 -- Tabla PAGO

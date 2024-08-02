@@ -193,6 +193,7 @@ public class Addons {
         System.out.println("El pago se realiza mediante Transferencia Bancaria a la cuenta 4815163067954720 a nombre de EDUPAY y la referncia es la matricula del alumno");
         System.out.println("El pago está pendiente de ser aprobado por el administrador");
         System.out.println("Para revisar el estado del pago, consulte en la opción de Consultar Pagos");
+        return;
     }
     //-------------------------------------------------------- Consultar Pagos
     public static void ConsultarPagos() {
@@ -212,7 +213,6 @@ public class Addons {
                 retrazo();
                 System.out.println("El alumno con matrícula " + matricula + " no existe.");
                 retrazo();
-                limpiarPantalla();
                 return;
             }
         } catch (SQLException e) {
@@ -247,6 +247,7 @@ public class Addons {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return;
     }
     //-------------------------------------------------------- Inscripciones
     public static void Inscripciones() {
@@ -346,12 +347,16 @@ public class Addons {
                     String periodoEscolar = scanner.next();
                     scanner.nextLine();
                     System.out.println("Estos son los grados y grupos disponibles");
-                    String query5 = "SELECT * FROM GRADO_Y_GRUPO";
-                    try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
-                         PreparedStatement pstmt = conn.prepareStatement(query5)) {
+                            String query5 = "SELECT * FROM GRADO_Y_GRUPO WHERE periodo_escolar = ? AND nivel_educativo = ?";
+                            try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
+                                 PreparedStatement pstmt = conn.prepareStatement(query5)) {
+                                    pstmt.setString(1, periodoEscolar);
+                                    pstmt.setString(2, nivelEducativo);
                         ResultSet rs = pstmt.executeQuery();
                         while (rs.next()) {
-                            System.out.println(rs.getString("codigo") + ". " + rs.getString("grado") + rs.getString("grupo"));
+                            System.out.println("---------------------------------------------");
+                            System.out.println(rs.getString("codigo") + ". " + rs.getString("grado") + rs.getString("grupo") + " - " + rs.getString("periodo_escolar"));
+                            System.out.println("---------------------------------------------");
                         }
                     } catch (SQLException e) {
                         e.printStackTrace();
@@ -396,9 +401,11 @@ public class Addons {
                     //registrar pago de inscripcion
                     //mostrar motivos de pago
                     System.out.println("Estos son los motivos de pago disponibles");
-                    String query8 = "SELECT * FROM MOTIVO_DE_PAGO";
+                    String query8 = "SELECT * FROM MOTIVO_DE_PAGO WHERE Nivel_educativo = ? AND nombre LIKE ?";
                     try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
                         PreparedStatement pstmt = conn.prepareStatement(query8)) {
+                        pstmt.setString(1, nivelEducativo);
+                        pstmt.setString(2, "%Inscripción%");
                         ResultSet rs = pstmt.executeQuery();
                         while (rs.next()) {
                             System.out.println(rs.getString("codigo") + ". " + rs.getString("nombre") + " - $" + rs.getString("precio"));
@@ -486,6 +493,7 @@ public class Addons {
                     System.out.println("---------------------------------------------");
                     System.out.println("Total: " + total);
                     System.out.println("=============================================");
+                    return;
                 }
         
     //-------------------------------------------------------- Agregar Periodo Escolar
@@ -512,6 +520,7 @@ public class Addons {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return;
     }
     //-------------------------------------------------------- Agregar Grado y Grupo
     public static void AgregarGradosyGrupos() {
@@ -537,6 +546,7 @@ public class Addons {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return;
     }
     //-------------------------------------------------------- Agregar motivos de Pago
     public static void AgregarMotivosdePago() {
@@ -569,6 +579,7 @@ public class Addons {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return;
     }
     //-------------------------------------------------------- Agregar Uniformes
     public static void AgregarUniformes() {
@@ -633,6 +644,7 @@ public class Addons {
         }
 
         scanner.close();
+        return;
     }
     //-------------------------------------------------------- Agregar Eventos Especiales
     public static void AgregarEventosEspeciales() {
@@ -682,6 +694,7 @@ public class Addons {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return;
     }
     //-------------------------------------------------------- ModificarAlumnos
     public static void ModificarAlumnos() {
@@ -772,6 +785,8 @@ public class Addons {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        //ingrese cualquer tecla para volver al menu de programa de cobros
+        return;
     }
     //-------------------------------------------------------- ModificarTutores
     public static void ModificarTutores() {
@@ -800,6 +815,7 @@ public class Addons {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return;
     }
     //-------------------------------------------------------- ModificarGradosyGrupos
     public static void ModificarGradosyGrupos() {
@@ -839,6 +855,7 @@ public class Addons {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return;
     }
     //-------------------------------------------------------- Modificar un Nivel Educativo
     public static void ModificarNivelEducativo() {
@@ -874,6 +891,7 @@ public class Addons {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return;
     }
     //-------------------------------------------------------- Modificar Motivos de Pago
     public static void ModificarMotivosdePago() {
@@ -909,6 +927,7 @@ public class Addons {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return;
     }
     //-------------------------------------------------------- ModificarPacksPapeleria
     public static void ModificarPacksPapeleria() {
@@ -935,7 +954,7 @@ public class Addons {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        
+        return;
     }
     //-------------------------------------------------------- ModificarUniformes
     public static void ModificarUniformes() {
@@ -975,6 +994,7 @@ public class Addons {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return;
     }
     //-------------------------------------------------------- ModificarTiposUniformes
     public static void ModificarTiposUniformes() {
@@ -997,6 +1017,7 @@ public class Addons {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return;
     }
     //-------------------------------------------------------- ModificarEventosEspeciales
     public static void ModificarEventosEspeciales() {
@@ -1028,6 +1049,7 @@ public class Addons {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return;
     }
     //-------------------------------------------------------- Eliminar Alumnos
     public static void EliminarAlumnos() {
@@ -1056,6 +1078,7 @@ public class Addons {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return;
     }
     //-------------------------------------------------------- Eliminar Tutores
     public static void EliminarTutores() {
@@ -1093,6 +1116,7 @@ public class Addons {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return;
     }
     //-------------------------------------------------------- Eliminar Grados y Grupos
     public static void EliminarGradosyGrupos() {
@@ -1121,6 +1145,7 @@ public class Addons {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return;
     }
     //-------------------------------------------------------- Eliminar Motivos de Pago
     public static void EliminarMotivosdePago() {
@@ -1204,6 +1229,7 @@ public class Addons {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return;
     }
     //-------------------------------------------------------- Eliminar Packs de Papeleria
     public static void EliminarPacksPapeleria() {
@@ -1223,6 +1249,7 @@ public class Addons {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return;
     }
     //-------------------------------------------------------- Eliminar Uniformes
     public static void EliminarUniformes() {
@@ -1242,6 +1269,7 @@ public class Addons {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return;
     }
     //-------------------------------------------------------- Eliminar Tipos de Uniformes
     public static void EliminarTiposUniformes() {
@@ -1271,6 +1299,7 @@ public class Addons {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return;
     }
     //-------------------------------------------------------- Eliminar Eventos Especiales
     public static void EliminarEventosEspeciales() {
@@ -1290,16 +1319,15 @@ public class Addons {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return;
     }
 
         
 
     //-------------------------------------------------------- Consultas Proyecto 7
-    public static void ConsultasProyecto7() {
+    public static void ConsultasProyecto7(int opcionRead){
         Scanner scanner = new Scanner(System.in);
-        int CP7;
-        CP7 = scanner.nextInt();
-        switch (CP7) {
+        switch (opcionRead) {
             case 1:
             System.out.println("=============================================");
                 System.out.println("Datos de un alumno en un periodo escolar");
