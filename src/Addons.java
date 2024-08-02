@@ -7,8 +7,79 @@ import java.time.format.TextStyle;
 import java.util.Locale;
 
 public class Addons {
+    //-------------------------------------------------------- Limpiar pantalla
+    public static void limpiarPantalla() {
+        for (int i = 0; i < 50; i++) {
+            System.out.println();
+        }
+        // Opcionalmente, puedes agregar esto para sistemas Unix-like
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }
+    //-------------------------------------------------------- retrazo 200ms
+    public static void retrazo() {
+        try {
+            Thread.sleep(200);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
     //-------------------------------------------------------- Banner
     public static void banner() {
+        System.out.println("                                                  -=+*##+                                          \n" +
+"                                               +%%%%##**%%                                          \n" +
+"                                              -@#***+++++@=                                         \n" +
+"                                              -@#***+++++%#                                         \n" +
+"                                               %%***+++++*@-                                        \n" +
+"                                               +@**####%%%@+                                        \n" +
+"                                                @%#**++++*%%                                        \n" +
+"                                                #%+**##%@##@=----------                             \n" +
+"                                                -@#*@#==@*-%@######%%%%%###*+-                      \n" +
+"                                              -=*@*-#%==#%=*@++++++++++****##%%#=                   \n" +
+"                                           -*#%#*#@=+@+=+@+=@#*#**+++++++++++**#%#-                 \n" +
+"                                         +#%#++==+@+=@*==%#-#@#+*%%*++++++*******%#                 \n" +
+"                                       +%%*+++++==%#-#@==*@=+@-   +%#++++++*****+#@-               \n" +
+"                                      *%*++++++++=*@==@+==@+=@*    =@*++++++***+*%#                 \n" +
+"                                     +@*+++++++++=+@*=%#==%%=*%     *%++++++++*#%*                  \n" +
+"                                     %#+++++++++++=%%=*@==*@==@=    *%++++++*#%#=                   \n" +
+"                                     %#+++++++++++=*@+=@*==@*=%#    %#++**#%#*-                     \n" +
+"                                     =@#++++++++++++@#-#%==#%=*@%*=-#%####+-                       \n" +
+"                                      =%%*+++++++++=#@=+@+=+@+=@#*#%#*=                            \n" +
+"                                        +#%#+++++++++@+=@#==%#-#%==+*#%#+-                          \n" +
+"                                          =*%#*++++++%#=*@==*@=+@+===++*#%#=                       \n" +
+"                                             =*%%#*++*@==@+==@+=%#==++++++#%#-                      \n" +
+"                                                =*#%#*@*=%#==%%=*@===+++++++#%=                     \n" +
+"                                       --====-     -+#@%=*@==+@==@*===+++++++#%                     \n" +
+"                                  =+*#%%#####%#-      =@+=@*==@*=%%====++++++*@-                   \n" +
+"                               +#%%#***+++++++#%-      %#-#%==#%=+@+====+++++*@-                   \n" +
+"                             -%%**+++++++++++++#%-     +@=+@+=+@+=@*=====++++%*                    \n" +
+"                             -@#++++++++++++++++#%=     @+=%#==@%*%%=======*%#                     \n" +
+"                              =%%*+++++++++++++++#%#=   #%*@%%%*++#@=====+#%+                      \n" +
+"                                =#%#**+++++++++++++#%%##%@#------ #%===+#%*-                       \n" +
+"                                  -+#%%#**++++++++++++**+#@+ -----@#*#%#+                          \n" +
+"                                      -+*#%%##***+++++++++*@*-   =@%*=-                            \n" +
+"                                           -=+*###%%%######%@#+**%@                                 \n" +
+"                                                   -------- -%@@@@#                                 \n" +
+"                                                              #@@@+                                 \n" +
+"                                                               *@@-                                 \n" +
+"                                                                +#                                  \n" +
+"                                                                                                    \n" +
+"                           -#*#####+       -##-            =#*####**=                               \n" +
+"                           -%##++++=       =##-            +%%*+++###                               \n" +
+"                           -%%+            =##-            +%%-   *##                               \n" +
+"                           -%%+            =##-            +%%-   *##                               \n" +
+"                           -%%+        =+++*##- -++   -++  +%%-   *##  -++++++=  ++=   -++          \n" +
+"                           -%##****   #%##*###- +%%-  +#%  +%%-   *##  #%%**#%#= *##   ###          \n" +
+"                           -%##****  =%%=  =##- +%%-  +##  +%#####%##  *#+   ##+ -##= -##=          \n" +
+"                           -%%+      =%%=  =##- +%%-  +##  +%%*+++==-  =*****##+  *## *##           \n" +
+"                           -%%+      =%%=  =##- +%%-  +##  +%%-        %%#***##+  -##=##=           \n" +
+"                           -%%+      =%%-  =##- +%%   +##  +%%-        %%+   ##+   *#%##            \n" +
+"                           -%#*====- -%%*==*##- +%%+==###  +%%-        %%*==+##+   -#*#=            \n" +
+"                           -#######*  +#######- -########  =##-        *#######=    #*#             \n" +
+"                                                                                   -##+             \n" +
+"                                                                                   *##              \n" +
+"                                                                                   ++=              \n" +
+"                                                                                                    \n");
         System.out.println("UNIVERSIDAD TECNOLOGICA DE TIJUANA");
         System.out.println("Programacion Orientada a Objetos");
         System.out.println("EDUPAY - SISTEMA DE COBROS DE UNA ESCUELA PARTICULAR");
@@ -18,23 +89,6 @@ public class Addons {
         System.out.println("===============================");
         System.out.println("Fecha Actual: " + java.time.LocalDate.now());
         System.out.println("===========================");
-    }
-    //-------------------------------------------------------- MenuProgramaCobros
-    public static void MenuProgramaCobros() {
-    Scanner scanner = new Scanner(System.in);
-    int PCinscripcion;
-    PCinscripcion = scanner.nextInt();
-            switch (PCinscripcion) {
-                case 1:
-                    Inscripciones();
-                    break;
-                case 2:
-                    ConsultarPagos();
-                    break;
-                    default:
-                        System.out.println("Opcion no valida");
-                        break;
-            }
     }
     //-------------------------------------------------------- Portal de Pagos
     public static void PortaldePagos() {
@@ -54,7 +108,10 @@ public class Addons {
             if (rs.next()) {
                 nivelEducativo = rs.getString("nivel_educativo");
             } else {
+                retrazo();
                 System.out.println("Alumno no encontrado.");
+                retrazo();
+                limpiarPantalla();
                 return;
             }
         } catch (SQLException e) {
@@ -87,7 +144,10 @@ public class Addons {
             if (rs.next()) {
                 precio = rs.getDouble("precio");
             } else {
+                retrazo();
                 System.out.println("Motivo de pago no encontrado.");
+                retrazo();
+                limpiarPantalla();
                 return;
             }
         } catch (SQLException e) {
@@ -113,7 +173,7 @@ public class Addons {
             pstmt.setString(5, matricula);
             pstmt.setString(6, motivoPago);
             pstmt.executeUpdate();
-            System.out.println("Pago registrado correctamente");
+            limpiarPantalla();
         } catch (SQLException e) {
             e.printStackTrace();
             return;
@@ -149,7 +209,10 @@ public class Addons {
             pstmtCheckAlumno.setString(1, matricula);
             ResultSet rsAlumno = pstmtCheckAlumno.executeQuery();
             if (!rsAlumno.next()) {
+                retrazo();
                 System.out.println("El alumno con matrícula " + matricula + " no existe.");
+                retrazo();
+                limpiarPantalla();
                 return;
             }
         } catch (SQLException e) {
@@ -179,7 +242,7 @@ public class Addons {
                 System.out.println("El pago se realiza mediante Transferencia Bancaria a la cuenta 4815163067954720 a nombre de EDUPAY y la referencia es la matricula del alumno");
                 System.out.println("El pago está pendiente de ser aprobado por el administrador");
             } else {
-                System.out.println("El alumno con matrícula " + matricula + " no tiene pagos registrados.");
+                System.out.println("El alumno con matrícula " + matricula + " no tiene pagos registrados como Pendientes.");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -207,6 +270,7 @@ public class Addons {
                         pstmt.setString(2, primerApell);
                         pstmt.setString(3, segundoApell);
                         pstmt.executeUpdate();
+                        limpiarPantalla();
                         System.out.println("Tutor agregado correctamente");
                     } catch (SQLException e) {
                         e.printStackTrace();
@@ -236,6 +300,7 @@ public class Addons {
                         pstmt.setString(1, folio);
                         pstmt.setString(2, num_tel);
                         pstmt.executeUpdate();
+                        limpiarPantalla();
                         System.out.println("Numero de telefono agregado correctamente");
                     } catch (SQLException e) {
                         e.printStackTrace();
@@ -308,6 +373,7 @@ public class Addons {
                         pstmt.setString(7, gradoGrupo);
                         pstmt.setString(8, folio);
                         pstmt.executeUpdate();
+                        limpiarPantalla();
                         System.out.println("Alumno agregado correctamente");
                     } catch (SQLException e) {
                         e.printStackTrace();
@@ -373,7 +439,10 @@ public class Addons {
                         pstmt.setString(1, matricula);
                         ResultSet rs = pstmt.executeQuery();
                         if (rs.next() && rs.getInt(1) == 0) {
+                            retrazo();
                             System.out.println("El alumno con matrícula " + matricula + " no existe.");
+                            retrazo();
+                            limpiarPantalla();
                             return;
                         }
                     } catch (SQLException e) {
@@ -390,6 +459,7 @@ public class Addons {
                         pstmt.setString(5, matricula);
                         pstmt.setString(6, motivo_de_pago);
                         pstmt.executeUpdate();
+                        limpiarPantalla();
                         System.out.println("Pago de inscripcion registrado correctamente");
                     } catch (SQLException e) {
                         e.printStackTrace();
@@ -436,7 +506,9 @@ public class Addons {
             pstmt.setString(2, fechaInicio);
             pstmt.setString(3, fechaFinal);
             pstmt.executeUpdate();
+            limpiarPantalla();
             System.out.println("Periodo escolar agregado correctamente");
+            System.out.println("---------------------------------------------");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -459,7 +531,9 @@ public class Addons {
                 pstmt.setString(2, grupo);
                 pstmt.setString(3, periodoEscolar);
                 pstmt.executeUpdate();
+                limpiarPantalla();
             System.out.println("Grado y grupo agregado correctamente");
+            System.out.println("---------------------------------------------");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -489,7 +563,9 @@ public class Addons {
             pstmt.setString(1, nombre);
             pstmt.setDouble(2, precio);
             pstmt.executeUpdate();
+            limpiarPantalla();
             System.out.println("Motivo de pago agregado correctamente");
+            System.out.println("---------------------------------------------");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -549,7 +625,9 @@ public class Addons {
             pstmt1.setString(3, tipo);
             pstmt1.setString(4, descripcion);
             pstmt1.executeUpdate();
+            limpiarPantalla();
             System.out.println("Uniforme agregado correctamente");
+            System.out.println("---------------------------------------------");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -598,7 +676,9 @@ public class Addons {
             pstmt.setString(4, horario);
             pstmt.setString(5, descripcion);
             pstmt.executeUpdate();
+            limpiarPantalla();
             System.out.println("Evento especial agregado correctamente");
+            System.out.println("---------------------------------------------");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -627,7 +707,10 @@ public class Addons {
                 System.out.println(rs.getString("codigo") + ". " + rs.getString("nombre"));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("el alumno no existe");
+            retrazo();
+            limpiarPantalla();
+            return;
         }
         System.out.println("Ingrese el nuevo nivel educativo del alumno: ");
         String nivelEducativo = scanner.nextLine();
@@ -683,7 +766,9 @@ public class Addons {
             pstmt.setString(7, tutor);
             pstmt.setString(8, matricula);
             pstmt.executeUpdate();
+            limpiarPantalla();
             System.out.println("Alumno modificado correctamente");
+            System.out.println("---------------------------------------------");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -709,7 +794,9 @@ public class Addons {
             pstmt.setString(3, apellido2);
             pstmt.setString(4, folio);
             pstmt.executeUpdate();
+            limpiarPantalla();
             System.out.println("Tutor modificado correctamente");
+            System.out.println("---------------------------------------------");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -746,7 +833,9 @@ public class Addons {
             pstmt.setString(3, periodoEscolar);
             pstmt.setString(4, codigo);
             pstmt.executeUpdate();
+            limpiarPantalla();
             System.out.println("Grado y grupo modificado correctamente");
+            System.out.println("---------------------------------------------");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -779,7 +868,9 @@ public class Addons {
             pstmt.setDouble(2, costo);
             pstmt.setString(3, codigo);
             pstmt.executeUpdate();
+            limpiarPantalla();
             System.out.println("Costo base del nivel educativo modificado correctamente");
+            System.out.println("---------------------------------------------");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -812,7 +903,9 @@ public class Addons {
             pstmt.setDouble(2, precio);
             pstmt.setString(3, codigo);
             pstmt.executeUpdate();
+            limpiarPantalla();
             System.out.println("Motivo de pago modificado correctamente");
+            System.out.println("---------------------------------------------");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -836,7 +929,9 @@ public class Addons {
             pstmt.setString(2, descripcion);
             pstmt.setString(3, motivo_de_pago);
             pstmt.executeUpdate();
+            limpiarPantalla();
             System.out.println("Pack de papelería modificado correctamente");
+            System.out.println("---------------------------------------------");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -874,7 +969,9 @@ public class Addons {
             pstmt.setString(3, descripcion);
             pstmt.setString(4, motivo_de_pago);
             pstmt.executeUpdate();
+            limpiarPantalla();
             System.out.println("Uniforme modificado correctamente");
+            System.out.println("---------------------------------------------");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -894,7 +991,9 @@ public class Addons {
             pstmt.setString(1, nombre);
             pstmt.setString(2, codigo);
             pstmt.executeUpdate();
+            limpiarPantalla();
             System.out.println("Tipo de uniforme modificado correctamente");
+            System.out.println("---------------------------------------------");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -923,7 +1022,9 @@ public class Addons {
             pstmt.setString(4, descripcion);
             pstmt.setString(5, motivo_de_pago);
             pstmt.executeUpdate();
+            limpiarPantalla();
             System.out.println("Evento especial modificado correctamente");
+            System.out.println("---------------------------------------------");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -949,7 +1050,9 @@ public class Addons {
             PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setString(1, matricula);
             pstmt.executeUpdate();
+            limpiarPantalla();
             System.out.println("Alumno eliminado correctamente");
+            System.out.println("---------------------------------------------");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -984,7 +1087,9 @@ public class Addons {
             PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setString(1, folio);
             pstmt.executeUpdate();
+            limpiarPantalla();
             System.out.println("Tutor eliminado correctamente");
+            System.out.println("---------------------------------------------");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -1010,7 +1115,9 @@ public class Addons {
             PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setString(1, codigo);
             pstmt.executeUpdate();
+            limpiarPantalla();
             System.out.println("Grado y grupo eliminado correctamente");
+            System.out.println("---------------------------------------------");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -1091,7 +1198,9 @@ public class Addons {
             PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setString(1, codigo);
             pstmt.executeUpdate();
+            limpiarPantalla();
             System.out.println("Motivo de pago eliminado correctamente");
+            System.out.println("---------------------------------------------");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -1108,7 +1217,9 @@ public class Addons {
             PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setString(1, motivo_de_pago);
             pstmt.executeUpdate();
+            limpiarPantalla();
             System.out.println("Pack de papelería eliminado correctamente");
+            System.out.println("---------------------------------------------");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -1125,7 +1236,9 @@ public class Addons {
             PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setString(1, motivo_de_pago);
             pstmt.executeUpdate();
+            limpiarPantalla();
             System.out.println("Uniforme eliminado correctamente");
+            System.out.println("---------------------------------------------");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -1152,7 +1265,9 @@ public class Addons {
             PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setString(1, codigo);
             pstmt.executeUpdate();
+            limpiarPantalla();
             System.out.println("Tipo de uniforme eliminado correctamente");
+            System.out.println("---------------------------------------------");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -1169,7 +1284,9 @@ public class Addons {
             PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setString(1, motivo_de_pago);
             pstmt.executeUpdate();
+            limpiarPantalla();
             System.out.println("Evento especial eliminado correctamente");
+            System.out.println("---------------------------------------------");
         } catch (SQLException e) {
             e.printStackTrace();
         }
