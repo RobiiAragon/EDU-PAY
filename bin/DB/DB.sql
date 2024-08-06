@@ -72,7 +72,9 @@ CREATE TABLE PAGO (
     monto_total DECIMAL(10,2) NOT NULL,
     estado VARCHAR(20),
     alumno VARCHAR(10),
+    gradoAlumno VARCHAR(5),
     motivo_de_pago VARCHAR(5),
+    FOREIGN KEY (gradoAlumno) REFERENCES GRADO_Y_GRUPO(codigo),
     FOREIGN KEY (alumno) REFERENCES ALUMNO(matricula),
     FOREIGN KEY (motivo_de_pago) REFERENCES MOTIVO_DE_PAGO(codigo)
 );

@@ -13,8 +13,9 @@ public class App {
                     System.out.println("Ingrese contraseña de administrador: ");
                     String password = scanner.nextLine();
                     if (password.equals("admin")) {
+                        password = null;
                         Addons.limpiarPantalla();
-                        mostrarMenuCRUD();
+                        Addons.Inscripciones();
                     } else {
                         System.out.println("Contraseña incorrecta. Por favor, intente de nuevo.");
                         Addons.limpiarPantalla();
@@ -22,9 +23,132 @@ public class App {
                     break;
                 case 2:
                     Addons.limpiarPantalla();
-                    ProgramaCobros();
+                    System.out.println("Alumno (A) o tutor (T)? ");
+                    String tipo = scanner.nextLine();
+                    if (tipo.equals("A")) {
+                        Addons.limpiarPantalla();
+                        Addons.ModificarAlumnos();
+                    } else if (tipo.equals("T")) {
+                        Addons.limpiarPantalla();
+                        Addons.ModificarTutores();
+                    } else {
+                        System.out.println("Entrada inválida. Por favor, intente de nuevo.");
+                        Addons.limpiarPantalla();
+                    }
+                    
                     break;
                 case 3:
+                    Addons.limpiarPantalla();
+                    System.out.println("Ingrese contraseña de administrador: ");
+                    password = scanner.nextLine();
+                    if (password.equals("admin")) {
+                        password = null;
+                        Addons.limpiarPantalla();
+                        Addons.PortaldePagos();
+                    } else {
+                        System.out.println("Contraseña incorrecta. Por favor, intente de nuevo.");
+                        Addons.limpiarPantalla();
+                    }
+                break;
+                case 4:
+                    Addons.limpiarPantalla();
+                    System.out.println("Mostar información de un alumno");
+                    System.out.println("1. Datos de un alumno en un periodo escolar");
+                    System.out.println("2. Grados y grupos en los que ha estado un alumno");
+                    System.out.println("3. Inscripciones pagadas por un alumno");
+                    System.out.println("4. Mensualidades pagadas por un alumno");
+                    System.out.println("5. Pagos de un alumno por evento especial");
+                    System.out.println("----------------------");
+                    System.out.println("Seleccione una opción: ");
+                    int opcion4 = Integer.parseInt(scanner.nextLine());
+                    switch (opcion4) {
+                        case 1:
+                            Addons.consulta1();
+                            break;
+                        case 2:
+                            Addons.consulta2();
+                            break;
+                        case 3:
+                            Addons.consulta4();
+                            break;
+                        case 4:
+                            Addons.consulta5();
+                            break;
+                        case 5:
+                            Addons.consulta6();
+                            break;
+                        default:
+                            System.out.println("Opción no válida. Por favor, intente de nuevo.");
+                            break;
+                    }
+                    break;
+                case 5:
+                    System.out.println("Mostar información de un tutor");
+                    Addons.consulta3();
+                    break;
+                case 6:
+                    Addons.limpiarPantalla();
+                    System.out.println("Ingrese contraseña de administrador: ");
+                    password = scanner.nextLine();
+                    if (password.equals("admin")) {
+                        password = null;
+                        Addons.limpiarPantalla();
+                        System.out.println("Mostar registros del sistema");
+                        System.out.println("1. Costos mantenimiento por periodo escolar");
+                        System.out.println("2. Lista de precios Packs de Papelería por periodo escolar y nivel escolar");
+                        System.out.println("3. Lista de precios Uniformes por periodo escolar y nivel escolar");
+                        System.out.println("4. total de pagos realizados para un nivel educativo en un periodo escolar");
+                        System.out.println("----------------------");
+                        System.out.println("Seleccione una opción: ");
+                        int opcion6 = Integer.parseInt(scanner.nextLine());
+                        switch (opcion6) {
+                            case 1:
+                                Addons.consulta7();
+                                break;
+                            case 2:
+                                Addons.consulta8();
+                                break;
+                            case 3:
+                                Addons.consulta9();
+                                break;
+                            case 4:
+                                Addons.consulta10();
+                                break;
+                            default:
+                                System.out.println("Opción no válida. Por favor, intente de nuevo.");
+                                break;
+                        }
+                    } else {
+                        System.out.println("Contraseña incorrecta. Por favor, intente de nuevo.");
+                        Addons.limpiarPantalla();
+                    }
+                    
+                    break;
+                case 7:
+                System.out.println("1. Añadir Eventos Especiales");
+                System.out.println("2. Añadir Packs de Papelería");
+                System.out.println("3. Añadir Uniformes");
+                System.out.println("4. Modificar Un evento especial");
+                System.out.println("5. Modificar Packs de Papelería");
+                System.out.println("6. Modificar Uniformes");
+                System.out.println("7. Eliminar Un evento especial");
+                System.out.println("8. Eliminar Packs de Papelería");
+                System.out.println("9. Eliminar Uniformes");
+                    break;
+                case 8:
+                Addons.limpiarPantalla();
+                    System.out.println("Ingrese contraseña de administrador: ");
+                    password = scanner.nextLine();
+                    if (password.equals("admin")) {
+                        password = null;
+                        Addons.limpiarPantalla();
+                        Addons.EliminarAlumnos();
+                    } else {
+                        System.out.println("Contraseña incorrecta. Por favor, intente de nuevo.");
+                        Addons.limpiarPantalla();
+                    }
+                    break;
+                case 9:
                     salirDelSistema();
                     return;
             }
@@ -33,17 +157,23 @@ public class App {
 
     public static int mostrarMenuPrincipal() {
         while (true) {
-            System.out.println("SISTEMA DE COBROS DE UNA ESCUELA PARTICULAR");
+            System.out.println("SISTEMA DE COBROS DE UNA ESCUELA PARTICULAR - EDUPAY");
             System.out.println("=============================================");
-            System.out.println("1. CRUD");
-            System.out.println("2. Programa de Cobros");
-            System.out.println("3. Salir del sistema");
+            System.out.println("1. Inscripciones y reinscripciones");
+            System.out.println("2. Actualizar informacion de un alumno o tutor");
+            System.out.println("3. Portal de pagos");
+            System.out.println("4. Ver Información de un alumno");
+            System.out.println("5. Ver Información de un tutor");
+            System.out.println("6. Ver Registros del sistema");
+            System.out.println("7. Hacer cambios en los registros del sistema");
+            System.out.println("8. DAR DE BAJA A UN ALUMNO");
+            System.out.println("----------------------");
+            System.out.println("9. Salir del sistema");
             System.out.println("==================");
             System.out.println("Seleccione una opción: ");
-            
             try {
                 int opcion = Integer.parseInt(scanner.nextLine());
-                if (opcion >= 1 && opcion <= 3) {
+                if (opcion >= 1 && opcion <= 9) {
                     return opcion;
                 } else {
                     System.out.println("Opción no válida. Por favor, intente de nuevo.");
@@ -56,314 +186,6 @@ public class App {
         }
     }
 
-    public static void mostrarMenuCRUD() {
-        while (true) {
-            System.out.println("CRUD SISTEMA DE COBROS ESCOLARES");
-            System.out.println("=============================================");
-            System.out.println("1. CREATE");
-            System.out.println("2. READ");
-            System.out.println("3. UPDATE");
-            System.out.println("4. DELETE");
-            System.out.println("5. Volver al menú principal");
-            System.out.println("=============================================");
-            System.out.println("Seleccione una opción: ");
-
-            try {
-                int opcionCRUD = Integer.parseInt(scanner.nextLine());
-                switch (opcionCRUD) {
-                    case 1:
-                    Addons.limpiarPantalla();
-                        mostrarMenuCreate();
-                        break;
-                    case 2:
-                    Addons.limpiarPantalla();
-                        mostrarMenuRead();
-                        break;
-                    case 3:
-                    Addons.limpiarPantalla();
-                        mostrarMenuUpdate();
-                        break;
-                    case 4:
-                    Addons.limpiarPantalla();
-                        mostrarMenuDelete();
-                        break;
-                    case 5:
-                        Addons.limpiarPantalla();
-                        return; // Volver al menú principal
-                    default:
-                        System.out.println("Opción no válida. Por favor, intente de nuevo.");
-                        Addons.limpiarPantalla();
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("Entrada inválida. Por favor, ingrese un número.");
-                Addons.limpiarPantalla();
-            }
-        }
-    }
-
-    public static void mostrarMenuCreate() {
-        while (true) {
-            System.out.println("CREATE - CRUD");
-            System.out.println("===============================");
-            System.out.println("1. Portal de pagos (Registrar pagos)");
-            System.out.println("2. Añadir periodos Escolares");
-            System.out.println("3. Añadir Grados y grupos");
-            System.out.println("4. Añadir motivos de Pago");
-            System.out.println("5. Añadir Uniformes");
-            System.out.println("6. Añadir Eventos Especiales");
-            System.out.println("-------------------------------");
-            System.out.println("7. Volver al menú CRUD");
-            System.out.println("================================");
-            System.out.println("Seleccione una opción: ");
-
-            try {
-                int opcionCreate = Integer.parseInt(scanner.nextLine());
-                switch (opcionCreate) {
-                    case 1:
-                    Addons.limpiarPantalla();
-                        Addons.PortaldePagos();
-                        break;
-                    case 2:
-                    Addons.limpiarPantalla();
-                        Addons.AgregarPeriodoEscolar();
-                        break;
-                    case 3:
-                    Addons.limpiarPantalla();
-                        Addons.AgregarGradosyGrupos();
-                        break;
-                    case 4:
-                    Addons.limpiarPantalla();
-                        Addons.AgregarMotivosdePago();
-                        break;
-                    case 5:
-                    Addons.limpiarPantalla();
-                        Addons.AgregarUniformes();
-                        break;
-                    case 6:
-                    Addons.limpiarPantalla();
-                        Addons.AgregarEventosEspeciales();
-                        break;
-                    case 7:
-                        Addons.limpiarPantalla();
-                        return; // Volver al menú CRUD
-                    default:
-                        System.out.println("Opción no válida. Por favor, intente de nuevo.");
-                        Addons.limpiarPantalla();
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("Entrada inválida. Por favor, ingrese un número.");
-                Addons.limpiarPantalla();
-            }
-        }
-    }
-
-    public static void mostrarMenuRead() {
-        while (true) {
-            System.out.println("READ - CRUD");
-            System.out.println("=============================================");
-            System.out.println("1. Datos de un alumno en un periodo escolar");
-            System.out.println("2. Grupos en los que ha estado un alumno");
-            System.out.println("3. Números de teléfono de un tutor");
-            System.out.println("4. Inscripciones pagadas de un alumno");
-            System.out.println("5. Mensualidades pagadas de un alumno en un periodo escolar");
-            System.out.println("6. Pagos realizados por un evento especial");
-            System.out.println("7. Costos del mantenimiento por periodo escolar");
-            System.out.println("8. Lista de precios de los paquetes de útiles escolares (papelería) para un periodo y nivel escolar.");
-            System.out.println("9. Lista de precios de los uniformes para un periodo y nivel escolar.");
-            System.out.println("10. Total de pagos realizados para un nivel educativo en un periodo escolar");
-            System.out.println("11. Volver al menú CRUD");
-            System.out.println("=============================================");
-            System.out.println("Seleccione una opción: ");
-
-            try {
-                int opcionRead = Integer.parseInt(scanner.nextLine());
-                if (opcionRead == 11) {
-                    Addons.limpiarPantalla();
-                    return; // Volver al menú CRUD
-                } else if (opcionRead >= 1 && opcionRead <= 10) {
-                    Addons.ConsultasProyecto7(opcionRead); // Pasar opcionRead como parámetro
-                } else {
-                    System.out.println("Opción no válida. Por favor, intente de nuevo.");
-                    Addons.limpiarPantalla();
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("Entrada inválida. Por favor, ingrese un número.");
-                Addons.limpiarPantalla();
-            }
-        }
-    }
-
-    public static void mostrarMenuUpdate() {
-        while (true) {
-            System.out.println("UPDATE - CRUD");
-            System.out.println("=============================================");
-            System.out.println("1. Modificar Alumnos");
-            System.out.println("2. Modificar tutores");
-            System.out.println("3. Modificar Grados y grupos");
-            System.out.println("4. Modificar un Nivel Educativo");
-            System.out.println("5. Modificar motivos de Pago");
-            System.out.println("6. Modificar packs de Papelería");
-            System.out.println("7. Modificar Uniformes");
-            System.out.println("8. Modificar Tipos de Uniformes");
-            System.out.println("9. Modificar Eventos Especiales");
-            System.out.println("-------------------------------");
-            System.out.println("10. Volver al menú CRUD");
-            System.out.println("=============================================");
-            System.out.println("Seleccione una opción: ");
-
-            try {
-                int opcionUpdate = Integer.parseInt(scanner.nextLine());
-                switch (opcionUpdate) {
-                    case 1:
-                    Addons.limpiarPantalla();
-                        Addons.ModificarAlumnos();
-                        break;
-                    case 2:
-                    Addons.limpiarPantalla();
-                        Addons.ModificarTutores();
-                        break;
-                    case 3:
-                    Addons.limpiarPantalla();
-                        Addons.ModificarGradosyGrupos();
-                        break;
-                    case 4:
-                    Addons.limpiarPantalla();
-                        Addons.ModificarNivelEducativo();
-                        break;
-                    case 5:
-                    Addons.limpiarPantalla();
-                        Addons.ModificarMotivosdePago();
-                        break;
-                    case 6:
-                    Addons.limpiarPantalla();
-                        Addons.ModificarPacksPapeleria();
-                        break;
-                    case 7:
-                    Addons.limpiarPantalla();
-                        Addons.ModificarUniformes();
-                        break;
-                    case 8:
-                    Addons.limpiarPantalla();
-                        Addons.ModificarTiposUniformes();
-                        break;
-                    case 9:
-                    Addons.limpiarPantalla();
-                        Addons.ModificarEventosEspeciales();
-                        break;
-                    case 10:
-                        Addons.limpiarPantalla();
-                        return; // Volver al menú CRUD
-                    default:
-                        System.out.println("Opción no válida. Por favor, intente de nuevo.");
-                        Addons.limpiarPantalla();
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("Entrada inválida. Por favor, ingrese un número.");
-                Addons.limpiarPantalla();
-            }
-        }
-    }
-
-    public static void mostrarMenuDelete() {
-        while (true) {
-            System.out.println("DELETE - CRUD");
-            System.out.println("=============================================");
-            System.out.println("1. Eliminar Alumnos");
-            System.out.println("2. Eliminar tutores");
-            System.out.println("3. Eliminar Grados y grupos");
-            System.out.println("4. Eliminar motivos de Pago");
-            System.out.println("5. Eliminar packs de Papelería");
-            System.out.println("6. Eliminar Uniformes");
-            System.out.println("7. Eliminar Tipos de Uniformes");
-            System.out.println("8. Eliminar Eventos Especiales");
-            System.out.println("-------------------------------");
-            System.out.println("9. Volver al menú CRUD");
-            System.out.println("=============================================");
-            System.out.println("Seleccione una opción: ");
-
-            try {
-                int opcionDelete = Integer.parseInt(scanner.nextLine());
-                switch (opcionDelete) {
-                    case 1:
-                    Addons.limpiarPantalla();
-                        Addons.EliminarAlumnos();
-                        break;
-                    case 2:
-                    Addons.limpiarPantalla();
-                        Addons.EliminarTutores();
-                        break;
-                    case 3:
-                    Addons.limpiarPantalla();
-                        Addons.EliminarGradosyGrupos();
-                        break;
-                    case 4:
-                    Addons.limpiarPantalla();
-                        Addons.EliminarMotivosdePago();
-                        break;
-                    case 5:
-                    Addons.limpiarPantalla();
-                        Addons.EliminarPacksPapeleria();
-                        break;
-                    case 6:
-                    Addons.limpiarPantalla();
-                        Addons.EliminarUniformes();
-                        break;
-                    case 7:
-                    Addons.limpiarPantalla();
-                        Addons.EliminarTiposUniformes();
-                        break;
-                    case 8:
-                    Addons.limpiarPantalla();
-                        Addons.EliminarEventosEspeciales();
-                        break;
-                    case 9:
-                        Addons.limpiarPantalla();
-                        return; // Volver al menú CRUD
-                    default:
-                        System.out.println("Opción no válida. Por favor, intente de nuevo.");
-                        Addons.limpiarPantalla();
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("Entrada inválida. Por favor, ingrese un número.");
-                Addons.limpiarPantalla();
-            }
-        }
-    }
-
-    public static void ProgramaCobros() {
-        while (true) {
-            System.out.println("Programa de Cobros");
-            System.out.println("=============================================");
-            System.out.println("1. Inscripciones");
-            System.out.println("2. Consultar pagos");
-            System.out.println("3. Volver al menú principal");
-            System.out.println("=============================================");
-            System.out.println("Seleccione una opción: ");
-
-            try {
-                int opcionCobros = Integer.parseInt(scanner.nextLine());
-                switch (opcionCobros) {
-                    case 1:
-                    Addons.limpiarPantalla();
-                        Addons.Inscripciones();
-                        break;
-                    case 2:
-                    Addons.limpiarPantalla();
-                        Addons.ConsultarPagos();
-                        break;
-                    case 3:
-                        Addons.limpiarPantalla();
-                        return; // Volver al menú principal
-                    default:
-                        System.out.println("Opción no válida. Por favor, intente de nuevo.");
-                        Addons.limpiarPantalla();
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("Entrada inválida. Por favor, ingrese un número.");
-                Addons.limpiarPantalla();
-            }
-        }
-    }
 
     public static void salirDelSistema() {
         System.out.print("Saliendo");
