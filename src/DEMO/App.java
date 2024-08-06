@@ -1,27 +1,25 @@
+package DEMO;
 import java.util.Scanner;
 
 public class App {
     public static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) throws Exception {
-        Addons.banner();
         while (true) {
             int opcion = mostrarMenuPrincipal();
             switch (opcion) {
                 case 1:
-                    Addons.limpiarPantalla();
                     System.out.println("Ingrese contraseña de administrador: ");
                     String password = scanner.nextLine();
                     if (password.equals("admin")) {
-                        Addons.limpiarPantalla();
                         mostrarMenuCRUD();
                     } else {
                         System.out.println("Contraseña incorrecta. Por favor, intente de nuevo.");
-                        Addons.limpiarPantalla();
+                        
                     }
                     break;
                 case 2:
-                    Addons.limpiarPantalla();
+                    
                     ProgramaCobros();
                     break;
                 case 3:
@@ -47,11 +45,11 @@ public class App {
                     return opcion;
                 } else {
                     System.out.println("Opción no válida. Por favor, intente de nuevo.");
-                    Addons.limpiarPantalla();
+                    
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Entrada inválida. Por favor, ingrese un número.");
-                Addons.limpiarPantalla();
+                
             }
         }
     }
@@ -72,31 +70,31 @@ public class App {
                 int opcionCRUD = Integer.parseInt(scanner.nextLine());
                 switch (opcionCRUD) {
                     case 1:
-                    Addons.limpiarPantalla();
+                    
                         mostrarMenuCreate();
                         break;
                     case 2:
-                    Addons.limpiarPantalla();
+                    
                         mostrarMenuRead();
                         break;
                     case 3:
-                    Addons.limpiarPantalla();
+                    
                         mostrarMenuUpdate();
                         break;
                     case 4:
-                    Addons.limpiarPantalla();
+                    
                         mostrarMenuDelete();
                         break;
                     case 5:
-                        Addons.limpiarPantalla();
+                        
                         return; // Volver al menú principal
                     default:
                         System.out.println("Opción no válida. Por favor, intente de nuevo.");
-                        Addons.limpiarPantalla();
+                        
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Entrada inválida. Por favor, ingrese un número.");
-                Addons.limpiarPantalla();
+                
             }
         }
     }
@@ -120,39 +118,39 @@ public class App {
                 int opcionCreate = Integer.parseInt(scanner.nextLine());
                 switch (opcionCreate) {
                     case 1:
-                    Addons.limpiarPantalla();
-                        Addons.PortaldePagos();
+                    
+                        
                         break;
                     case 2:
-                    Addons.limpiarPantalla();
-                        Addons.AgregarPeriodoEscolar();
+                    
+                        
                         break;
                     case 3:
-                    Addons.limpiarPantalla();
-                        Addons.AgregarGradosyGrupos();
+                    
+                        
                         break;
                     case 4:
-                    Addons.limpiarPantalla();
-                        Addons.AgregarMotivosdePago();
+                    
+                        
                         break;
                     case 5:
-                    Addons.limpiarPantalla();
-                        Addons.AgregarUniformes();
+                    
+                        
                         break;
                     case 6:
-                    Addons.limpiarPantalla();
-                        Addons.AgregarEventosEspeciales();
+                    
+                        
                         break;
                     case 7:
-                        Addons.limpiarPantalla();
+                        
                         return; // Volver al menú CRUD
                     default:
                         System.out.println("Opción no válida. Por favor, intente de nuevo.");
-                        Addons.limpiarPantalla();
+                        
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Entrada inválida. Por favor, ingrese un número.");
-                Addons.limpiarPantalla();
+                
             }
         }
     }
@@ -178,17 +176,17 @@ public class App {
             try {
                 int opcionRead = Integer.parseInt(scanner.nextLine());
                 if (opcionRead == 11) {
-                    Addons.limpiarPantalla();
+                    
                     return; // Volver al menú CRUD
                 } else if (opcionRead >= 1 && opcionRead <= 10) {
-                    Addons.ConsultasProyecto7(opcionRead); // Pasar opcionRead como parámetro
+                    
                 } else {
                     System.out.println("Opción no válida. Por favor, intente de nuevo.");
-                    Addons.limpiarPantalla();
+                    
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Entrada inválida. Por favor, ingrese un número.");
-                Addons.limpiarPantalla();
+                
             }
         }
     }
@@ -215,51 +213,51 @@ public class App {
                 int opcionUpdate = Integer.parseInt(scanner.nextLine());
                 switch (opcionUpdate) {
                     case 1:
-                    Addons.limpiarPantalla();
-                        Addons.ModificarAlumnos();
+                    
+                        
                         break;
                     case 2:
-                    Addons.limpiarPantalla();
-                        Addons.ModificarTutores();
+                    
+                        
                         break;
                     case 3:
-                    Addons.limpiarPantalla();
-                        Addons.ModificarGradosyGrupos();
+                    
+                        
                         break;
                     case 4:
-                    Addons.limpiarPantalla();
-                        Addons.ModificarNivelEducativo();
+                    
+                        
                         break;
                     case 5:
-                    Addons.limpiarPantalla();
-                        Addons.ModificarMotivosdePago();
+                    
+                        
                         break;
                     case 6:
-                    Addons.limpiarPantalla();
-                        Addons.ModificarPacksPapeleria();
+                    
+                        
                         break;
                     case 7:
-                    Addons.limpiarPantalla();
-                        Addons.ModificarUniformes();
+                    
+                        
                         break;
                     case 8:
-                    Addons.limpiarPantalla();
-                        Addons.ModificarTiposUniformes();
+                    
+                        
                         break;
                     case 9:
-                    Addons.limpiarPantalla();
-                        Addons.ModificarEventosEspeciales();
+                    
+                        
                         break;
                     case 10:
-                        Addons.limpiarPantalla();
+                        
                         return; // Volver al menú CRUD
                     default:
                         System.out.println("Opción no válida. Por favor, intente de nuevo.");
-                        Addons.limpiarPantalla();
+                        
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Entrada inválida. Por favor, ingrese un número.");
-                Addons.limpiarPantalla();
+                
             }
         }
     }
@@ -285,47 +283,47 @@ public class App {
                 int opcionDelete = Integer.parseInt(scanner.nextLine());
                 switch (opcionDelete) {
                     case 1:
-                    Addons.limpiarPantalla();
-                        Addons.EliminarAlumnos();
+                    
+                        
                         break;
                     case 2:
-                    Addons.limpiarPantalla();
-                        Addons.EliminarTutores();
+                    
+                        
                         break;
                     case 3:
-                    Addons.limpiarPantalla();
-                        Addons.EliminarGradosyGrupos();
+                    
+                        
                         break;
                     case 4:
-                    Addons.limpiarPantalla();
-                        Addons.EliminarMotivosdePago();
+                    
+                        
                         break;
                     case 5:
-                    Addons.limpiarPantalla();
-                        Addons.EliminarPacksPapeleria();
+                    
+                        
                         break;
                     case 6:
-                    Addons.limpiarPantalla();
-                        Addons.EliminarUniformes();
+                    
+                        
                         break;
                     case 7:
-                    Addons.limpiarPantalla();
-                        Addons.EliminarTiposUniformes();
+                    
+                        
                         break;
                     case 8:
-                    Addons.limpiarPantalla();
-                        Addons.EliminarEventosEspeciales();
+                    
+                        
                         break;
                     case 9:
-                        Addons.limpiarPantalla();
+                        
                         return; // Volver al menú CRUD
                     default:
                         System.out.println("Opción no válida. Por favor, intente de nuevo.");
-                        Addons.limpiarPantalla();
+                        
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Entrada inválida. Por favor, ingrese un número.");
-                Addons.limpiarPantalla();
+                
             }
         }
     }
@@ -344,23 +342,23 @@ public class App {
                 int opcionCobros = Integer.parseInt(scanner.nextLine());
                 switch (opcionCobros) {
                     case 1:
-                    Addons.limpiarPantalla();
-                        Addons.Inscripciones();
+                    
+                        
                         break;
                     case 2:
-                    Addons.limpiarPantalla();
-                        Addons.ConsultarPagos();
+                    
+                        
                         break;
                     case 3:
-                        Addons.limpiarPantalla();
+                        
                         return; // Volver al menú principal
                     default:
                         System.out.println("Opción no válida. Por favor, intente de nuevo.");
-                        Addons.limpiarPantalla();
+                        
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Entrada inválida. Por favor, ingrese un número.");
-                Addons.limpiarPantalla();
+                
             }
         }
     }
