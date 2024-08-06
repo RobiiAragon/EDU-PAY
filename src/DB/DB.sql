@@ -57,7 +57,9 @@ CREATE TABLE MOTIVO_DE_PAGO (
     codigo VARCHAR(5) PRIMARY KEY,
     nombre VARCHAR(30) NOT NULL,
     precio DECIMAL(10,2) NOT NULL,
+    periodo_escolar VARCHAR(10),
     Nivel_educativo VARCHAR(5),
+    FOREIGN KEY (periodo_escolar) REFERENCES PERIODO_ESCOLAR(codigo),
     FOREIGN KEY (nivel_educativo) REFERENCES NIVEL_EDUCATIVO(codigo)
 );
 
@@ -77,7 +79,8 @@ CREATE TABLE PAGO (
 
 -- Tabla EVENTOS_ESPECIALES
 CREATE TABLE EVENTOS_ESPECIALES (
-    motivo_de_pago VARCHAR(5) PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    motivo_de_pago VARCHAR(5) ,
     fecha DATE NOT NULL,
     lugar VARCHAR(50) NOT NULL,
     horario VARCHAR(20) NOT NULL,
@@ -87,15 +90,18 @@ CREATE TABLE EVENTOS_ESPECIALES (
 
 -- Tabla PAPELERIA
 CREATE TABLE PAPELERIA (
-    motivo_de_pago VARCHAR(5) PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    motivo_de_pago VARCHAR(5) ,
     nombre_pack VARCHAR(30) NOT NULL,
     descripcion VARCHAR(80),
     FOREIGN KEY (motivo_de_pago) REFERENCES MOTIVO_DE_PAGO(codigo)
 );
 
+
 -- Tabla INSCRIPCION
 CREATE TABLE INSCRIPCION (
-    motivo_de_pago VARCHAR(5) PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    motivo_de_pago VARCHAR(5) ,
     proximo_pago DATE NOT NULL,
     fecha_pago DATE NOT NULL,
     FOREIGN KEY (motivo_de_pago) REFERENCES MOTIVO_DE_PAGO(codigo)
@@ -103,7 +109,8 @@ CREATE TABLE INSCRIPCION (
 
 -- Tabla MENSUALIDAD
 CREATE TABLE MENSUALIDAD (
-    motivo_de_pago VARCHAR(5) PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    motivo_de_pago VARCHAR(5),
     mes_pagado VARCHAR(10) NOT NULL,
     proximo_pago DATE NOT NULL,
     fecha_pago DATE NOT NULL,
@@ -112,7 +119,8 @@ CREATE TABLE MENSUALIDAD (
 
 -- Tabla MANTENIMIENTO
 CREATE TABLE MANTENIMIENTO (
-    motivo_de_pago VARCHAR(5) PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    motivo_de_pago VARCHAR(5) ,
     fecha_pago DATE NOT NULL,
     proximo_pago DATE NOT NULL,
     concepto VARCHAR(50) NOT NULL,
@@ -127,21 +135,23 @@ CREATE TABLE TIPO_DE_UNIFORME (
 
 -- Tabla UNIFORMES
 CREATE TABLE UNIFORMES (
-    motivo_de_pago VARCHAR(5) PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    motivo_de_pago VARCHAR(5) ,
     talla VARCHAR(10) NOT NULL,
-    tipo_de_uniforme VARCHAR(5),
     descripcion VARCHAR(255),
+    tipo_de_uniforme VARCHAR(5),
     FOREIGN KEY (motivo_de_pago) REFERENCES MOTIVO_DE_PAGO(codigo),
     FOREIGN KEY (tipo_de_uniforme) REFERENCES TIPO_DE_UNIFORME(codigo)
 );
 
 -- Tabla NUM_TEL
 CREATE TABLE NUM_TEL (
+    id INT PRIMARY KEY AUTO_INCREMENT,
     tutor VARCHAR(10),
     numTel VARCHAR(15),
-    PRIMARY KEY (tutor),
     FOREIGN KEY (tutor) REFERENCES TUTOR(folio)
 );
+
 
 ----------------------------------------------------------------- Crear la tabla para manejar la secuencia
 CREATE TABLE matricula_seq (

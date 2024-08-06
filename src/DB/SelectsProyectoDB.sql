@@ -1,3 +1,4 @@
+-- Active: 1721413128424@@127.0.0.1@3306@sistema_de_cobros_escolares
 /*1. Datos de un alumno en un periodo escolar
 a. Periodo escolar
 b. Fecha de inicio
@@ -221,7 +222,7 @@ SELECT
     DATE_FORMAT(pe.fecha_inicio, '%d/%m/%Y') AS 'Fecha de inicio del periodo escolar',                                                      /*'*/
     DATE_FORMAT(pe.fecha_final, '%d/%m/%Y') AS 'Fecha final del periodo escolar',                                                           /*'*/
     ne.nombre AS 'Nivel escolar',                                                                                                           /*'*/
-    SUM(p.monto_total) AS 'Total de pagos'                                                                                                  /*'*/
+    COUNT(p.numero) AS 'Total de pagos'                                                                                                  /*'*/
 FROM PAGO p
 INNER JOIN ALUMNO a ON p.alumno = a.matricula
 INNER JOIN NIVEL_EDUCATIVO ne ON a.nivel_educativo = ne.codigo

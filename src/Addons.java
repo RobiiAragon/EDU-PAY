@@ -26,7 +26,8 @@ public class Addons {
     }
     //-------------------------------------------------------- Banner
     public static void banner() {
-        System.out.println("                                                  -=+*##+                                          \n" +
+        System.out.println(
+"                                                  -=+*##+                                          \n" +
 "                                               +%%%%##**%%                                          \n" +
 "                                              -@#***+++++@=                                         \n" +
 "                                              -@#***+++++%#                                         \n" +
@@ -254,6 +255,64 @@ public class Addons {
         
     Scanner scanner = new Scanner(System.in);
         System.out.println("=============================================");
+                    // Insertar alumno
+                    System.out.println("Ingrese el nombre del alumno: ");
+                    String nombreAlumno = scanner.next();
+                    scanner.nextLine();
+                    System.out.println("Ingrese el primer apellido del alumno: ");
+                    String primerApellAlumno = scanner.next();
+                    scanner.nextLine();
+                    System.out.println("Ingrese el segundo apellido del alumno: ");
+                    String segundoApellAlumno = scanner.next();
+                    scanner.nextLine();
+                    System.out.println("Ingrese la dirección del alumno: ");
+                    String direccion = scanner.next();
+                    scanner.nextLine();
+                    System.out.println("Estos son los niveles educativos disponibles");
+                    String query3 = "SELECT * FROM NIVEL_EDUCATIVO";
+                    try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
+                        PreparedStatement pstmt = conn.prepareStatement(query3)) {
+                        ResultSet rs = pstmt.executeQuery();
+                        while (rs.next()) {
+                            System.out.println(rs.getString("codigo") + ". " + rs.getString("nombre"));
+                        }
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                    System.out.println("Ingrese el nivel educativo del alumno: ");
+                    String nivelEducativo = scanner.next();
+                    System.out.println("Estos son los periodos escolares disponibles");
+                    String query4 = "SELECT * FROM PERIODO_ESCOLAR";
+                    try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
+                        PreparedStatement pstmt = conn.prepareStatement(query4)) {
+                        ResultSet rs = pstmt.executeQuery();
+                        while (rs.next()) {
+                            System.out.println(rs.getString("codigo") + ". " + rs.getString("fecha_inicio") + " - " + rs.getString("fecha_final"));
+                        }
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                    System.out.println("Ingrese el periodo escolar del alumno: ");
+                    String periodoEscolar = scanner.next();
+                    scanner.nextLine();
+                    System.out.println("Estos son los grados y grupos disponibles");
+                            String query5 = "SELECT * FROM GRADO_Y_GRUPO WHERE periodo_escolar = ? AND nivel_educativo = ?";
+                            try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
+                                PreparedStatement pstmt = conn.prepareStatement(query5)) {
+                                    pstmt.setString(1, periodoEscolar);
+                                    pstmt.setString(2, nivelEducativo);
+                        ResultSet rs = pstmt.executeQuery();
+                        while (rs.next()) {
+                            System.out.println("---------------------------------------------");
+                            System.out.println(rs.getString("codigo") + ". " + rs.getString("grado") + rs.getString("grupo") + " - " + rs.getString("periodo_escolar"));
+                            System.out.println("---------------------------------------------");
+                        }
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                    System.out.println("Ingrese el grado y grupo del alumno: ");
+                    String gradoGrupo = scanner.next();
+                    scanner.nextLine();
                     System.out.println("Ingrese el nombre del tutor: ");
                     String nombre = scanner.next();
                     scanner.nextLine();
@@ -306,64 +365,7 @@ public class Addons {
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
-                    // Insertar alumno
-                    System.out.println("Ingrese el nombre del alumno: ");
-                    String nombreAlumno = scanner.next();
-                    scanner.nextLine();
-                    System.out.println("Ingrese el primer apellido del alumno: ");
-                    String primerApellAlumno = scanner.next();
-                    scanner.nextLine();
-                    System.out.println("Ingrese el segundo apellido del alumno: ");
-                    String segundoApellAlumno = scanner.next();
-                    scanner.nextLine();
-                    System.out.println("Ingrese la dirección del alumno: ");
-                    String direccion = scanner.next();
-                    scanner.nextLine();
-                    System.out.println("Estos son los niveles educativos disponibles");
-                    String query3 = "SELECT * FROM NIVEL_EDUCATIVO";
-                    try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
-                         PreparedStatement pstmt = conn.prepareStatement(query3)) {
-                        ResultSet rs = pstmt.executeQuery();
-                        while (rs.next()) {
-                            System.out.println(rs.getString("codigo") + ". " + rs.getString("nombre"));
-                        }
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
-                    System.out.println("Ingrese el nivel educativo del alumno: ");
-                    String nivelEducativo = scanner.next();
-                    System.out.println("Estos son los periodos escolares disponibles");
-                    String query4 = "SELECT * FROM PERIODO_ESCOLAR";
-                    try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
-                         PreparedStatement pstmt = conn.prepareStatement(query4)) {
-                        ResultSet rs = pstmt.executeQuery();
-                        while (rs.next()) {
-                            System.out.println(rs.getString("codigo") + ". " + rs.getString("fecha_inicio") + " - " + rs.getString("fecha_final"));
-                        }
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
-                    System.out.println("Ingrese el periodo escolar del alumno: ");
-                    String periodoEscolar = scanner.next();
-                    scanner.nextLine();
-                    System.out.println("Estos son los grados y grupos disponibles");
-                            String query5 = "SELECT * FROM GRADO_Y_GRUPO WHERE periodo_escolar = ? AND nivel_educativo = ?";
-                            try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
-                                 PreparedStatement pstmt = conn.prepareStatement(query5)) {
-                                    pstmt.setString(1, periodoEscolar);
-                                    pstmt.setString(2, nivelEducativo);
-                        ResultSet rs = pstmt.executeQuery();
-                        while (rs.next()) {
-                            System.out.println("---------------------------------------------");
-                            System.out.println(rs.getString("codigo") + ". " + rs.getString("grado") + rs.getString("grupo") + " - " + rs.getString("periodo_escolar"));
-                            System.out.println("---------------------------------------------");
-                        }
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
-                    System.out.println("Ingrese el grado y grupo del alumno: ");
-                    String gradoGrupo = scanner.next();
-                    scanner.nextLine();
+                    
 
                     // Insertar alumno
                     String query6 = "INSERT INTO ALUMNO (nombre, primerApell, segundoApell, direccion, nivel_educativo, periodo_escolar, grado_y_grupo, tutor) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -1696,7 +1698,7 @@ public class Addons {
                     "DATE_FORMAT(pe.fecha_inicio, '%d/%m/%Y') AS 'Fecha de inicio PE', " +
                     "DATE_FORMAT(pe.fecha_final, '%d/%m/%Y') AS 'Fecha final PE', " +
                     "ne.nombre AS 'Nivel escolar', " +
-                    "SUM(p.monto_total) AS 'Total de pagos' " +
+                    "COUNT(p.numero) AS 'Total de pagos' " +
                     "FROM PAGO p " +
                     "INNER JOIN ALUMNO a ON p.alumno = a.matricula " +
                     "INNER JOIN NIVEL_EDUCATIVO ne ON a.nivel_educativo = ne.codigo " +

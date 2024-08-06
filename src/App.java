@@ -10,7 +10,15 @@ public class App {
             switch (opcion) {
                 case 1:
                     Addons.limpiarPantalla();
-                    mostrarMenuCRUD();
+                    System.out.println("Ingrese contraseña de administrador: ");
+                    String password = scanner.nextLine();
+                    if (password.equals("admin")) {
+                        Addons.limpiarPantalla();
+                        mostrarMenuCRUD();
+                    } else {
+                        System.out.println("Contraseña incorrecta. Por favor, intente de nuevo.");
+                        Addons.limpiarPantalla();
+                    }
                     break;
                 case 2:
                     Addons.limpiarPantalla();
