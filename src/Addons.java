@@ -122,17 +122,84 @@ public class Addons {
 
         // Mostrar los motivos de pago disponibles
         System.out.println("Estos son los motivos de pago disponibles");
-        String queryMotivosPago = "SELECT * FROM MOTIVO_DE_PAGO";
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
-            PreparedStatement pstmt = conn.prepareStatement(queryMotivosPago)) {
-            ResultSet rs = pstmt.executeQuery();
-            while (rs.next()) {
-                System.out.println(rs.getString("codigo") + ". " + rs.getString("nombre") + " - $" + rs.getString("precio"));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return;
-            }
+        System.out.println("1. Mensualidades");
+        System.out.println("2. Uniformes");
+        System.out.println("3. Papelería");
+        System.out.println("4. Mantenimiento");
+        System.out.println("5. Eventos Especiales");
+        System.out.println("seleccione una opcion: ");
+        int opcion = scanner.nextInt();
+        scanner.nextLine();
+        switch (opcion) {
+            case 1:
+            String queryMotivosPago = "SELECT * FROM MOTIVO_DE_PAGO WHERE codigo BETWEEN 'MP016' AND 'MP030'";
+            try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
+                PreparedStatement pstmt = conn.prepareStatement(queryMotivosPago)) {
+                ResultSet rs = pstmt.executeQuery();
+                while (rs.next()) {
+                    System.out.println(rs.getString("codigo") + ". " + rs.getString("nombre") + " - $" + rs.getString("precio"));
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return;
+                }
+                break;
+            case 2:
+            String queryMotivosPago2 = "SELECT * FROM MOTIVO_DE_PAGO WHERE codigo BETWEEN 'MP031' AND 'MP045'";
+            try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
+                PreparedStatement pstmt = conn.prepareStatement(queryMotivosPago2)) {
+                ResultSet rs = pstmt.executeQuery();
+                while (rs.next()) {
+                    System.out.println(rs.getString("codigo") + ". " + rs.getString("nombre") + " - $" + rs.getString("precio"));
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return;
+                }
+                break;
+            case 3:
+            String queryMotivosPago3 = "SELECT * FROM MOTIVO_DE_PAGO WHERE codigo BETWEEN 'MP046' AND 'MP060'";
+            try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
+                PreparedStatement pstmt = conn.prepareStatement(queryMotivosPago3)) {
+                ResultSet rs = pstmt.executeQuery();
+                while (rs.next()) {
+                    System.out.println(rs.getString("codigo") + ". " + rs.getString("nombre") + " - $" + rs.getString("precio"));
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return;
+                }
+                break;
+            case 4:
+            String queryMotivosPago4 = "SELECT * FROM MOTIVO_DE_PAGO WHERE codigo BETWEEN 'MP061' AND 'MP065'";
+            try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
+                PreparedStatement pstmt = conn.prepareStatement(queryMotivosPago4)) {
+                ResultSet rs = pstmt.executeQuery();
+                while (rs.next()) {
+                    System.out.println(rs.getString("codigo") + ". " + rs.getString("nombre") + " - $" + rs.getString("precio"));
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return;
+                }
+                break;
+            case 5:
+            String queryMotivosPago5 = "SELECT * FROM MOTIVO_DE_PAGO WHERE codigo BETWEEN 'MP066' AND 'MP070'";
+            try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
+                PreparedStatement pstmt = conn.prepareStatement(queryMotivosPago5)) {
+                ResultSet rs = pstmt.executeQuery();
+                while (rs.next()) {
+                    System.out.println(rs.getString("codigo") + ". " + rs.getString("nombre") + " - $" + rs.getString("precio"));
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return;
+                }
+                break;
+            default:
+                break;
+        }
+        
         System.out.println("Ingrese el codigo del motivo de pago: ");
         String motivoPago = scanner.nextLine();
         // Obtener el precio del motivo de pago
