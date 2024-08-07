@@ -231,6 +231,28 @@ public class Addons {
         double iva = subtotal * 0.16;
         double total = subtotal + iva;
         // Insertar el pago
+        System.out.println("El pago de inscripcion ya fue realizado?");
+        System.out.println("1. Si");
+        System.out.println("2. No");
+        System.out.println("Ingrese una opción: ");
+        int pago = scanner.nextInt();
+        if(pago == 1){
+        String queryInsertPago = "INSERT INTO PAGO (fecha, subtotal, iva, monto_total, estado, alumno, motivo_de_pago) VALUES (?, ?, ?, ?, 'Pagado', ?, ?)";
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
+            PreparedStatement pstmt = conn.prepareStatement(queryInsertPago)) {
+            pstmt.setString(1, fecha);
+            pstmt.setDouble(2, subtotal);
+            pstmt.setDouble(3, iva);
+            pstmt.setDouble(4, total);
+            pstmt.setString(5, matricula);
+            pstmt.setString(6, motivoPago);
+            pstmt.executeUpdate();
+            limpiarPantalla();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return;
+        }
+    }else{
         String queryInsertPago = "INSERT INTO PAGO (fecha, subtotal, iva, monto_total, estado, alumno, motivo_de_pago) VALUES (?, ?, ?, ?, 'Pendiente', ?, ?)";
         try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
             PreparedStatement pstmt = conn.prepareStatement(queryInsertPago)) {
@@ -246,6 +268,7 @@ public class Addons {
             e.printStackTrace();
             return;
         }
+    }
         System.out.println("=============================================");
         System.out.println("Pago registrado correctamente");
         System.out.println("Fecha: " + fecha);
@@ -401,7 +424,7 @@ public class Addons {
                 pstmt.setString(4, matricula);
                 pstmt.executeUpdate();
                 limpiarPantalla();
-                System.out.println("Alumno actualizado correctamente");
+                System.out.println("Alumno Reinscrito correctamente");
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -702,6 +725,45 @@ public class Addons {
         }
         return;
     }
+        //-------------------------------------------------------- Agregar packs papeleria
+        public static void AgregarPacksPapeleria() {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("=============================================");
+            System.out.println("Añadir Packs Papeleria");
+            System.out.println("Estos son los motivos de pago disponibles");
+            String query = "SELECT * FROM MOTIVO_DE_PAGO WHERE codigo BETWEEN 'MP046' AND 'MP060'";
+            try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
+                 PreparedStatement pstmt = conn.prepareStatement(query)) {
+                ResultSet rs = pstmt.executeQuery();
+                while (rs.next()) {
+                    System.out.println(rs.getString("codigo") + ". " + rs.getString("nombre") + " - $" + rs.getString("precio"));
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            System.out.println("Ingrese el codigo del motivo de pago: ");
+            String motivoPago = scanner.nextLine();
+            System.out.println("Ingrese el nombre del pack de papeleria: ");
+            String nombre = scanner.nextLine();
+            System.out.println("Ingrese la descripción del pack de papeleria: ");
+            String descripcion = scanner.nextLine();
+            System.out.println("Ingrese el precio del pack de papeleria: ");
+            double precio = scanner.nextDouble();
+            String queryInsert = "INSERT INTO PACKS_PAPELERIA (motivo_de_pago, nombre, descripcion, precio) VALUES (?, ?, ?, ?)";
+            try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
+                 PreparedStatement pstmt = conn.prepareStatement(queryInsert)) {
+                pstmt.setString(1, motivoPago);
+                pstmt.setString(2, nombre);
+                pstmt.setString(3, descripcion);
+                pstmt.setDouble(4, precio);
+                pstmt.executeUpdate();
+                limpiarPantalla();
+                System.out.println("Pack de papeleria agregado correctamente");
+                System.out.println("---------------------------------------------");
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     //-------------------------------------------------------- Agregar Grado y Grupo
     public static void AgregarGradosyGrupos() {
         Scanner scanner = new Scanner(System.in);

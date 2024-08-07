@@ -126,15 +126,54 @@ public class App {
                     break;
                 case 7:
                 System.out.println("1. Añadir Eventos Especiales");
-                System.out.println("2. Añadir Packs de Papelería");
-                System.out.println("3. Añadir Uniformes");
-                System.out.println("4. Modificar Un evento especial");
-                System.out.println("5. Modificar Packs de Papelería");
-                System.out.println("6. Modificar Uniformes");
-                System.out.println("7. Eliminar Un evento especial");
-                System.out.println("8. Eliminar Packs de Papelería");
-                System.out.println("9. Eliminar Uniformes");
-                    break;
+                System.out.println("2. Añadir Uniformes");
+                System.out.println("3. Modificar Un evento especial");
+                System.out.println("4. Modificar Packs de Papelería");
+                System.out.println("5. Modificar Uniformes");
+                System.out.println("6. Eliminar Un evento especial");
+                System.out.println("7. Eliminar Packs de Papelería");
+                System.out.println("8. Eliminar Uniformes");
+                System.out.println("----------------------");
+                System.out.println("Seleccione una opción: ");
+                int opcion7 = Integer.parseInt(scanner.nextLine());
+                switch (opcion7) {
+                    case 1:
+                        Addons.limpiarPantalla();
+                        Addons.AgregarEventosEspeciales();
+                        break;
+                    case 2:
+                        Addons.limpiarPantalla();
+                        Addons.ModificarUniformes();
+                        break;
+                    case 3:
+                        Addons.limpiarPantalla();
+                        Addons.ModificarEventosEspeciales();
+                        break;
+                    case 4:
+                        Addons.limpiarPantalla();
+                        Addons.ModificarPacksPapeleria();
+                        break;
+                    case 5:
+                        Addons.limpiarPantalla();
+                        Addons.ModificarUniformes();
+                        break;
+                    case 6:
+                        Addons.limpiarPantalla();
+                        Addons.EliminarEventosEspeciales();
+                        break;
+                    case 7:
+                        Addons.limpiarPantalla();
+                        Addons.EliminarPacksPapeleria();
+                        break;
+                    case 8:
+                        Addons.limpiarPantalla();
+                        Addons.EliminarUniformes();
+                        break;
+                    default:
+                        System.out.println("Opción no válida. Por favor, intente de nuevo.");
+                        break;
+                }
+                break;
                 case 8:
                 Addons.limpiarPantalla();
                     System.out.println("Ingrese contraseña de administrador: ");
