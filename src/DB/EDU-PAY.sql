@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-08-2024 a las 10:01:56
+-- Tiempo de generación: 07-08-2024 a las 21:24:09
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -44,7 +44,7 @@ CREATE TABLE `alumno` (
 --
 
 INSERT INTO `alumno` (`matricula`, `nombre`, `primerApell`, `segundoApell`, `direccion`, `nivel_educativo`, `periodo_escolar`, `grado_y_grupo`, `tutor`) VALUES
-('MTC0000001', 'Juan', 'Pérez', 'García', 'Calle 123, Tijuana', 'NE001', 'PE2023', 'GG001', 'TU001'),
+('MTC0000001', 'Juan', 'Pérez', 'García', 'Calle 123, Tijuana', 'NE001', 'PE2022', 'GG007', 'TU001'),
 ('MTC0000002', 'María', 'López', 'Ramírez', 'Calle 124, Tijuana', 'NE001', 'PE2023', 'GG001', 'TU002'),
 ('MTC0000003', 'Carlos', 'Rodríguez', 'Martínez', 'Calle 125, Tijuana', 'NE002', 'PE2023', 'GG002', 'TU003'),
 ('MTC0000004', 'Sofía', 'Gómez', 'Hernández', 'Calle 126, Tijuana', 'NE002', 'PE2023', 'GG002', 'TU004'),
@@ -104,7 +104,8 @@ INSERT INTO `alumno` (`matricula`, `nombre`, `primerApell`, `segundoApell`, `dir
 ('MTC0000058', 'Tomás', 'Álvarez', 'Cisneros', 'Calle 219, Tijuana', 'NE003', 'PE2020', 'GG001', 'TU097'),
 ('MTC0000059', 'Pilar', 'Hernández', 'Munguía', 'Calle 220, Tijuana', 'NE001', 'PE2020', 'GG002', 'TU098'),
 ('MTC0000060', 'Julián', 'Nieves', 'Zavala', 'Calle 221, Tijuana', 'NE001', 'PE2020', 'GG002', 'TU099'),
-('MTC0000061', 'Patricia', 'Beltrán', 'Magaña', 'Calle 222, Tijuana', 'NE002', 'PE2020', 'GG003', 'TU100');
+('MTC0000061', 'Patricia', 'Beltrán', 'Magaña', 'Calle 222, Tijuana', 'NE002', 'PE2020', 'GG003', 'TU100'),
+('MTC0000062', 'Jesus', 'Aragon', 'Lopez', 'Sevilla Residencial', 'NE002', 'PE2023', 'GG010', 'TU101');
 
 --
 -- Disparadores `alumno`
@@ -264,7 +265,8 @@ INSERT INTO `folio_seq` (`id`) VALUES
 (97),
 (98),
 (99),
-(100);
+(100),
+(101);
 
 -- --------------------------------------------------------
 
@@ -484,7 +486,8 @@ INSERT INTO `matricula_seq` (`id`) VALUES
 (58),
 (59),
 (60),
-(61);
+(61),
+(62);
 
 -- --------------------------------------------------------
 
@@ -1109,7 +1112,8 @@ INSERT INTO `num_tel` (`id`, `tutor`, `numTel`) VALUES
 (197, 'TU097', '669-234-5679'),
 (198, 'TU098', '662-555-6790'),
 (199, 'TU099', '668-789-1235'),
-(200, 'TU100', '667-234-5679');
+(200, 'TU100', '667-234-5679'),
+(201, 'TU101', '6633016320');
 
 -- --------------------------------------------------------
 
@@ -1145,14 +1149,17 @@ INSERT INTO `pago` (`numero`, `fecha`, `subtotal`, `iva`, `monto_total`, `estado
 (37, '2021-03-01', 420.00, 67.20, 487.20, 'pagado', 'MTC0000001', 'GG001', 'MP016'),
 (38, '2021-04-01', 420.00, 67.20, 487.20, 'pagado', 'MTC0000001', 'GG001', 'MP016'),
 (39, '2021-05-01', 420.00, 67.20, 487.20, 'pagado', 'MTC0000001', 'GG001', 'MP016'),
-(40, '2021-08-01', 850.00, 136.00, 986.00, 'Pagado', 'MTC0000001', 'GG008', 'MP001'),
+(40, '2021-08-01', 850.00, 136.00, 986.00, 'Pagado', 'MTC0000001', 'GG008', 'MP004'),
 (41, '2020-08-01', 1050.00, 168.00, 1218.00, 'Pagado', 'MTC0000002', 'GG001', 'MP001'),
 (42, '2021-08-01', 1050.00, 168.00, 1218.00, 'Pagado', 'MTC0000002', 'GG008', 'MP001'),
 (43, '2020-08-01', 1250.00, 200.00, 1450.00, 'Pagado', 'MTC0000003', 'GG001', 'MP001'),
 (44, '2021-08-01', 1250.00, 200.00, 1450.00, 'Pagado', 'MTC0000003', 'GG008', 'MP001'),
 (45, '2024-08-01', 170.00, 27.20, 197.20, 'Pagado', 'MTC0000003', 'GG008', 'MP066'),
 (46, '2024-08-01', 170.00, 27.20, 197.20, 'Pagado', 'MTC0000002', 'GG008', 'MP066'),
-(47, '2024-08-01', 170.00, 27.20, 197.20, 'Pagado', 'MTC0000001', 'GG008', 'MP066');
+(47, '2024-08-01', 170.00, 27.20, 197.20, 'Pagado', 'MTC0000001', 'GG008', 'MP066'),
+(48, '2024-08-06', 1050.00, 168.00, 1218.00, 'Pendiente', 'MTC0000062', NULL, 'MP002'),
+(49, '2024-08-06', 270.00, 43.20, 313.20, 'Pendiente', 'MTC0000001', NULL, 'MP060'),
+(50, '2024-08-06', 170.00, 27.20, 197.20, 'Pagado', 'MTC0000001', NULL, 'MP046');
 
 -- --------------------------------------------------------
 
@@ -1205,8 +1212,8 @@ CREATE TABLE `periodo_escolar` (
 --
 
 INSERT INTO `periodo_escolar` (`codigo`, `fecha_inicio`, `fecha_final`) VALUES
-('PE2020', '2023-08-01', '2024-07-31'),
-('PE2021', '2023-08-01', '2024-07-31'),
+('PE2020', '2020-08-01', '2021-07-31'),
+('PE2021', '2021-08-01', '2022-07-31'),
 ('PE2022', '2023-08-01', '2024-07-31'),
 ('PE2023', '2023-08-01', '2024-07-31'),
 ('PE2024', '2024-08-01', '2025-07-31');
@@ -1383,7 +1390,8 @@ INSERT INTO `tutor` (`folio`, `nombre`, `primerApell`, `segundoApell`) VALUES
 ('TU097', 'Ximena', 'Salinas', 'Murillo'),
 ('TU098', 'Gustavo', 'Hernández', 'Molina'),
 ('TU099', 'Yolanda', 'Cruz', 'Sánchez'),
-('TU100', 'Antonio', 'Márquez', 'Rangel');
+('TU100', 'Antonio', 'Márquez', 'Rangel'),
+('TU101', 'Angel', 'Aragon', 'Payan');
 
 --
 -- Disparadores `tutor`
@@ -1631,7 +1639,7 @@ ALTER TABLE `eventos_especiales`
 -- AUTO_INCREMENT de la tabla `folio_seq`
 --
 ALTER TABLE `folio_seq`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
 
 --
 -- AUTO_INCREMENT de la tabla `ggcofigo_seq`
@@ -1655,7 +1663,7 @@ ALTER TABLE `mantenimiento`
 -- AUTO_INCREMENT de la tabla `matricula_seq`
 --
 ALTER TABLE `matricula_seq`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- AUTO_INCREMENT de la tabla `mensualidad`
@@ -1679,13 +1687,13 @@ ALTER TABLE `necodigo_seq`
 -- AUTO_INCREMENT de la tabla `num_tel`
 --
 ALTER TABLE `num_tel`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=201;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=202;
 
 --
 -- AUTO_INCREMENT de la tabla `pago`
 --
 ALTER TABLE `pago`
-  MODIFY `numero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `numero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT de la tabla `papeleria`
