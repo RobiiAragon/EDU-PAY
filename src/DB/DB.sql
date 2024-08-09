@@ -5,13 +5,13 @@ USE Sistema_de_cobros_escolares;
 -- Tabla NIVEL_EDUCATIVO
 CREATE TABLE NIVEL_EDUCATIVO (
     codigo VARCHAR(5) PRIMARY KEY,
-    nombre VARCHAR(30) NOT NULL,
+    nombre VARCHAR(30) NOT NULL, 
     costo_base DECIMAL(10,2) NOT NULL
 );
 
 -- Tabla PERIODO_ESCOLAR
 CREATE TABLE PERIODO_ESCOLAR (
-    codigo VARCHAR(10) PRIMARY KEY,
+    codigo VARCHAR(6) PRIMARY KEY,
     fecha_inicio DATE NOT NULL,
     fecha_final DATE NOT NULL
 );
@@ -19,9 +19,9 @@ CREATE TABLE PERIODO_ESCOLAR (
 -- Tabla GRADO_Y_GRUPO
 CREATE TABLE GRADO_Y_GRUPO (
     codigo VARCHAR(5) PRIMARY KEY,
-    grado VARCHAR(5),
-    grupo VARCHAR(5),
-    periodo_escolar VARCHAR(10),
+    grado VARCHAR(2),
+    grupo VARCHAR(2),
+    periodo_escolar VARCHAR(6),
     nivel_educativo VARCHAR(5),
     FOREIGN KEY (periodo_escolar) REFERENCES PERIODO_ESCOLAR(codigo),
     FOREIGN KEY (nivel_educativo) REFERENCES NIVEL_EDUCATIVO(codigo)
