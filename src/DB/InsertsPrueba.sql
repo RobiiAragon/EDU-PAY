@@ -6,9 +6,9 @@ INSERT INTO NIVEL_EDUCATIVO (codigo, nombre, costo_base) VALUES
 
 -- Inserts para PERIODO_ESCOLAR
 INSERT INTO PERIODO_ESCOLAR (codigo, fecha_inicio, fecha_final) VALUES
-('PE2020', '2023-08-01', '2024-07-31'),
-('PE2021', '2023-08-01', '2024-07-31'),
-('PE2022', '2023-08-01', '2024-07-31'),
+('PE2020', '2020-08-01', '2021-07-31'),
+('PE2021', '2021-08-01', '2022-07-31'),
+('PE2022', '2022-08-01', '2023-07-31'),
 ('PE2023', '2023-08-01', '2024-07-31'),
 ('PE2024', '2024-08-01', '2025-07-31');
 
@@ -20,15 +20,15 @@ INSERT INTO GRADO_Y_GRUPO (codigo, grado, grupo, periodo_escolar, nivel_educativ
 ('GG004', '1', 'A', 'PE2021', 'NE001'),
 ('GG005', '2', 'A', 'PE2021', 'NE001'),
 ('GG006', '3', 'A', 'PE2021', 'NE001'),
-('GG006', '1', 'A', 'PE2022', 'NE001'),
-('GG007', '2', 'A', 'PE2022', 'NE001'),
-('GG008', '3', 'A', 'PE2022', 'NE001'),
-('GG009', '1', 'A', 'PE2023', 'NE002'),
-('GG010', '2', 'A', 'PE2023', 'NE002'),
-('GG011', '3', 'A', 'PE2023', 'NE002'),
-('GG012', '1', 'A', 'PE2023', 'NE002'),
-('GG013', '2', 'A', 'PE2023', 'NE002'),
-('GG014', '3', 'A', 'PE2023', 'NE002');
+('GG007', '1', 'A', 'PE2022', 'NE001'),
+('GG008', '2', 'A', 'PE2022', 'NE001'),
+('GG009', '3', 'A', 'PE2022', 'NE001'),
+('GG010', '1', 'A', 'PE2023', 'NE002'),
+('GG011', '2', 'A', 'PE2023', 'NE002'),
+('GG012', '3', 'A', 'PE2023', 'NE002'),
+('GG013', '1', 'A', 'PE2023', 'NE002'),
+('GG014', '2', 'A', 'PE2023', 'NE002'),
+('GG015', '3', 'A', 'PE2023', 'NE002');
 
 -- Inserts para TUTOR 100 registros
 INSERT INTO TUTOR (folio, nombre, primerApell, segundoApell) VALUES
