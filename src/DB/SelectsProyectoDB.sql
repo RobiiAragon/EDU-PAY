@@ -25,7 +25,7 @@ INNER JOIN PERIODO_ESCOLAR pe ON a.periodo_escolar = pe.codigo
 INNER JOIN GRADO_Y_GRUPO gg ON a.grado_y_grupo = gg.codigo
 INNER JOIN NIVEL_EDUCATIVO ne ON a.nivel_educativo = ne.codigo
 LEFT JOIN TUTOR t ON a.tutor = t.folio
-WHERE pe.codigo = :periodo_escolar AND a.matricula = :matricula;
+WHERE pe.codigo = 'PE2022' AND a.matricula = 'MTC0000001';
 
 
 /*2.Grupos en los que ha estado un alumno
@@ -48,7 +48,7 @@ INNER JOIN PAGO p ON a.matricula = p.alumno
 INNER JOIN GRADO_Y_GRUPO gg ON p.gradoAlumno = gg.codigo
 INNER JOIN PERIODO_ESCOLAR pe ON gg.periodo_escolar = pe.codigo
 INNER JOIN NIVEL_EDUCATIVO ne ON gg.nivel_educativo = ne.codigo
-WHERE a.matricula = :matricula AND motivo_de_pago = 'MP001';
+WHERE a.matricula = 'MTC0000002' AND motivo_de_pago = 'MP001';
 
 /*3. Números de teléfono de un tutor
 a. Nombre del tutor
@@ -62,7 +62,7 @@ SELECT
 FROM TUTOR t
 INNER JOIN ALUMNO a ON t.folio = a.tutor
 INNER JOIN NUM_TEL nt ON t.folio = nt.tutor
-WHERE t.folio = :folio_tutor;
+WHERE t.folio = 'TU001';
 
 /*4. Inscripciones pagadas de un alumno
 a. Matricula del alumno
@@ -87,7 +87,7 @@ INNER JOIN MOTIVO_DE_PAGO mp ON p.motivo_de_pago = mp.codigo
 INNER JOIN PERIODO_ESCOLAR pe ON mp.periodo_escolar = pe.codigo
 INNER JOIN GRADO_Y_GRUPO gg ON p.gradoAlumno = gg.codigo
 INNER JOIN NIVEL_EDUCATIVO ne ON a.nivel_educativo = ne.codigo
-WHERE a.matricula = :matricula AND mp.nombre LIKE 'Inscripción%';
+WHERE a.matricula = 'MTC0000001' AND mp.nombre LIKE 'Inscripción%';
 
 /*5. Mensualidades pagadas de un alumno en un periodo escolar
 a. Matricula del alumno
@@ -115,7 +115,7 @@ INNER JOIN PERIODO_ESCOLAR pe ON mp.periodo_escolar = pe.codigo
 INNER JOIN GRADO_Y_GRUPO gg ON a.grado_y_grupo = gg.codigo
 INNER JOIN NIVEL_EDUCATIVO ne ON mp.nivel_educativo = ne.codigo
 INNER JOIN MENSUALIDAD m ON mp.codigo = m.motivo_de_pago
-WHERE a.matricula = :matricula AND pe.codigo = :periodo_escolar AND p.motivo_de_pago = 'MP016';
+WHERE a.matricula = 'MTC0000001' AND pe.codigo = 'PE2020' AND p.motivo_de_pago = 'MP016' ORDER BY a.matricula limit 12;
 
 /*6. Pagos realizados por un evento especial
 a. Nombre del evento
@@ -161,7 +161,7 @@ SELECT
 FROM MANTENIMIENTO m
 INNER JOIN MOTIVO_DE_PAGO mp ON m.motivo_de_pago = mp.codigo
 INNER JOIN PERIODO_ESCOLAR pe ON m.fecha_pago BETWEEN pe.fecha_inicio AND pe.fecha_final
-WHERE pe.codigo = :periodo_escolar;
+WHERE pe.codigo = 'PE2022';
 
 /*8. Lista de precios de los paquetes de útiles escolares (papelería) para un
 periodo y nivel escolar.
@@ -184,8 +184,8 @@ INNER JOIN MOTIVO_DE_PAGO mp ON p.motivo_de_pago = mp.codigo
 INNER JOIN NIVEL_EDUCATIVO ne ON mp.nivel_educativo = ne.codigo
 INNER JOIN GRADO_Y_GRUPO gg ON gg.nivel_educativo = ne.codigo
 INNER JOIN PERIODO_ESCOLAR pe ON mp.periodo_escolar = pe.codigo
-WHERE pe.codigo = :periodo_escolar 
-  AND ne.codigo = :nivel_educativo;
+WHERE pe.codigo = 'PE2020' 
+  AND ne.codigo = 'NE001';
 
 /* 9. Lista de precios de los uniformes para un para un periodo y nivel escolar.
 a. Fecha de inicio del periodo escolar
@@ -208,9 +208,9 @@ FROM UNIFORMES u
 INNER JOIN MOTIVO_DE_PAGO mp ON u.motivo_de_pago = mp.codigo
 INNER JOIN TIPO_DE_UNIFORME tu ON u.tipo_de_uniforme = tu.codigo
 INNER JOIN NIVEL_EDUCATIVO ne ON mp.nombre LIKE CONCAT('%', ne.nombre, '%')
-INNER JOIN GRADO_Y_GRUPO gg ON gg.periodo_escolar = :periodo_escolar
+INNER JOIN GRADO_Y_GRUPO gg ON gg.periodo_escolar = 'PE2022'
 INNER JOIN PERIODO_ESCOLAR pe ON mp.periodo_escolar = pe.codigo
-WHERE pe.codigo = :periodo_escolar AND ne.codigo = :nivel_educativo;
+WHERE pe.codigo = 'PE2022' AND ne.codigo = 'NE001';
 
 
 /* 10. Total de pagos realizados para un nivel educativo en un periodo escolar
@@ -228,5 +228,5 @@ FROM PAGO p
 INNER JOIN MOTIVO_DE_PAGO MP ON p.motivo_de_pago = MP.codigo
 INNER JOIN NIVEL_EDUCATIVO ne ON MP.Nivel_educativo = ne.codigo
 INNER JOIN PERIODO_ESCOLAR pe ON MP.periodo_escolar = pe.codigo
-WHERE pe.codigo = :periodo_escolar AND ne.codigo = :nivel_educativo
+WHERE pe.codigo = 'PE2020' AND ne.codigo = 'NE001'
 GROUP BY pe.codigo, ne.codigo;
