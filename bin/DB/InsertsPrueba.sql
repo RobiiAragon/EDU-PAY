@@ -273,6 +273,15 @@ INSERT INTO MOTIVO_DE_PAGO (codigo, nombre, precio, periodo_escolar, Nivel_educa
 ('MP069', 'Evento Especial 2023', 170, 'PE2023', NULL),
 ('MP070', 'Evento Especial 2024', 170, 'PE2024', NULL);
 
+INSERT INTO MOTIVO_DE_PAGO (codigo, nombre, precio, periodo_escolar, Nivel_educativo) VALUES
+('MP071', 'Pack de libros Preescolar 2020', 170, 'PE2020', 'NE001'),
+('MP072', 'Pack de libros Primaria 2020', 220, 'PE2020', 'NE002'),
+('MP073', 'Pack de libros Secundaria 2020', 270, 'PE2020', 'NE003');
+
+(nombre, precio, periodo_escolar, Nivel_educativo) values
+('Pack de libros Preescolar 2021', 170, 'PE2021', 'NE001'),
+('Pack de libros Primaria 2021', 220, 'PE2021', 'NE002'),
+('Pack de libros Secundaria 2021', 270, 'PE2021', 'NE003');
 
 
 
