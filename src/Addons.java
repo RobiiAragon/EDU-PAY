@@ -281,9 +281,6 @@ public class Addons {
         System.out.println("---------------------------------------------");
         System.out.println("Total: " + total);
         System.out.println("=============================================");
-        System.out.println("El pago se realiza mediante Transferencia Bancaria a la cuenta 4815163067954720 a nombre de EDUPAY y la referncia es la matricula del alumno");
-        System.out.println("El pago está pendiente de ser aprobado por el administrador");
-        System.out.println("Para revisar el estado del pago, consulte en la opción de Consultar Pagos");
         return;
     }
     //-------------------------------------------------------- Consultar Pagos
@@ -579,11 +576,12 @@ public class Addons {
                     //registrar pago de inscripcion
                     //mostrar motivos de pago
                     System.out.println("Estos son los motivos de pago disponibles");
-                    String query8 = "SELECT * FROM MOTIVO_DE_PAGO WHERE Nivel_educativo = ? AND nombre LIKE ?";
+                    String query8 = "SELECT * FROM MOTIVO_DE_PAGO WHERE Nivel_educativo = ? AND nombre LIKE ? AND periodo_escolar = ?";
                     try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
                         PreparedStatement pstmt = conn.prepareStatement(query8)) {
                         pstmt.setString(1, nivelEducativo);
                         pstmt.setString(2, "%Inscripción%");
+                        pstmt.setString(3, periodoEscolar);
                         ResultSet rs = pstmt.executeQuery();
                         while (rs.next()) {
                             System.out.println(rs.getString("codigo") + ". " + rs.getString("nombre") + " - $" + rs.getString("precio"));
@@ -640,6 +638,7 @@ public class Addons {
                     System.out.println("Ingrese una opción: ");
                     int pago = scanner.nextInt();
                     if(pago == 1){
+                        limpiarPantalla();
                         String query10 = "INSERT INTO PAGO (fecha, subtotal, iva, monto_total, estado, alumno, motivo_de_pago) VALUES (?, ?, ?, ?, 'Pagado', ?, ?)";
                     try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
                         PreparedStatement pstmt = conn.prepareStatement(query10)) {
@@ -656,6 +655,7 @@ public class Addons {
                         e.printStackTrace();
                     }
                     }else{
+                        limpiarPantalla();
                     String query10 = "INSERT INTO PAGO (fecha, subtotal, iva, monto_total, estado, alumno, motivo_de_pago) VALUES (?, ?, ?, ?, 'Pendiente', ?, ?)";
                     try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
                         PreparedStatement pstmt = conn.prepareStatement(query10)) {
@@ -1968,5 +1968,32 @@ public class Addons {
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
+        }
+        public static void registroTutor(){
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("=============================================");
+            System.out.println("Registro de Tutor");
+            System.out.println("Ingrese el nombre del tutor: ");
+            String nombre = scanner.nextLine();
+            System.out.println("Ingrese el primer apellido del tutor: ");
+            String primerApell = scanner.nextLine();
+            System.out.println("Ingrese el segundo apellido del tutor: ");
+            String segundoApell = scanner.nextLine();
+            String query = "INSERT INTO TUTOR (nombre, primerApell, segundoApell) VALUES (?, ?, ?)";
+            try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
+                PreparedStatement pstmt = conn.prepareStatement(query)) {
+                pstmt.setString(1, nombre);
+                pstmt.setString(2, primerApell);
+                pstmt.setString(3, segundoApell);
+                pstmt.executeUpdate();
+                limpiarPantalla();
+                System.out.println("Tutor registrado correctamente");
+                System.out.println("ingrese el numero de telefono del tutor: ");
+                String numTel = scanner.nextLine();
+                String query2 = "INSERT INTO NUM_TEL (numTel, tutor) VALUES (?, (SELECT folio FROM TUTOR WHERE nombre = ? AND primerApell = ? AND segundoApell = ?))";
+                System.out.println("---------------------------------------------");
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }

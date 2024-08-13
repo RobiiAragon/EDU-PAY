@@ -188,6 +188,9 @@ public class App {
                     }
                     break;
                 case 9:
+                    Addons.registroTutor();
+                    return;
+                case 10:
                     salirDelSistema();
                     return;
             }
@@ -206,13 +209,14 @@ public class App {
             System.out.println("6. Ver Registros del sistema");
             System.out.println("7. Hacer cambios en los registros del sistema");
             System.out.println("8. DAR DE BAJA A UN ALUMNO");
+            System.out.println("9. Registrar a un Tutor");
             System.out.println("----------------------");
-            System.out.println("9. Salir del sistema");
+            System.out.println("10. Salir del sistema");
             System.out.println("==================");
             System.out.println("Seleccione una opción: ");
             try {
                 int opcion = Integer.parseInt(scanner.nextLine());
-                if (opcion >= 1 && opcion <= 9) {
+                if (opcion >= 1 && opcion <= 10) {
                     return opcion;
                 } else {
                     System.out.println("Opción no válida. Por favor, intente de nuevo.");
