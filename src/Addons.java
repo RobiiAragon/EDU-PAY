@@ -102,7 +102,7 @@ public class Addons {
         // Obtener la información del alumno
         String queryAlumno = "SELECT nivel_educativo FROM ALUMNO WHERE matricula = ?";
         String nivelEducativo = null;
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
             PreparedStatement pstmt = conn.prepareStatement(queryAlumno)) {
             pstmt.setString(1, matricula);
             ResultSet rs = pstmt.executeQuery();
@@ -133,7 +133,7 @@ public class Addons {
         switch (opcion) {
             case 1:
             String queryMotivosPago = "SELECT * FROM MOTIVO_DE_PAGO WHERE codigo BETWEEN 'MP016' AND 'MP030'";
-            try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+            try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
                 PreparedStatement pstmt = conn.prepareStatement(queryMotivosPago)) {
                 ResultSet rs = pstmt.executeQuery();
                 while (rs.next()) {
@@ -146,7 +146,7 @@ public class Addons {
                 break;
             case 2:
             String queryMotivosPago2 = "SELECT * FROM MOTIVO_DE_PAGO WHERE codigo BETWEEN 'MP031' AND 'MP045'";
-            try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+            try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
                 PreparedStatement pstmt = conn.prepareStatement(queryMotivosPago2)) {
                 ResultSet rs = pstmt.executeQuery();
                 while (rs.next()) {
@@ -159,7 +159,7 @@ public class Addons {
                 break;
             case 3:
             String queryMotivosPago3 = "SELECT * FROM MOTIVO_DE_PAGO WHERE codigo BETWEEN 'MP046' AND 'MP060'";
-            try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+            try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
                 PreparedStatement pstmt = conn.prepareStatement(queryMotivosPago3)) {
                 ResultSet rs = pstmt.executeQuery();
                 while (rs.next()) {
@@ -172,7 +172,7 @@ public class Addons {
                 break;
             case 4:
             String queryMotivosPago4 = "SELECT * FROM MOTIVO_DE_PAGO WHERE codigo BETWEEN 'MP061' AND 'MP065'";
-            try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+            try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
                 PreparedStatement pstmt = conn.prepareStatement(queryMotivosPago4)) {
                 ResultSet rs = pstmt.executeQuery();
                 while (rs.next()) {
@@ -185,7 +185,7 @@ public class Addons {
                 break;
             case 5:
             String queryMotivosPago5 = "SELECT * FROM MOTIVO_DE_PAGO WHERE codigo BETWEEN 'MP066' AND 'MP070'";
-            try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+            try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
                 PreparedStatement pstmt = conn.prepareStatement(queryMotivosPago5)) {
                 ResultSet rs = pstmt.executeQuery();
                 while (rs.next()) {
@@ -205,7 +205,7 @@ public class Addons {
         // Obtener el precio del motivo de pago
         String queryPrecio = "SELECT precio FROM MOTIVO_DE_PAGO WHERE codigo = ?";
         double precio = 0;
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
             PreparedStatement pstmt = conn.prepareStatement(queryPrecio)) {
             pstmt.setString(1, motivoPago);
             ResultSet rs = pstmt.executeQuery();
@@ -238,7 +238,7 @@ public class Addons {
         int pago = scanner.nextInt();
         if(pago == 1){
         String queryInsertPago = "INSERT INTO PAGO (fecha, subtotal, iva, monto_total, estado, alumno, motivo_de_pago) VALUES (?, ?, ?, ?, 'Pagado', ?, ?)";
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
             PreparedStatement pstmt = conn.prepareStatement(queryInsertPago)) {
             pstmt.setString(1, fecha);
             pstmt.setDouble(2, subtotal);
@@ -254,7 +254,7 @@ public class Addons {
         }
     }else{
         String queryInsertPago = "INSERT INTO PAGO (fecha, subtotal, iva, monto_total, estado, alumno, motivo_de_pago) VALUES (?, ?, ?, ?, 'Pendiente', ?, ?)";
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
             PreparedStatement pstmt = conn.prepareStatement(queryInsertPago)) {
             pstmt.setString(1, fecha);
             pstmt.setDouble(2, subtotal);
@@ -296,7 +296,7 @@ public class Addons {
 
         // Verificar que el alumno existe en la tabla alumno
         String queryCheckAlumno = "SELECT * FROM ALUMNO WHERE matricula = ?";
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
              PreparedStatement pstmtCheckAlumno = conn.prepareStatement(queryCheckAlumno)) {
             pstmtCheckAlumno.setString(1, matricula);
             ResultSet rsAlumno = pstmtCheckAlumno.executeQuery();
@@ -313,7 +313,7 @@ public class Addons {
 
         // Verificar que tiene pagos pendientes
         String queryCheckPagos = "SELECT * FROM PAGO WHERE alumno = ? AND estado = 'Pendiente'";
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
              PreparedStatement pstmtCheckPagos = conn.prepareStatement(queryCheckPagos)) {
             pstmtCheckPagos.setString(1, matricula);
             ResultSet rsPagos = pstmtCheckPagos.executeQuery();
@@ -357,7 +357,7 @@ public class Addons {
             String matricula = scanner.nextLine();
             // Verificar que el alumno existe en la tabla alumno
             String queryCheckAlumno = "SELECT COUNT(*) FROM alumno WHERE matricula = ?";
-            try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+            try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
                 PreparedStatement pstmt = conn.prepareStatement(queryCheckAlumno)) {
                 pstmt.setString(1, matricula);
                 ResultSet rs = pstmt.executeQuery();
@@ -373,7 +373,7 @@ public class Addons {
             }
             System.out.println("Seleccione el nivel educativo del alumno"); 
             String query1 = "SELECT * FROM NIVEL_EDUCATIVO";
-            try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+            try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
                 PreparedStatement pstmt = conn.prepareStatement(query1)) {
                 ResultSet rs = pstmt.executeQuery();
                 while (rs.next()) {
@@ -386,7 +386,7 @@ public class Addons {
             String nivelEducativo = scanner.next();
             System.out.println("Estos son los periodos escolares disponibles");
             String query2 = "SELECT * FROM PERIODO_ESCOLAR";
-            try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+            try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
                 PreparedStatement pstmt = conn.prepareStatement(query2)) {
                 ResultSet rs = pstmt.executeQuery();
                 while (rs.next()) {
@@ -399,7 +399,7 @@ public class Addons {
             String periodoEscolar = scanner.next();
             System.out.println("Estos son los grados y grupos disponibles");
             String query3 = "SELECT * FROM GRADO_Y_GRUPO WHERE periodo_escolar = ? AND nivel_educativo = ?";
-            try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+            try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
                 PreparedStatement pstmt = conn.prepareStatement(query3)) {
                 pstmt.setString(1, periodoEscolar);
                 pstmt.setString(2, nivelEducativo);
@@ -416,7 +416,7 @@ public class Addons {
             String gradoGrupo = scanner.next();
 
             String query4 = "UPDATE ALUMNO SET nivel_educativo = ?, periodo_escolar = ?, grado_y_grupo = ? WHERE matricula = ?";
-            try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+            try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
                 PreparedStatement pstmt = conn.prepareStatement(query4)) {
                 pstmt.setString(1, nivelEducativo);
                 pstmt.setString(2, periodoEscolar);
@@ -446,7 +446,7 @@ public class Addons {
                     scanner.nextLine();
                     System.out.println("Estos son los niveles educativos disponibles");
                     String query3 = "SELECT * FROM NIVEL_EDUCATIVO";
-                    try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+                    try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
                         PreparedStatement pstmt = conn.prepareStatement(query3)) {
                         ResultSet rs = pstmt.executeQuery();
                         while (rs.next()) {
@@ -459,7 +459,7 @@ public class Addons {
                     String nivelEducativo = scanner.next();
                     System.out.println("Estos son los periodos escolares disponibles");
                     String query4 = "SELECT * FROM PERIODO_ESCOLAR";
-                    try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+                    try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
                         PreparedStatement pstmt = conn.prepareStatement(query4)) {
                         ResultSet rs = pstmt.executeQuery();
                         while (rs.next()) {
@@ -473,7 +473,7 @@ public class Addons {
                     scanner.nextLine();
                     System.out.println("Estos son los grados y grupos disponibles");
                             String query5 = "SELECT * FROM grado_y_grupo WHERE periodo_escolar = ? AND nivel_educativo = ?";
-                            try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+                            try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
                                 PreparedStatement pstmt = conn.prepareStatement(query5)) {
                                     pstmt.setString(1, periodoEscolar);
                                     pstmt.setString(2, nivelEducativo);
@@ -500,7 +500,7 @@ public class Addons {
                     scanner.nextLine();
                     // Insertar tutor
                     String query = "INSERT INTO TUTOR (nombre, primerApell, segundoApell) VALUES (?, ?, ?)";
-                    try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+                    try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
                          PreparedStatement pstmt = conn.prepareStatement(query)) {
                         pstmt.setString(1, nombre);
                         pstmt.setString(2, primerApell);
@@ -517,7 +517,7 @@ public class Addons {
                     // buscar el folio del tutor
                     String query1 = "SELECT folio FROM TUTOR WHERE nombre = ? AND primerApell = ? AND segundoApell = ?";
                     String folio = "";
-                    try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+                    try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
                          PreparedStatement pstmt = conn.prepareStatement(query1)) {
                         pstmt.setString(1, nombre);
                         pstmt.setString(2, primerApell);
@@ -531,7 +531,7 @@ public class Addons {
                     }
                     // Insertar numero de telefono
                     String query2 = "INSERT INTO NUM_TEL (tutor, numTel) VALUES (?, ?)";
-                    try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+                    try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
                          PreparedStatement pstmt = conn.prepareStatement(query2)) {
                         pstmt.setString(1, folio);
                         pstmt.setString(2, num_tel);
@@ -545,7 +545,7 @@ public class Addons {
 
                     // Insertar alumno
                     String query6 = "INSERT INTO ALUMNO (nombre, primerApell, segundoApell, direccion, nivel_educativo, periodo_escolar, grado_y_grupo, tutor) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-                    try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+                    try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
                          PreparedStatement pstmt = conn.prepareStatement(query6)) {
                         pstmt.setString(1, nombreAlumno);
                         pstmt.setString(2, primerApellAlumno);
@@ -564,7 +564,7 @@ public class Addons {
                     //sacar la matricula del alumno
                     String query7 = "SELECT matricula FROM ALUMNO WHERE nombre = ? AND primerApell = ? AND segundoApell = ?";
                     String matricula = "";
-                    try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+                    try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
                          PreparedStatement pstmt = conn.prepareStatement(query7)) {
                         pstmt.setString(1, nombreAlumno);
                         pstmt.setString(2, primerApellAlumno);
@@ -580,7 +580,7 @@ public class Addons {
                     //mostrar motivos de pago
                     System.out.println("Estos son los motivos de pago disponibles");
                     String query8 = "SELECT * FROM MOTIVO_DE_PAGO WHERE Nivel_educativo = ? AND nombre LIKE ?";
-                    try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+                    try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
                         PreparedStatement pstmt = conn.prepareStatement(query8)) {
                         pstmt.setString(1, nivelEducativo);
                         pstmt.setString(2, "%Inscripción%");
@@ -597,7 +597,7 @@ public class Addons {
                     //obtener el costo del motivo de pago
                     String query9 = "SELECT precio FROM MOTIVO_DE_PAGO WHERE codigo = ?";
                     double precio = 0;
-                    try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+                    try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
                         PreparedStatement pstmt = conn.prepareStatement(query9)) {
                         pstmt.setString(1, motivo_de_pago);
                         ResultSet rs = pstmt.executeQuery();
@@ -619,7 +619,7 @@ public class Addons {
                     double total = subtotal + iva;
                     // Verificar que el alumno existe en la tabla alumno
                     String queryCheckAlumno = "SELECT COUNT(*) FROM alumno WHERE matricula = ?";
-                    try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+                    try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
                         PreparedStatement pstmt = conn.prepareStatement(queryCheckAlumno)) {
                         pstmt.setString(1, matricula);
                         ResultSet rs = pstmt.executeQuery();
@@ -641,7 +641,7 @@ public class Addons {
                     int pago = scanner.nextInt();
                     if(pago == 1){
                         String query10 = "INSERT INTO PAGO (fecha, subtotal, iva, monto_total, estado, alumno, motivo_de_pago) VALUES (?, ?, ?, ?, 'Pagado', ?, ?)";
-                    try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+                    try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
                         PreparedStatement pstmt = conn.prepareStatement(query10)) {
                         pstmt.setString(1, fecha);
                         pstmt.setDouble(2, subtotal);
@@ -657,7 +657,7 @@ public class Addons {
                     }
                     }else{
                     String query10 = "INSERT INTO PAGO (fecha, subtotal, iva, monto_total, estado, alumno, motivo_de_pago) VALUES (?, ?, ?, ?, 'Pendiente', ?, ?)";
-                    try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+                    try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
                         PreparedStatement pstmt = conn.prepareStatement(query10)) {
                         pstmt.setString(1, fecha);
                         pstmt.setDouble(2, subtotal);
@@ -711,7 +711,7 @@ public class Addons {
         System.out.println("Ingrese la fecha final del periodo escolar (yyyy-mm-dd): ");
         String fechaFinal = scanner.next();
         String query = "INSERT INTO PERIODO_ESCOLAR (codigo, fecha_inicio, fecha_final) VALUES (?, ?, ?)";
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
              PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setString(1, codigo);
             pstmt.setString(2, fechaInicio);
@@ -732,7 +732,7 @@ public class Addons {
             System.out.println("Añadir Packs Papeleria");
             System.out.println("Estos son los motivos de pago disponibles");
             String query = "SELECT * FROM MOTIVO_DE_PAGO WHERE codigo BETWEEN 'MP046' AND 'MP060'";
-            try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+            try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
                  PreparedStatement pstmt = conn.prepareStatement(query)) {
                 ResultSet rs = pstmt.executeQuery();
                 while (rs.next()) {
@@ -750,7 +750,7 @@ public class Addons {
             System.out.println("Ingrese el precio del pack de papeleria: ");
             double precio = scanner.nextDouble();
             String queryInsert = "INSERT INTO PACKS_PAPELERIA (motivo_de_pago, nombre, descripcion, precio) VALUES (?, ?, ?, ?)";
-            try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+            try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
                  PreparedStatement pstmt = conn.prepareStatement(queryInsert)) {
                 pstmt.setString(1, motivoPago);
                 pstmt.setString(2, nombre);
@@ -776,7 +776,7 @@ public class Addons {
         System.out.println("Ingrese el periodo escolar: ");
         String periodoEscolar = "PE" + scanner.next();
         String sql = "INSERT INTO GRADO_Y_GRUPO (grado, grupo, periodo_escolar) VALUES (?, ?, ?)";
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
                 pstmt.setString(1, grado);
                 pstmt.setString(2, grupo);
@@ -810,7 +810,7 @@ public class Addons {
             }
         }
         String query = "INSERT INTO MOTIVO_DE_PAGO (nombre, precio) VALUES (?, ?)";
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
              PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setString(1, nombre);
             pstmt.setDouble(2, precio);
@@ -832,7 +832,7 @@ public class Addons {
         System.out.println("------------------");
         String queryMotivoPago = "SELECT MAX(codigo) AS ultimo_motivo FROM MOTIVO_DE_PAGO";
         
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
             PreparedStatement pstmt = conn.prepareStatement(queryMotivoPago)) {
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
@@ -856,7 +856,7 @@ public class Addons {
         System.out.println("Ingrese el tipo de uniforme: ");
         
         String queryTipoUniforme = "SELECT * FROM TIPO_DE_UNIFORME";
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
             PreparedStatement pstmt = conn.prepareStatement(queryTipoUniforme)) {
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
@@ -871,7 +871,7 @@ public class Addons {
         String descripcion = scanner.nextLine();
         
         String queryInsertUniforme = "INSERT INTO UNIFORMES (motivo_de_pago, talla, tipo_de_uniforme, descripcion) VALUES (?, ?, ?, ?)";
-        try (Connection conn1 = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+        try (Connection conn1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
             PreparedStatement pstmt1 = conn1.prepareStatement(queryInsertUniforme)) {
             pstmt1.setString(1, motivoPago);
             pstmt1.setString(2, talla);
@@ -896,7 +896,7 @@ public class Addons {
         System.out.println("Añadir Eventos Especiales");
         String queryMotivoPago = "SELECT MAX(codigo) AS ultimo_motivo FROM MOTIVO_DE_PAGO";
         
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
             PreparedStatement pstmt = conn.prepareStatement(queryMotivoPago)) {
         ResultSet rs = pstmt.executeQuery();
         if (rs.next()) {
@@ -922,7 +922,7 @@ public class Addons {
         System.out.println("Ingrese la descripcion del evento especial: ");
         String descripcion = scanner.nextLine();
         String query = "INSERT INTO EVENTOS_ESPECIALES (motivo_de_pago, fecha, lugar, horario, descripcion) VALUES (?, ?, ?, ?, ?)";
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
              PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setString(1, motivoPago);
             pstmt.setString(2, fecha);
@@ -955,7 +955,7 @@ public class Addons {
         String direccion = scanner.nextLine();
         System.out.println("aqui estan los niveles educativos disponibles");
         String query = "SELECT * FROM NIVEL_EDUCATIVO";
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
              PreparedStatement pstmt = conn.prepareStatement(query)) {
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
@@ -971,7 +971,7 @@ public class Addons {
         String nivelEducativo = scanner.nextLine();
         System.out.println("aqui estan los periodos escolares disponibles");
         String query1 = "SELECT * FROM PERIODO_ESCOLAR";
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
              PreparedStatement pstmt = conn.prepareStatement(query1)) {
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
@@ -985,7 +985,7 @@ public class Addons {
 
         System.out.println("aqui estan los grados y grupos disponibles");
         String query2 = "SELECT * FROM GRADO_Y_GRUPO";
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
              PreparedStatement pstmt = conn.prepareStatement(query2)) {
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
@@ -998,7 +998,7 @@ public class Addons {
         String gradoGrupo = scanner.nextLine();
         System.out.println("Ingrese El Tutor del alumno");
         String query3 = "SELECT * FROM TUTOR";
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
              PreparedStatement pstmt = conn.prepareStatement(query3)) {
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
@@ -1010,7 +1010,7 @@ public class Addons {
         System.out.println("Ingrese el nuevo tutor del alumno: ");
         String tutor = scanner.nextLine();
         String query4 = "UPDATE ALUMNO SET nombre = ?, primerApell = ?, segundoApell = ?, direccion = ?, grado_y_grupo = ?, nivel_educativo = ?, tutor = ? WHERE matricula = ?";
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
              PreparedStatement pstmt = conn.prepareStatement(query4)) {
             pstmt.setString(1, nombre);
             pstmt.setString(2, apellido);
@@ -1044,7 +1044,7 @@ public class Addons {
         System.out.println("Ingrese el nuevo apellido materno del tutor: ");
         String apellido2 = scanner.nextLine();
         String query = "UPDATE TUTOR SET nombre = ?, primerApell = ?, segundoApell = ? WHERE folio = ?";
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
              PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setString(1, nombre);
             pstmt.setString(2, apellido);
@@ -1072,7 +1072,7 @@ public class Addons {
         String grupo = scanner.nextLine();
         System.out.println("Aqui esta la lista de periodos escolares disponibles");
         String query = "SELECT * FROM PERIODO_ESCOLAR";
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
              PreparedStatement pstmt = conn.prepareStatement(query)) {
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
@@ -1084,7 +1084,7 @@ public class Addons {
         System.out.println("Ingrese el nuevo periodo escolar: ");
         String periodoEscolar = scanner.nextLine();
         String query1 = "UPDATE GRADO_Y_GRUPO SET grado = ?, grupo = ?, periodo_escolar = ? WHERE codigo = ?";
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
              PreparedStatement pstmt = conn.prepareStatement(query1)) {
             pstmt.setString(1, grado);
             pstmt.setString(2, grupo);
@@ -1121,7 +1121,7 @@ public class Addons {
             }
         }
         String query = "UPDATE NIVEL_EDUCATIVO SET nombre = ?, costo_base = ? WHERE codigo = ?";
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
              PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setString(1, nombre);
             pstmt.setDouble(2, costo);
@@ -1157,7 +1157,7 @@ public class Addons {
             }
         }
         String query = "UPDATE MOTIVO_DE_PAGO SET nombre = ?, precio = ? WHERE codigo = ?";
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
              PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setString(1, nombre);
             pstmt.setDouble(2, precio);
@@ -1184,7 +1184,7 @@ public class Addons {
         System.out.println("Ingrese la nueva descripción del pack de papelería: ");
         descripcion = scanner.nextLine();
         String query = "update PAPELERIA set nombre_pack = ?, descripcion = ? where motivo_de_pago = ?";
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
              PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setString(1, nombre_pack);
             pstmt.setString(2, descripcion);
@@ -1209,7 +1209,7 @@ public class Addons {
         String talla = scanner.nextLine();
         System.out.println("Aqui se muestran los tipos de uniformes disponibles");
         String query0 = "SELECT * FROM TIPO_DE_UNIFORME";
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
              PreparedStatement pstmt = conn.prepareStatement(query0)) {
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
@@ -1223,7 +1223,7 @@ public class Addons {
         System.out.println("Ingrese la nueva descripción del uniforme: ");
         String descripcion = scanner.nextLine();
         String query = "update UNIFORMES set talla = ?, tipo_de_uniforme = ?, descripcion = ? where motivo_de_pago = ?";
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
              PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setString(1, talla);
             pstmt.setString(2, tipo_de_uniforme);
@@ -1248,7 +1248,7 @@ public class Addons {
         System.out.println("Ingrese el nuevo nombre del tipo de uniforme: ");
         String nombre = scanner.nextLine();
         String query = "UPDATE TIPO_DE_UNIFORME SET nombre = ? WHERE codigo = ?";
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
              PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setString(1, nombre);
             pstmt.setString(2, codigo);
@@ -1277,7 +1277,7 @@ public class Addons {
         System.out.println("Ingrese la nueva descripción del evento especial: ");
         String descripcion = scanner.nextLine();
         String query = "UPDATE EVENTOS_ESPECIALES SET fecha = ?, lugar = ?, horario = ?, descripcion = ? WHERE motivo_de_pago = ?";
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
              PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setString(1, fecha);
             pstmt.setString(2, lugar);
@@ -1302,7 +1302,7 @@ public class Addons {
         String matricula = scanner.nextLine();
         // Eliminar pagos relacionados
         String query1 = "UPDATE PAGO SET ALUMNO = NULL WHERE ALUMNO = ?";
-        try (Connection conn1 = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+        try (Connection conn1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
             PreparedStatement pstmt1 = conn1.prepareStatement(query1)) {
             pstmt1.setString(1, matricula);
             pstmt1.executeUpdate();
@@ -1310,7 +1310,7 @@ public class Addons {
             e.printStackTrace();
         }
         String query = "DELETE FROM ALUMNO WHERE matricula = ?";
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
             PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setString(1, matricula);
             pstmt.executeUpdate();
@@ -1331,7 +1331,7 @@ public class Addons {
         String folio = scanner.nextLine();
         // Eliminar numeros de telefono relacionados
         String query2 = "DELETE FROM num_tel WHERE tutor = ?";
-        try (Connection conn2 = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+        try (Connection conn2 = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
             PreparedStatement pstmt2 = conn2.prepareStatement(query2)) {
             pstmt2.setString(1, folio);
             pstmt2.executeUpdate();
@@ -1340,7 +1340,7 @@ public class Addons {
         }
         // Eliminar alumnos relacionados
         String query1 = "UPDATE ALUMNO SET tutor = NULL WHERE tutor = ?";
-        try (Connection conn1 = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+        try (Connection conn1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
             PreparedStatement pstmt1 = conn1.prepareStatement(query1)) {
             pstmt1.setString(1, folio);
             pstmt1.executeUpdate();
@@ -1348,7 +1348,7 @@ public class Addons {
             e.printStackTrace();
         }
         String query = "DELETE FROM TUTOR WHERE folio = ?";
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
             PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setString(1, folio);
             pstmt.executeUpdate();
@@ -1369,7 +1369,7 @@ public class Addons {
         String codigo = scanner.nextLine();
         // Eliminar alumnos relacionados
         String query1 = "UPDATE ALUMNO SET grado_y_grupo = NULL WHERE grado_y_grupo = ?";
-        try (Connection conn1 = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+        try (Connection conn1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
             PreparedStatement pstmt1 = conn1.prepareStatement(query1)) {
             pstmt1.setString(1, codigo);
             pstmt1.executeUpdate();
@@ -1377,7 +1377,7 @@ public class Addons {
             e.printStackTrace();
         }
         String query = "DELETE FROM GRADO_Y_GRUPO WHERE codigo = ?";
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
             PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setString(1, codigo);
             pstmt.executeUpdate();
@@ -1398,7 +1398,7 @@ public class Addons {
         String codigo = scanner.nextLine();
         // Eliminar pagos relacionados
         String query1 = "UPDATE PAGO SET motivo_de_pago = NULL WHERE motivo_de_pago = ?";
-        try (Connection conn1 = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+        try (Connection conn1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
             PreparedStatement pstmt1 = conn1.prepareStatement(query1)) {
             pstmt1.setString(1, codigo);
             pstmt1.executeUpdate();
@@ -1407,7 +1407,7 @@ public class Addons {
         }
         // Eliminar packs de papeleria relacionados
         String query2 = "DELETE FROM PAPELERIA WHERE motivo_de_pago = ?";
-        try (Connection conn2 = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+        try (Connection conn2 = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
             PreparedStatement pstmt2 = conn2.prepareStatement(query2)) {
             pstmt2.setString(1, codigo);
             pstmt2.executeUpdate();
@@ -1416,7 +1416,7 @@ public class Addons {
         }
         // Eliminar uniformes relacionados
         String query3 = "DELETE FROM UNIFORMES WHERE motivo_de_pago = ?";
-        try (Connection conn3 = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+        try (Connection conn3 = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
             PreparedStatement pstmt3 = conn3.prepareStatement(query3)) {
             pstmt3.setString(1, codigo);
             pstmt3.executeUpdate();
@@ -1425,7 +1425,7 @@ public class Addons {
         }
         // Eliminar eventos especiales relacionados
         String query4 = "DELETE FROM EVENTOS_ESPECIALES WHERE motivo_de_pago = ?";
-        try (Connection conn4 = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+        try (Connection conn4 = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
             PreparedStatement pstmt4 = conn4.prepareStatement(query4)) {
             pstmt4.setString(1, codigo);
             pstmt4.executeUpdate();
@@ -1434,7 +1434,7 @@ public class Addons {
         }
         // Eliminar inscripciones relacionadas
         String query5 = "DELETE FROM INSCRIPCION WHERE motivo_de_pago = ?";
-        try (Connection conn5 = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+        try (Connection conn5 = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
             PreparedStatement pstmt5 = conn5.prepareStatement(query5)) {
             pstmt5.setString(1, codigo);
             pstmt5.executeUpdate();
@@ -1443,7 +1443,7 @@ public class Addons {
         }
         // Eliminar mensualidades relacionadas
         String query6 = "DELETE FROM MENSUALIDAD WHERE motivo_de_pago = ?";
-        try (Connection conn6 = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+        try (Connection conn6 = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
             PreparedStatement pstmt6 = conn6.prepareStatement(query6)) {
             pstmt6.setString(1, codigo);
             pstmt6.executeUpdate();
@@ -1452,7 +1452,7 @@ public class Addons {
         }
         // Eliminar mantenimientos relacionados
         String query7 = "DELETE FROM MANTENIMIENTO WHERE motivo_de_pago = ?";
-        try (Connection conn7 = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+        try (Connection conn7 = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
             PreparedStatement pstmt7 = conn7.prepareStatement(query7)) {
             pstmt7.setString(1, codigo);
             pstmt7.executeUpdate();
@@ -1461,7 +1461,7 @@ public class Addons {
         }
 
         String query = "DELETE FROM MOTIVO_DE_PAGO WHERE codigo = ?";
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
             PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setString(1, codigo);
             pstmt.executeUpdate();
@@ -1481,7 +1481,7 @@ public class Addons {
         System.out.println("Ingrese el motivo de pago del pack de papelería a eliminar: ");
         String motivo_de_pago = scanner.nextLine();
         String query = "DELETE FROM PAPELERIA WHERE motivo_de_pago = ?";
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
             PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setString(1, motivo_de_pago);
             pstmt.executeUpdate();
@@ -1501,7 +1501,7 @@ public class Addons {
         System.out.println("Ingrese el motivo de pago del uniforme a eliminar: ");
         String motivo_de_pago = scanner.nextLine();
         String query = "DELETE FROM UNIFORMES WHERE motivo_de_pago = ?";
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
             PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setString(1, motivo_de_pago);
             pstmt.executeUpdate();
@@ -1523,7 +1523,7 @@ public class Addons {
         String codigo = scanner.nextLine();
         // Eliminar uniformes relacionados
         String query1 = "DELETE FROM UNIFORMES WHERE tipo_de_uniforme = ?";
-        try (Connection conn1 = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+        try (Connection conn1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
             PreparedStatement pstmt1 = conn1.prepareStatement(query1)) {
             pstmt1.setString(1, codigo);
             pstmt1.executeUpdate();
@@ -1531,7 +1531,7 @@ public class Addons {
             e.printStackTrace();
         }
         String query = "DELETE FROM TIPO_DE_UNIFORME WHERE codigo = ?";
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
             PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setString(1, codigo);
             pstmt.executeUpdate();
@@ -1551,7 +1551,7 @@ public class Addons {
         System.out.println("Ingrese el motivo de pago del evento especial a eliminar: ");
         String motivo_de_pago = scanner.nextLine();
         String query = "DELETE FROM EVENTOS_ESPECIALES WHERE motivo_de_pago = ?";
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
             PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setString(1, motivo_de_pago);
             pstmt.executeUpdate();
@@ -1592,7 +1592,7 @@ public class Addons {
                     "LEFT JOIN TUTOR t ON a.tutor = t.folio " +
                     "WHERE pe.codigo = ? AND a.matricula = ? " +
                     "GROUP BY a.matricula;";
-                try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+                try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
                      PreparedStatement pstmt = conn.prepareStatement(query)) {
                     pstmt.setString(1, periodoEscolar);
                     pstmt.setString(2, matricula);
@@ -1635,7 +1635,7 @@ public class Addons {
                         "INNER JOIN PERIODO_ESCOLAR pe ON gg.periodo_escolar = pe.codigo " +
                         "INNER JOIN NIVEL_EDUCATIVO ne ON gg.nivel_educativo = ne.codigo " +
                         "WHERE a.matricula = ? AND motivo_de_pago = 'MP001'";
-                try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+                try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
                         PreparedStatement pstmt = conn.prepareStatement(query2)) {
                         pstmt.setString(1, matricula);
                         ResultSet rs = pstmt.executeQuery();
@@ -1669,7 +1669,7 @@ public class Addons {
                         "INNER JOIN ALUMNO a ON t.folio = a.tutor " +
                         "INNER JOIN NUM_TEL nt ON t.folio = nt.tutor " +
                         "WHERE t.folio = ? ";
-                try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+                try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
                         PreparedStatement pstmt = conn.prepareStatement(query3)) {
                         pstmt.setString(1, FOTutor);
                         ResultSet rs = pstmt.executeQuery();
@@ -1708,7 +1708,7 @@ public class Addons {
                         "INNER JOIN GRADO_Y_GRUPO gg ON p.gradoAlumno = gg.codigo " +
                         "INNER JOIN NIVEL_EDUCATIVO ne ON a.nivel_educativo = ne.codigo " +
                         "WHERE a.matricula = ? AND mp.nombre LIKE 'Inscripción%'";
-                try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+                try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
                      PreparedStatement pstmt = conn.prepareStatement(query4)) {
                     pstmt.setString(1, matricula);
                     ResultSet rs = pstmt.executeQuery();
@@ -1752,7 +1752,7 @@ public class Addons {
                             "INNER JOIN NIVEL_EDUCATIVO ne ON mp.nivel_educativo = ne.codigo " +
                             "INNER JOIN MENSUALIDAD m ON mp.codigo = m.motivo_de_pago " +
                             "WHERE a.matricula = ? AND pe.codigo = ? AND p.motivo_de_pago = 'MP016'";
-                    try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+                    try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
                         PreparedStatement pstmt = conn.prepareStatement(query5)) {
                         pstmt.setString(1, matricula);
                         pstmt.setString(2, periodoEscolar);
@@ -1794,7 +1794,7 @@ public class Addons {
                         "INNER JOIN MOTIVO_DE_PAGO mp ON p.motivo_de_pago = mp.codigo " +
                         "INNER JOIN EVENTOS_ESPECIALES ee ON mp.codigo = ee.motivo_de_pago " +
                         "WHERE ee.motivo_de_pago = 'MP066'";
-                try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+                try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
                         PreparedStatement pstmt = conn.prepareStatement(query6)) {
                         ResultSet rs = pstmt.executeQuery();
                         // Extraer datos del conjunto de resultados
@@ -1830,7 +1830,7 @@ public class Addons {
                         "INNER JOIN MOTIVO_DE_PAGO mp ON m.motivo_de_pago = mp.codigo " +
                         "INNER JOIN PERIODO_ESCOLAR pe ON m.fecha_pago BETWEEN pe.fecha_inicio AND pe.fecha_final " +
                         "WHERE pe.codigo = ?";
-                try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+                try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
                         PreparedStatement pstmt = conn.prepareStatement(query7)) {
                         pstmt.setString(1, periodoEscolar);
                         ResultSet rs = pstmt.executeQuery();
@@ -1868,7 +1868,7 @@ public class Addons {
                         "INNER JOIN GRADO_Y_GRUPO gg ON gg.nivel_educativo = ne.codigo " +
                         "INNER JOIN PERIODO_ESCOLAR pe ON mp.periodo_escolar = pe.codigo " +
                         "WHERE pe.codigo = ? AND ne.codigo = ?";
-                try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+                try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
                         PreparedStatement pstmt = conn.prepareStatement(query8)) {
                         pstmt.setString(1, periodoEscolar);
                         pstmt.setString(2, nivelEducativo);
@@ -1911,7 +1911,7 @@ public class Addons {
                             "INNER JOIN GRADO_Y_GRUPO gg ON gg.periodo_escolar = ? " +
                             "INNER JOIN PERIODO_ESCOLAR pe ON gg.periodo_escolar = pe.codigo " +
                             "WHERE pe.codigo = ? AND ne.codigo = ?";
-                    try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+                    try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
                             PreparedStatement pstmt = conn.prepareStatement(query9)) {
                             pstmt.setString(1, periodoEscolar);
                             pstmt.setString(2, periodoEscolar);
@@ -1951,7 +1951,7 @@ public class Addons {
                     "INNER JOIN NIVEL_EDUCATIVO ne ON MP.Nivel_educativo = ne.codigo " +
                     "INNER JOIN PERIODO_ESCOLAR pe ON MP.periodo_escolar = pe.codigo " +
                     "WHERE pe.codigo = ? AND ne.codigo = ?";
-                try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.17.40.14:3307/sistema_de_cobros_escolares", "root", "");
+                try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
                     PreparedStatement pstmt = conn.prepareStatement(query10)) {
                     pstmt.setString(1, periodoEscolar);
                     pstmt.setString(2, nivelEducativo);
