@@ -132,7 +132,7 @@ public class Addons {
         scanner.nextLine();
         switch (opcion) {
             case 1:
-            String queryMotivosPago = "SELECT * FROM MOTIVO_DE_PAGO WHERE codigo BETWEEN 'MP016' AND 'MP030'";
+            String queryMotivosPago = "SELECT * FROM MOTIVO_DE_PAGO WHERE codigo = 'MP030'";
             try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
                 PreparedStatement pstmt = conn.prepareStatement(queryMotivosPago)) {
                 ResultSet rs = pstmt.executeQuery();
@@ -158,7 +158,7 @@ public class Addons {
                 }
                 break;
             case 3:
-            String queryMotivosPago3 = "SELECT * FROM MOTIVO_DE_PAGO WHERE codigo BETWEEN 'MP046' AND 'MP060'";
+            String queryMotivosPago3 = "SELECT * FROM MOTIVO_DE_PAGO WHERE codigo = 'MP073'";
             try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
                 PreparedStatement pstmt = conn.prepareStatement(queryMotivosPago3)) {
                 ResultSet rs = pstmt.executeQuery();
@@ -184,7 +184,7 @@ public class Addons {
                 }
                 break;
             case 5:
-            String queryMotivosPago5 = "SELECT * FROM MOTIVO_DE_PAGO WHERE codigo BETWEEN 'MP066' AND 'MP070'";
+            String queryMotivosPago5 = "SELECT * FROM MOTIVO_DE_PAGO WHERE codigo = 'MP073'";
             try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
                 PreparedStatement pstmt = conn.prepareStatement(queryMotivosPago5)) {
                 ResultSet rs = pstmt.executeQuery();
@@ -731,7 +731,7 @@ public class Addons {
             System.out.println("=============================================");
             System.out.println("Añadir Packs Papeleria");
             System.out.println("Estos son los motivos de pago disponibles");
-            String query = "SELECT * FROM MOTIVO_DE_PAGO WHERE codigo BETWEEN 'MP046' AND 'MP060'";
+            String query = "SELECT * FROM MOTIVO_DE_PAGO WHERE codigo = 'MP060'";
             try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_de_cobros_escolares", "root", "");
                  PreparedStatement pstmt = conn.prepareStatement(query)) {
                 ResultSet rs = pstmt.executeQuery();
