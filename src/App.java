@@ -4,7 +4,6 @@ public class App {
     public static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) throws Exception {
-        Addons.banner();
         while (true) {
             int opcion = mostrarMenuPrincipal();
             switch (opcion) {
