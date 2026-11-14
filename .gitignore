@@ -1,0 +1,8 @@
+out/
+bin/
+*.class
+*.jar
+.idea/
+*.iml
+.DS_Store
+~$*

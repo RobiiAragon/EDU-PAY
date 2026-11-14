@@ -11,7 +11,7 @@ public class App {
                     Addons.limpiarPantalla();
                     System.out.println("Ingrese contraseña de administrador: ");
                     String password = scanner.nextLine();
-                    if (password.equals("admin")) {
+                    if (password.equals(Addons.ADMIN_PASSWORD)) {
                         password = null;
                         Addons.limpiarPantalla();
                         Addons.Inscripciones();
@@ -40,7 +40,7 @@ public class App {
                     Addons.limpiarPantalla();
                     System.out.println("Ingrese contraseña de administrador: ");
                     password = scanner.nextLine();
-                    if (password.equals("admin")) {
+                    if (password.equals(Addons.ADMIN_PASSWORD)) {
                         password = null;
                         Addons.limpiarPantalla();
                         Addons.PortaldePagos();
@@ -89,7 +89,7 @@ public class App {
                     Addons.limpiarPantalla();
                     System.out.println("Ingrese contraseña de administrador: ");
                     password = scanner.nextLine();
-                    if (password.equals("admin")) {
+                    if (password.equals(Addons.ADMIN_PASSWORD)) {
                         password = null;
                         Addons.limpiarPantalla();
                         System.out.println("Mostar registros del sistema");
@@ -177,7 +177,7 @@ public class App {
                 Addons.limpiarPantalla();
                     System.out.println("Ingrese contraseña de administrador: ");
                     password = scanner.nextLine();
-                    if (password.equals("admin")) {
+                    if (password.equals(Addons.ADMIN_PASSWORD)) {
                         password = null;
                         Addons.limpiarPantalla();
                         Addons.EliminarAlumnos();
