@@ -1,0 +1,49 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Compile
+        run: |
+          javac -Xlint:all -encoding UTF-8 -d out src/App.java src/Addons.java
+          javac -encoding UTF-8 -d out-demo src/DEMO/App.java
+      - name: Smoke test (menu without a database)
+        run: |
+          # invalid option, wrong admin password on a protected menu, then exit
+          out=$(printf 'abc\n7\nwrong\n10\n' | java -cp out App)
+          echo "$out" | grep -q "Opción no válida"
+          echo "$out" | grep -q "Contraseña incorrecta"
+          echo "$out" | grep -q "Saliendo"
+
+  database:
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: ci-only
+          MYSQL_DATABASE: sistema_de_cobros_escolares
+        ports: ['3306:3306']
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1 -pci-only"
+          --health-interval=5s --health-timeout=5s --health-retries=20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Import schema and data dump
+        run: mysql -h 127.0.0.1 -uroot -pci-only sistema_de_cobros_escolares < src/DB/EDU-PAY.sql
+      - name: Check tables
+        run: mysql -h 127.0.0.1 -uroot -pci-only -e "SHOW TABLES" sistema_de_cobros_escolares

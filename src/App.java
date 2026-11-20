@@ -1,52 +1,50 @@
+import java.io.Console;
 import java.util.Scanner;
 
 public class App {
     public static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) throws Exception {
+        if (Addons.ADMIN_PASSWORD.equals("admin")) {
+            System.out.println("AVISO: se usa la contraseña de administrador por defecto. Define EDUPAY_ADMIN_PASSWORD.");
+        }
         while (true) {
             int opcion = mostrarMenuPrincipal();
             switch (opcion) {
                 case 1:
                     Addons.limpiarPantalla();
-                    System.out.println("Ingrese contraseña de administrador: ");
-                    String password = scanner.nextLine();
-                    if (password.equals(Addons.ADMIN_PASSWORD)) {
-                        password = null;
+                    if (verificarAdmin()) {
                         Addons.limpiarPantalla();
                         Addons.Inscripciones();
                     } else {
-                        System.out.println("Contraseña incorrecta. Por favor, intente de nuevo.");
                         Addons.limpiarPantalla();
+                        System.out.println("Contraseña incorrecta. Por favor, intente de nuevo.");
                     }
                     break;
                 case 2:
                     Addons.limpiarPantalla();
                     System.out.println("Alumno (A) o tutor (T)? ");
-                    String tipo = scanner.nextLine();
-                    if (tipo.equals("A")) {
+                    String tipo = scanner.nextLine().trim();
+                    if (tipo.equalsIgnoreCase("A")) {
                         Addons.limpiarPantalla();
                         Addons.ModificarAlumnos();
-                    } else if (tipo.equals("T")) {
+                    } else if (tipo.equalsIgnoreCase("T")) {
                         Addons.limpiarPantalla();
                         Addons.ModificarTutores();
                     } else {
-                        System.out.println("Entrada inválida. Por favor, intente de nuevo.");
                         Addons.limpiarPantalla();
+                        System.out.println("Entrada inválida. Por favor, intente de nuevo.");
                     }
                     
                     break;
                 case 3:
                     Addons.limpiarPantalla();
-                    System.out.println("Ingrese contraseña de administrador: ");
-                    password = scanner.nextLine();
-                    if (password.equals(Addons.ADMIN_PASSWORD)) {
-                        password = null;
+                    if (verificarAdmin()) {
                         Addons.limpiarPantalla();
                         Addons.PortaldePagos();
                     } else {
-                        System.out.println("Contraseña incorrecta. Por favor, intente de nuevo.");
                         Addons.limpiarPantalla();
+                        System.out.println("Contraseña incorrecta. Por favor, intente de nuevo.");
                     }
                 break;
                 case 4:
@@ -59,7 +57,7 @@ public class App {
                     System.out.println("5. Pagos de un alumno por evento especial");
                     System.out.println("----------------------");
                     System.out.println("Seleccione una opción: ");
-                    int opcion4 = Integer.parseInt(scanner.nextLine());
+                    int opcion4 = leerEntero();
                     switch (opcion4) {
                         case 1:
                             Addons.consulta1();
@@ -87,10 +85,7 @@ public class App {
                     break;
                 case 6:
                     Addons.limpiarPantalla();
-                    System.out.println("Ingrese contraseña de administrador: ");
-                    password = scanner.nextLine();
-                    if (password.equals(Addons.ADMIN_PASSWORD)) {
-                        password = null;
+                    if (verificarAdmin()) {
                         Addons.limpiarPantalla();
                         System.out.println("Mostar registros del sistema");
                         System.out.println("1. Costos mantenimiento por periodo escolar");
@@ -99,7 +94,7 @@ public class App {
                         System.out.println("4. total de pagos realizados para un nivel educativo en un periodo escolar");
                         System.out.println("----------------------");
                         System.out.println("Seleccione una opción: ");
-                        int opcion6 = Integer.parseInt(scanner.nextLine());
+                        int opcion6 = leerEntero();
                         switch (opcion6) {
                             case 1:
                                 Addons.consulta7();
@@ -118,12 +113,17 @@ public class App {
                                 break;
                         }
                     } else {
-                        System.out.println("Contraseña incorrecta. Por favor, intente de nuevo.");
                         Addons.limpiarPantalla();
+                        System.out.println("Contraseña incorrecta. Por favor, intente de nuevo.");
                     }
                     
                     break;
                 case 7:
+                Addons.limpiarPantalla();
+                if (!verificarAdmin()) {
+                    System.out.println("Contraseña incorrecta. Por favor, intente de nuevo.");
+                    break;
+                }
                 System.out.println("1. Añadir Eventos Especiales");
                 System.out.println("2. Añadir Uniformes");
                 System.out.println("3. Modificar Un evento especial");
@@ -134,7 +134,7 @@ public class App {
                 System.out.println("8. Eliminar Uniformes");
                 System.out.println("----------------------");
                 System.out.println("Seleccione una opción: ");
-                int opcion7 = Integer.parseInt(scanner.nextLine());
+                int opcion7 = leerEntero();
                 switch (opcion7) {
                     case 1:
                         Addons.limpiarPantalla();
@@ -142,7 +142,7 @@ public class App {
                         break;
                     case 2:
                         Addons.limpiarPantalla();
-                        Addons.ModificarUniformes();
+                        Addons.AgregarUniformes();
                         break;
                     case 3:
                         Addons.limpiarPantalla();
@@ -175,20 +175,17 @@ public class App {
                 break;
                 case 8:
                 Addons.limpiarPantalla();
-                    System.out.println("Ingrese contraseña de administrador: ");
-                    password = scanner.nextLine();
-                    if (password.equals(Addons.ADMIN_PASSWORD)) {
-                        password = null;
+                if (verificarAdmin()) {
                         Addons.limpiarPantalla();
                         Addons.EliminarAlumnos();
                     } else {
-                        System.out.println("Contraseña incorrecta. Por favor, intente de nuevo.");
                         Addons.limpiarPantalla();
+                        System.out.println("Contraseña incorrecta. Por favor, intente de nuevo.");
                     }
                     break;
                 case 9:
                     Addons.registroTutor();
-                    return;
+                    break;
                 case 10:
                     salirDelSistema();
                     return;
@@ -213,21 +210,49 @@ public class App {
             System.out.println("10. Salir del sistema");
             System.out.println("==================");
             System.out.println("Seleccione una opción: ");
-            try {
-                int opcion = Integer.parseInt(scanner.nextLine());
-                if (opcion >= 1 && opcion <= 10) {
-                    return opcion;
-                } else {
-                    System.out.println("Opción no válida. Por favor, intente de nuevo.");
-                    Addons.limpiarPantalla();
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("Entrada inválida. Por favor, ingrese un número.");
-                Addons.limpiarPantalla();
+            if (!scanner.hasNextLine()) {
+                return 10; // fin de la entrada (Ctrl+D / Ctrl+Z): salir
             }
+            int opcion = leerEntero();
+            if (opcion >= 1 && opcion <= 10) {
+                return opcion;
+            }
+            Addons.limpiarPantalla();
+            System.out.println("Opción no válida. Por favor, ingrese un número del 1 al 10.");
         }
     }
 
+
+    /**
+     * Pide la contraseña de administrador. Si hay una consola real la lectura no se muestra en
+     * pantalla, y la comparación es de tiempo constante.
+     */
+    static boolean verificarAdmin() {
+        String ingresada;
+        Console console = System.console();
+        if (console != null) {
+            char[] chars = console.readPassword("Ingrese contraseña de administrador: ");
+            ingresada = chars == null ? "" : new String(chars);
+            if (chars != null) java.util.Arrays.fill(chars, ' ');
+        } else {
+            System.out.println("Ingrese contraseña de administrador: ");
+            ingresada = scanner.nextLine();
+        }
+        return Addons.passwordCorrecta(ingresada);
+    }
+
+    /** Lee un número del menú; devuelve -1 si la entrada no es un número (en vez de cerrar el programa). */
+    static int leerEntero() {
+        String linea = scanner.nextLine().trim();
+        while (linea.isEmpty() && scanner.hasNextLine()) {
+            linea = scanner.nextLine().trim();
+        }
+        try {
+            return Integer.parseInt(linea);
+        } catch (NumberFormatException e) {
+            return -1;
+        }
+    }
 
     public static void salirDelSistema() {
         System.out.print("Saliendo");

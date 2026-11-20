@@ -21,6 +21,14 @@ public class Addons {
         return v == null || v.isEmpty() ? fallback : v;
     }
 
+    /** Compara la contraseña de administrador en tiempo constante. */
+    static boolean passwordCorrecta(String ingresada) {
+        if (ingresada == null) return false;
+        return java.security.MessageDigest.isEqual(
+            ingresada.getBytes(java.nio.charset.StandardCharsets.UTF_8),
+            ADMIN_PASSWORD.getBytes(java.nio.charset.StandardCharsets.UTF_8));
+    }
+
     static Connection connect() throws SQLException {
         return DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
     }
@@ -902,7 +910,7 @@ public class Addons {
             e.printStackTrace();
         }
 
-        scanner.close();
+        // No cerrar el Scanner: cerraría System.in y el menú principal dejaría de leer.
         return;
     }
     //-------------------------------------------------------- Agregar Eventos Especiales
@@ -2007,7 +2015,18 @@ public class Addons {
                 System.out.println("Tutor registrado correctamente");
                 System.out.println("ingrese el numero de telefono del tutor: ");
                 String numTel = scanner.nextLine();
-                String query2 = "INSERT INTO NUM_TEL (numTel, tutor) VALUES (?, (SELECT folio FROM TUTOR WHERE nombre = ? AND primerApell = ? AND segundoApell = ?))";
+                if (!numTel.trim().isEmpty()) {
+                    // El folio lo genera la base de datos; se toma el del tutor recién registrado.
+                    String query2 = "INSERT INTO NUM_TEL (numTel, tutor) VALUES (?, (SELECT folio FROM TUTOR WHERE nombre = ? AND primerApell = ? AND segundoApell = ? ORDER BY folio DESC LIMIT 1))";
+                    try (PreparedStatement pstmt2 = conn.prepareStatement(query2)) {
+                        pstmt2.setString(1, numTel.trim());
+                        pstmt2.setString(2, nombre);
+                        pstmt2.setString(3, primerApell);
+                        pstmt2.setString(4, segundoApell);
+                        pstmt2.executeUpdate();
+                        System.out.println("Teléfono registrado correctamente");
+                    }
+                }
                 System.out.println("---------------------------------------------");
             } catch (SQLException e) {
                 e.printStackTrace();

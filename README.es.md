@@ -4,7 +4,7 @@
 
 **Sistema de cobros para una escuela particular — preescolar, primaria y secundaria.**
 
-![Java](https://img.shields.io/badge/Java-ED8B00?style=flat-square&logo=openjdk&logoColor=white) ![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=flat-square&logo=mysql&logoColor=white) ![JDBC](https://img.shields.io/badge/JDBC-5382a1?style=flat-square)
+![Java](https://img.shields.io/badge/Java-ED8B00?style=flat-square&logo=openjdk&logoColor=white) ![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=flat-square&logo=mysql&logoColor=white) [![CI](https://github.com/RobiiAragon/EDU-PAY/actions/workflows/ci.yml/badge.svg)](https://github.com/RobiiAragon/EDU-PAY/actions/workflows/ci.yml) ![JDBC](https://img.shields.io/badge/JDBC-5382a1?style=flat-square)
 
 [English](README.md) · **Español**
 
@@ -46,6 +46,10 @@ La conexión y la contraseña de administrador se pueden cambiar con variables d
 | `EDUPAY_DB_URL` | `jdbc:mysql://localhost:3306/sistema_de_cobros_escolares` |
 | `EDUPAY_DB_USER` / `EDUPAY_DB_PASS` | `root` / *(vacío)* |
 | `EDUPAY_ADMIN_PASSWORD` | `admin` |
+
+Hay una plantilla en [`.env.example`](.env.example). Pon una contraseña de administrador real antes de usarlo en serio: la app avisa al arrancar mientras siga la de por defecto. Todos los menús que modifican o eliminan registros piden la contraseña de administrador, y al escribirla en una terminal no se muestra.
+
+> En el código las tablas van en MAYÚSCULAS y en el volcado en minúsculas. En Windows/macOS no pasa nada; en MySQL sobre Linux configura `lower_case_table_names=1`.
 
 ## Estructura
 

@@ -4,7 +4,7 @@
 
 **Payment management system for a private school — preschool, elementary and middle school.**
 
-![Java](https://img.shields.io/badge/Java-ED8B00?style=flat-square&logo=openjdk&logoColor=white) ![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=flat-square&logo=mysql&logoColor=white) ![JDBC](https://img.shields.io/badge/JDBC-5382a1?style=flat-square)
+![Java](https://img.shields.io/badge/Java-ED8B00?style=flat-square&logo=openjdk&logoColor=white) ![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=flat-square&logo=mysql&logoColor=white) [![CI](https://github.com/RobiiAragon/EDU-PAY/actions/workflows/ci.yml/badge.svg)](https://github.com/RobiiAragon/EDU-PAY/actions/workflows/ci.yml) ![JDBC](https://img.shields.io/badge/JDBC-5382a1?style=flat-square)
 
 **English** · [Español](README.es.md)
 
@@ -46,6 +46,10 @@ The database connection and admin password can be changed with environment varia
 | `EDUPAY_DB_URL` | `jdbc:mysql://localhost:3306/sistema_de_cobros_escolares` |
 | `EDUPAY_DB_USER` / `EDUPAY_DB_PASS` | `root` / *(empty)* |
 | `EDUPAY_ADMIN_PASSWORD` | `admin` |
+
+There is a template in [`.env.example`](.env.example). Set a real admin password before using it anywhere: the app warns at startup while the default is in use. Every menu that changes or deletes records asks for the admin password, and the password is not echoed when you run it in a terminal.
+
+> Table names in the code are UPPERCASE while the dump uses lowercase. That is fine on Windows/macOS; on Linux MySQL set `lower_case_table_names=1`.
 
 > The app's menus are in Spanish, as it was built for a school in Mexico.
 
