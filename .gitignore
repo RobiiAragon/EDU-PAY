@@ -6,3 +6,7 @@ bin/
 *.iml
 .DS_Store
 ~$*
+
+# Local secrets and drivers
+.env
+lib/
